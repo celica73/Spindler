@@ -1,0 +1,527 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D24186461CF068D800674227 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24186451CF068D800674227 /* AppDelegate.swift */; };
+		D24186481CF068D800674227 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24186471CF068D800674227 /* ViewController.swift */; };
+		D241864B1CF068D800674227 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D24186491CF068D800674227 /* Main.storyboard */; };
+		D241864E1CF068D900674227 /* Spindler.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D241864C1CF068D900674227 /* Spindler.xcdatamodeld */; };
+		D24186501CF068D900674227 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D241864F1CF068D900674227 /* Assets.xcassets */; };
+		D24186531CF068D900674227 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D24186511CF068D900674227 /* LaunchScreen.storyboard */; };
+		D241865E1CF068D900674227 /* SpindlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D241865D1CF068D900674227 /* SpindlerTests.swift */; };
+		D24186691CF068D900674227 /* SpindlerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24186681CF068D900674227 /* SpindlerUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D241865A1CF068D900674227 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D241863A1CF068D800674227 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D24186411CF068D800674227;
+			remoteInfo = Spindler;
+		};
+		D24186651CF068D900674227 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D241863A1CF068D800674227 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D24186411CF068D800674227;
+			remoteInfo = Spindler;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D24186421CF068D800674227 /* Spindler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spindler.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D24186451CF068D800674227 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D24186471CF068D800674227 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D241864A1CF068D800674227 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D241864D1CF068D900674227 /* Spindler.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Spindler.xcdatamodel; sourceTree = "<group>"; };
+		D241864F1CF068D900674227 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D24186521CF068D900674227 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D24186541CF068D900674227 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D24186591CF068D900674227 /* SpindlerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpindlerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D241865D1CF068D900674227 /* SpindlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpindlerTests.swift; sourceTree = "<group>"; };
+		D241865F1CF068D900674227 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D24186641CF068D900674227 /* SpindlerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpindlerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D24186681CF068D900674227 /* SpindlerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpindlerUITests.swift; sourceTree = "<group>"; };
+		D241866A1CF068D900674227 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D241863F1CF068D800674227 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D24186561CF068D900674227 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D24186611CF068D900674227 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D24186391CF068D800674227 = {
+			isa = PBXGroup;
+			children = (
+				D24186441CF068D800674227 /* Spindler */,
+				D241865C1CF068D900674227 /* SpindlerTests */,
+				D24186671CF068D900674227 /* SpindlerUITests */,
+				D24186431CF068D800674227 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D24186431CF068D800674227 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D24186421CF068D800674227 /* Spindler.app */,
+				D24186591CF068D900674227 /* SpindlerTests.xctest */,
+				D24186641CF068D900674227 /* SpindlerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D24186441CF068D800674227 /* Spindler */ = {
+			isa = PBXGroup;
+			children = (
+				D24186451CF068D800674227 /* AppDelegate.swift */,
+				D24186471CF068D800674227 /* ViewController.swift */,
+				D24186491CF068D800674227 /* Main.storyboard */,
+				D241864F1CF068D900674227 /* Assets.xcassets */,
+				D24186511CF068D900674227 /* LaunchScreen.storyboard */,
+				D24186541CF068D900674227 /* Info.plist */,
+				D241864C1CF068D900674227 /* Spindler.xcdatamodeld */,
+			);
+			path = Spindler;
+			sourceTree = "<group>";
+		};
+		D241865C1CF068D900674227 /* SpindlerTests */ = {
+			isa = PBXGroup;
+			children = (
+				D241865D1CF068D900674227 /* SpindlerTests.swift */,
+				D241865F1CF068D900674227 /* Info.plist */,
+			);
+			path = SpindlerTests;
+			sourceTree = "<group>";
+		};
+		D24186671CF068D900674227 /* SpindlerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D24186681CF068D900674227 /* SpindlerUITests.swift */,
+				D241866A1CF068D900674227 /* Info.plist */,
+			);
+			path = SpindlerUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D24186411CF068D800674227 /* Spindler */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D241866D1CF068D900674227 /* Build configuration list for PBXNativeTarget "Spindler" */;
+			buildPhases = (
+				D241863E1CF068D800674227 /* Sources */,
+				D241863F1CF068D800674227 /* Frameworks */,
+				D24186401CF068D800674227 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Spindler;
+			productName = Spindler;
+			productReference = D24186421CF068D800674227 /* Spindler.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D24186581CF068D900674227 /* SpindlerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D24186701CF068D900674227 /* Build configuration list for PBXNativeTarget "SpindlerTests" */;
+			buildPhases = (
+				D24186551CF068D900674227 /* Sources */,
+				D24186561CF068D900674227 /* Frameworks */,
+				D24186571CF068D900674227 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D241865B1CF068D900674227 /* PBXTargetDependency */,
+			);
+			name = SpindlerTests;
+			productName = SpindlerTests;
+			productReference = D24186591CF068D900674227 /* SpindlerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D24186631CF068D900674227 /* SpindlerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D24186731CF068D900674227 /* Build configuration list for PBXNativeTarget "SpindlerUITests" */;
+			buildPhases = (
+				D24186601CF068D900674227 /* Sources */,
+				D24186611CF068D900674227 /* Frameworks */,
+				D24186621CF068D900674227 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D24186661CF068D900674227 /* PBXTargetDependency */,
+			);
+			name = SpindlerUITests;
+			productName = SpindlerUITests;
+			productReference = D24186641CF068D900674227 /* SpindlerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D241863A1CF068D800674227 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Scott Johnson";
+				TargetAttributes = {
+					D24186411CF068D800674227 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = W2U2Y36EDH;
+					};
+					D24186581CF068D900674227 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = W2U2Y36EDH;
+						TestTargetID = D24186411CF068D800674227;
+					};
+					D24186631CF068D900674227 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = W2U2Y36EDH;
+						TestTargetID = D24186411CF068D800674227;
+					};
+				};
+			};
+			buildConfigurationList = D241863D1CF068D800674227 /* Build configuration list for PBXProject "Spindler" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D24186391CF068D800674227;
+			productRefGroup = D24186431CF068D800674227 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D24186411CF068D800674227 /* Spindler */,
+				D24186581CF068D900674227 /* SpindlerTests */,
+				D24186631CF068D900674227 /* SpindlerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D24186401CF068D800674227 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D24186531CF068D900674227 /* LaunchScreen.storyboard in Resources */,
+				D24186501CF068D900674227 /* Assets.xcassets in Resources */,
+				D241864B1CF068D800674227 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D24186571CF068D900674227 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D24186621CF068D900674227 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D241863E1CF068D800674227 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D24186481CF068D800674227 /* ViewController.swift in Sources */,
+				D24186461CF068D800674227 /* AppDelegate.swift in Sources */,
+				D241864E1CF068D900674227 /* Spindler.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D24186551CF068D900674227 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D241865E1CF068D900674227 /* SpindlerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D24186601CF068D900674227 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D24186691CF068D900674227 /* SpindlerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D241865B1CF068D900674227 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D24186411CF068D800674227 /* Spindler */;
+			targetProxy = D241865A1CF068D900674227 /* PBXContainerItemProxy */;
+		};
+		D24186661CF068D900674227 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D24186411CF068D800674227 /* Spindler */;
+			targetProxy = D24186651CF068D900674227 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D24186491CF068D800674227 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D241864A1CF068D800674227 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D24186511CF068D900674227 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D24186521CF068D900674227 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D241866B1CF068D900674227 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D241866C1CF068D900674227 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D241866E1CF068D900674227 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Spindler/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Scott.Spindler;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D241866F1CF068D900674227 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Spindler/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Scott.Spindler;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		D24186711CF068D900674227 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = SpindlerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Scott.SpindlerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spindler.app/Spindler";
+			};
+			name = Debug;
+		};
+		D24186721CF068D900674227 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = SpindlerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Scott.SpindlerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spindler.app/Spindler";
+			};
+			name = Release;
+		};
+		D24186741CF068D900674227 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = SpindlerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Scott.SpindlerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Spindler;
+			};
+			name = Debug;
+		};
+		D24186751CF068D900674227 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = SpindlerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Scott.SpindlerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Spindler;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D241863D1CF068D800674227 /* Build configuration list for PBXProject "Spindler" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D241866B1CF068D900674227 /* Debug */,
+				D241866C1CF068D900674227 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D241866D1CF068D900674227 /* Build configuration list for PBXNativeTarget "Spindler" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D241866E1CF068D900674227 /* Debug */,
+				D241866F1CF068D900674227 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D24186701CF068D900674227 /* Build configuration list for PBXNativeTarget "SpindlerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D24186711CF068D900674227 /* Debug */,
+				D24186721CF068D900674227 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D24186731CF068D900674227 /* Build configuration list for PBXNativeTarget "SpindlerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D24186741CF068D900674227 /* Debug */,
+				D24186751CF068D900674227 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D241864C1CF068D900674227 /* Spindler.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D241864D1CF068D900674227 /* Spindler.xcdatamodel */,
+			);
+			currentVersion = D241864D1CF068D900674227 /* Spindler.xcdatamodel */;
+			path = Spindler.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = D241863A1CF068D800674227 /* Project object */;
+}
