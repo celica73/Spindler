@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class LanscapeView: UIViewController, UITextFieldDelegate {
     
     var engine = MathEngine()
     
@@ -25,6 +25,30 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     var bottomText: UITextField!
     
+    class TriangeView : UIView {
+        
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+        }
+        
+        required init(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)!
+        }
+        
+        override func drawRect(rect: CGRect) {
+            
+            let ctx : CGContextRef = UIGraphicsGetCurrentContext()!
+            
+            CGContextBeginPath(ctx)
+            CGContextMoveToPoint(ctx, CGRectGetMinX(rect), CGRectGetMaxY(rect))
+            CGContextAddLineToPoint(ctx, CGRectGetMaxX(rect), CGRectGetMaxY(rect))
+            CGContextAddLineToPoint(ctx, (CGRectGetMaxX(rect)), CGRectGetMinY(rect))
+            CGContextClosePath(ctx)
+            
+            CGContextSetRGBFillColor(ctx, 1.0, 0.5, 0.0, 0.60);
+            CGContextFillPath(ctx);
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -40,6 +64,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         rise.tag = 8
         run.tag = 9
         updateValues()
+        
+        let triangle = TriangeView(frame: CGRectMake(75, 250, 400, 50))
+        triangle.backgroundColor = .whiteColor()
+        view.addSubview(triangle)
     }
     
     override func didReceiveMemoryWarning() {
@@ -95,12 +123,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func validateInput(input: String, fieldTag: Int) -> (Bool, Double) {
-//        if(fieldTag == 3 || fieldTag == 4) {
-//            let x: Int? = Int(input)
-//            if (x == nil) {
-//                return (false, -1)
-//            }
-//        }
+        //        if(fieldTag == 3 || fieldTag == 4) {
+        //            let x: Int? = Int(input)
+        //            if (x == nil) {
+        //                return (false, -1)
+        //            }
+        //        }
         let value = asDecimal(input)
         if( value >= 0 ) {
             return (true, value)
@@ -163,7 +191,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
-
+    
     func keyboardWillShow(notification: NSNotification) {
         if bottomText.tag == 7 || bottomText.tag == 8 || bottomText.tag == 9 {
             if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {

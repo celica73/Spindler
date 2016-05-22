@@ -15,6 +15,8 @@
 		D24186531CF068D900674227 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D24186511CF068D900674227 /* LaunchScreen.storyboard */; };
 		D241865E1CF068D900674227 /* SpindlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D241865D1CF068D900674227 /* SpindlerTests.swift */; };
 		D24186691CF068D900674227 /* SpindlerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24186681CF068D900674227 /* SpindlerUITests.swift */; };
+		D24186771CF06A0A00674227 /* MathEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24186761CF06A0A00674227 /* MathEngine.swift */; };
+		D285AC6C1CF116DE0033190A /* LanscapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D285AC6B1CF116DE0033190A /* LanscapeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		D24186641CF068D900674227 /* SpindlerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpindlerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D24186681CF068D900674227 /* SpindlerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpindlerUITests.swift; sourceTree = "<group>"; };
 		D241866A1CF068D900674227 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D24186761CF06A0A00674227 /* MathEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathEngine.swift; sourceTree = "<group>"; };
+		D285AC6B1CF116DE0033190A /* LanscapeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanscapeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +105,9 @@
 			children = (
 				D24186451CF068D800674227 /* AppDelegate.swift */,
 				D24186471CF068D800674227 /* ViewController.swift */,
+				D285AC6B1CF116DE0033190A /* LanscapeView.swift */,
 				D24186491CF068D800674227 /* Main.storyboard */,
+				D24186761CF06A0A00674227 /* MathEngine.swift */,
 				D241864F1CF068D900674227 /* Assets.xcassets */,
 				D24186511CF068D900674227 /* LaunchScreen.storyboard */,
 				D24186541CF068D900674227 /* Info.plist */,
@@ -190,6 +196,9 @@
 		D241863A1CF068D800674227 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					1,
+				);
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Scott Johnson";
@@ -265,6 +274,8 @@
 				D24186481CF068D800674227 /* ViewController.swift in Sources */,
 				D24186461CF068D800674227 /* AppDelegate.swift in Sources */,
 				D241864E1CF068D900674227 /* Spindler.xcdatamodeld in Sources */,
+				D285AC6C1CF116DE0033190A /* LanscapeView.swift in Sources */,
+				D24186771CF06A0A00674227 /* MathEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,6 +502,7 @@
 				D241866F1CF068D900674227 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D24186701CF068D900674227 /* Build configuration list for PBXNativeTarget "SpindlerTests" */ = {
 			isa = XCConfigurationList;
@@ -499,6 +511,7 @@
 				D24186721CF068D900674227 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D24186731CF068D900674227 /* Build configuration list for PBXNativeTarget "SpindlerUITests" */ = {
 			isa = XCConfigurationList;
@@ -507,6 +520,7 @@
 				D24186751CF068D900674227 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
