@@ -35,27 +35,43 @@ class MathEngine {
     
     func updateOperation(sender: Int, newValue: Double) {
         switch sender {
-            case 0: postChange(newValue)
+            case 1: postChange(newValue)
                 break
-            case 1: spindleWidthChange(newValue)
+            case 2: spindleWidthChange(newValue)
                 break
-            case 2: maxSpaceChange(newValue)
+            case 3: maxSpaceChange(newValue)
                 break
-            case 3: numSpacesChange(newValue)
+            case 4: numSpacesChange(newValue)
                 break
-            case 4: numSpindlesChange(newValue)
+            case 5: numSpindlesChange(newValue)
                 break
-            case 5: onCenterChange(newValue)
+            case 6: onCenterChange(newValue)
                 break
-            case 6: betweenChange(newValue)
+            case 7: betweenChange(newValue)
                 break
-            case 7: angleChange(newValue)
+            case 8: angleChange(newValue)
                 break
-            case 8: riseChange(newValue)
+            case 9: riseChange(newValue)
                 break
-            case 9: runChange(newValue)
+            case 10: runChange(newValue)
                 break
         default: postChange(newValue)
+        }
+    }
+    
+    func getValue(sender: Int)-> Double {
+        switch sender {
+        case 1: return postSpacing
+        case 2: return spindleWidth
+        case 3: return maxSpace
+        case 4: return Double(numSpaces)
+        case 5: return Double(numSpindles)
+        case 6: return onCenter
+        case 7: return between
+        case 8: return angle
+        case 9: return rise
+        case 10: return run
+        default: return postSpacing
         }
     }
     
@@ -127,7 +143,7 @@ class MathEngine {
     }
     
     func angleChange(newValue: Double) {
-        angle = newValue
+        angle =  newValue > 0 ? (newValue > 75 ? 75: newValue): 0
         rise = postSpacing * abs(sin(angle * M_PI / 180))
         run = postSpacing * abs(cos(angle * M_PI / 180))
         numSpaces = Int(round((run) / (spindleWidth + maxSpace) + 1))
@@ -138,7 +154,8 @@ class MathEngine {
     
     func riseChange(newValue: Double) {
         rise = newValue
-        angle = asin(rise/postSpacing) * 180 /  M_PI
+        let newAngle = asin(rise/postSpacing) * 180 /  M_PI
+        angle =  newAngle > 0 ? (newAngle > 75 ? 75: newAngle): 0
         if(angle < 90 && angle > 0) {
             run = sqrt(postSpacing*postSpacing - rise*rise)
             numSpaces = Int(round((run) / (spindleWidth + maxSpace) + 1))
@@ -153,7 +170,8 @@ class MathEngine {
         if(run > postSpacing){
             postSpacing = run
         }
-        angle = acos(run/postSpacing) * 180 /  M_PI
+        let newAngle = acos(run/postSpacing) * 180 /  M_PI
+        angle =  newAngle > 0 ? (newAngle > 75 ? 75: newAngle): 0
         rise = sqrt(postSpacing * postSpacing - run*run)
         numSpaces = Int(round((run) / (spindleWidth + maxSpace) + 1))
         numSpindles = numSpaces - 1

@@ -86,7 +86,7 @@
                                 <color key="tintColor" red="0.36138314928963899" green="0.65888362391533173" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="y3q-7B-iGj" appends="YES" id="EpK-e2-E6z"/>
+                                    <outletCollection property="gestureRecognizers" destination="pUP-Ym-LrE" appends="YES" id="K66-h1-dg8"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -101,7 +101,6 @@
                     <connections>
                         <outlet property="angle" destination="aZF-4A-ucq" id="a7C-ka-7cD"/>
                         <outlet property="between" destination="NbO-H2-xhg" id="IH5-mp-MEA"/>
-                        <outlet property="horizPincher" destination="y3q-7B-iGj" id="O0G-Hb-FJd"/>
                         <outlet property="maxSpace" destination="aNS-MD-Ifk" id="zYU-cJ-I5e"/>
                         <outlet property="onCenter" destination="pgv-ff-T50" id="j8K-9F-Y7m"/>
                         <outlet property="pictureView" destination="SBG-2r-YUf" id="rdR-Bv-RME"/>
@@ -111,14 +110,11 @@
                         <outlet property="spaces" destination="LJw-lh-a3E" id="Hpl-BF-R5h"/>
                         <outlet property="spindleWidth" destination="ttO-Wx-lFV" id="ryq-1j-pCj"/>
                         <outlet property="spindles" destination="ztW-e5-4v8" id="t3I-OY-WHR"/>
+                        <outlet property="swipeGesture" destination="pUP-Ym-LrE" id="GWV-6I-8uh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eb0-WJ-O7E" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <pinchGestureRecognizer id="y3q-7B-iGj">
-                    <connections>
-                        <action selector="horizontalPinch:" destination="0lD-sl-yRW" id="oZD-hb-D0S"/>
-                    </connections>
-                </pinchGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="pUP-Ym-LrE"/>
             </objects>
             <point key="canvasLocation" x="245" y="352"/>
         </scene>
