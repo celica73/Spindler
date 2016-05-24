@@ -23,33 +23,14 @@ class LanscapeView: UIViewController, UITextFieldDelegate {
     @IBOutlet var rise: UITextField!
     @IBOutlet var run: UITextField!
     
+    @IBOutlet var pictureView: SpindleDiagram!
+    
+    @IBOutlet var horizPincher: UIPinchGestureRecognizer!
+    
+    let pinchRec = UIPinchGestureRecognizer()
     var bottomText: UITextField!
     
-    class TriangeView : UIView {
-        
-        override init(frame: CGRect) {
-            super.init(frame: frame)
-        }
-        
-        required init(coder aDecoder: NSCoder) {
-            super.init(coder: aDecoder)!
-        }
-        
-        override func drawRect(rect: CGRect) {
-            
-            let ctx : CGContextRef = UIGraphicsGetCurrentContext()!
-            
-            CGContextBeginPath(ctx)
-            CGContextMoveToPoint(ctx, CGRectGetMinX(rect), CGRectGetMaxY(rect))
-            CGContextAddLineToPoint(ctx, CGRectGetMaxX(rect), CGRectGetMaxY(rect))
-            CGContextAddLineToPoint(ctx, (CGRectGetMaxX(rect)), CGRectGetMinY(rect))
-            CGContextClosePath(ctx)
-            
-            CGContextSetRGBFillColor(ctx, 1.0, 0.5, 0.0, 0.60);
-            CGContextFillPath(ctx);
-        }
-    }
-    override func viewDidLoad() {
+        override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         registerForKeyboardNotifications()
@@ -64,10 +45,10 @@ class LanscapeView: UIViewController, UITextFieldDelegate {
         rise.tag = 8
         run.tag = 9
         updateValues()
-        
-        let triangle = TriangeView(frame: CGRectMake(75, 250, 400, 50))
-        triangle.backgroundColor = .whiteColor()
-        view.addSubview(triangle)
+            pinchRec.addTarget(self, action: #selector(LanscapeView.horizontalPinch))
+        pictureView.addGestureRecognizer(pinchRec)
+        pictureView.userInteractionEnabled = true
+        pictureView.multipleTouchEnabled = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -123,12 +104,6 @@ class LanscapeView: UIViewController, UITextFieldDelegate {
     }
     
     func validateInput(input: String, fieldTag: Int) -> (Bool, Double) {
-        //        if(fieldTag == 3 || fieldTag == 4) {
-        //            let x: Int? = Int(input)
-        //            if (x == nil) {
-        //                return (false, -1)
-        //            }
-        //        }
         let value = asDecimal(input)
         if( value >= 0 ) {
             return (true, value)
@@ -193,12 +168,12 @@ class LanscapeView: UIViewController, UITextFieldDelegate {
     }
     
     func keyboardWillShow(notification: NSNotification) {
-        if bottomText.tag == 7 || bottomText.tag == 8 || bottomText.tag == 9 {
+        if bottomText.tag == 5 || bottomText.tag == 6 || bottomText.tag == 7 || bottomText.tag == 8 || bottomText.tag == 9 {
             if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
                 self.view.window?.frame.origin.y = -0.5 * keyboardSize.height
             }
-        } else {
-            self.view.window?.frame.origin.y = 0
+        } else if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            self.view.window?.frame.origin.y = 0 * keyboardSize.height
         }
     }
     
@@ -209,5 +184,20 @@ class LanscapeView: UIViewController, UITextFieldDelegate {
             }
         }
     }
+
+    @IBAction func horizontalPinch(sender: UIPinchGestureRecognizer) {
+
+        let newAngle = Double(sender.scale) > 1 ? Double(sender.scale) * 5 + Double(engine.angle) : Double(engine.angle) - Double(sender.scale)
+        engine.angle =  newAngle > 0 ? newAngle: 0
+        NSLog(String(sender.scale))
+        NSLog("new angle = %d", Int(newAngle))
+        pictureView.angle = engine.angle
+        updateView(angle)
+    }
 }
 
+//code for figuring out scaling from x and y
+//CGPoint firstPoint = [recognizer locationOfTouch:0 inView:recognizer.view];
+//CGPoint secondPoint = [recognizer locationOfTouch:1 inView:recognizer.view];
+//
+//CGFloat angle = atan2(secondPoint.y - firstPoint.y, secondPoint.x - firstPoint.x);

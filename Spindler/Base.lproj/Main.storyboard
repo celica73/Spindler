@@ -165,21 +165,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="inches" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YIk-Qg-Te9">
-                                <rect key="frame" x="129" y="405" width="50" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="feet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uvv-nf-7G8">
-                                <rect key="frame" x="244" y="405" width="30" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6dy-T5-b7R">
-                                <rect key="frame" x="187" y="400" width="51" height="31"/>
-                            </switch>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eH2-3N-Hqh">
                                 <rect key="frame" x="167" y="324" width="97" height="30"/>
                                 <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
@@ -235,198 +220,200 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="1" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Vr-oL-e6H">
-                                <rect key="frame" x="68" y="38" width="97" height="30"/>
+                                <rect key="frame" x="11" y="38" width="97" height="30"/>
                                 <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
                                 <connections>
-                                    <action selector="shiftWindow:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="MzR-Ru-FY5"/>
-                                    <action selector="updateView:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="W4m-Tx-ZOg"/>
+                                    <action selector="shiftWindow:" destination="0lD-sl-yRW" eventType="editingDidBegin" id="Ncp-1u-Ylq"/>
+                                    <action selector="updateView:" destination="0lD-sl-yRW" eventType="editingDidEnd" id="WY9-FN-ATn"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DXK-Xc-A3S">
-                                <rect key="frame" x="191" y="38" width="97" height="30"/>
+                                <rect key="frame" x="134" y="38" width="97" height="30"/>
                                 <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
                                 <connections>
-                                    <action selector="shiftWindow:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="iV4-Iv-Ws2"/>
-                                    <action selector="updateView:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="3bo-SK-Gzg"/>
+                                    <action selector="shiftWindow:" destination="0lD-sl-yRW" eventType="editingDidBegin" id="BvE-EB-QJ7"/>
+                                    <action selector="updateView:" destination="0lD-sl-yRW" eventType="editingDidEnd" id="b6a-5e-bS7"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yHr-HL-YV3">
-                                <rect key="frame" x="317" y="38" width="97" height="30"/>
+                                <rect key="frame" x="260" y="38" width="97" height="30"/>
                                 <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
                                 <connections>
-                                    <action selector="shiftWindow:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="qaa-y0-man"/>
-                                    <action selector="updateView:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="Yxc-HQ-s4x"/>
+                                    <action selector="shiftWindow:" destination="0lD-sl-yRW" eventType="editingDidBegin" id="EbQ-LL-Mys"/>
+                                    <action selector="updateView:" destination="0lD-sl-yRW" eventType="editingDidEnd" id="1ej-qe-18F"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I4M-pO-r0v">
-                                <rect key="frame" x="430" y="38" width="97" height="30"/>
+                                <rect key="frame" x="373" y="38" width="97" height="30"/>
                                 <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
                                 <connections>
-                                    <action selector="shiftWindow:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="Yz7-bL-cmM"/>
-                                    <action selector="updateView:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="RPY-mR-XHk"/>
+                                    <action selector="shiftWindow:" destination="0lD-sl-yRW" eventType="editingDidBegin" id="trC-ZK-QM9"/>
+                                    <action selector="updateView:" destination="0lD-sl-yRW" eventType="editingDidEnd" id="hle-M2-Hjz"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D2M-XC-KeY">
-                                <rect key="frame" x="70" y="96" width="97" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D2M-XC-KeY">
+                                <rect key="frame" x="478" y="38" width="97" height="30"/>
                                 <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
                                 <connections>
-                                    <action selector="shiftWindow:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="xOc-0y-cob"/>
-                                    <action selector="updateView:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="8Np-xf-ATT"/>
+                                    <action selector="shiftWindow:" destination="0lD-sl-yRW" eventType="editingDidBegin" id="j75-1d-7dE"/>
+                                    <action selector="updateView:" destination="0lD-sl-yRW" eventType="editingDidEnd" id="n63-g0-qup"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RjL-4c-cfK">
-                                <rect key="frame" x="191" y="96" width="97" height="30"/>
+                                <rect key="frame" x="9" y="96" width="97" height="30"/>
                                 <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
                                 <connections>
-                                    <action selector="shiftWindow:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="G8V-xa-UDj"/>
-                                    <action selector="updateView:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="cKv-MY-ylU"/>
+                                    <action selector="shiftWindow:" destination="0lD-sl-yRW" eventType="editingDidBegin" id="tk6-UT-sAX"/>
+                                    <action selector="updateView:" destination="0lD-sl-yRW" eventType="editingDidEnd" id="IsG-pf-HPx"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rTT-E1-Y0c">
-                                <rect key="frame" x="317" y="96" width="97" height="30"/>
+                                <rect key="frame" x="135" y="96" width="97" height="30"/>
                                 <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
                                 <connections>
-                                    <action selector="shiftWindow:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="hP9-2x-Wn4"/>
-                                    <action selector="updateView:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="OtN-QE-xC2"/>
+                                    <action selector="shiftWindow:" destination="0lD-sl-yRW" eventType="editingDidBegin" id="qCK-Zi-QIm"/>
+                                    <action selector="updateView:" destination="0lD-sl-yRW" eventType="editingDidEnd" id="3Fx-x3-m0z"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oql-Tn-65m">
-                                <rect key="frame" x="430" y="96" width="97" height="30"/>
+                                <rect key="frame" x="248" y="96" width="97" height="30"/>
                                 <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
                                 <connections>
-                                    <action selector="shiftWindow:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="Bbk-7q-bcR"/>
-                                    <action selector="updateView:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="ENT-ol-gz6"/>
+                                    <action selector="shiftWindow:" destination="0lD-sl-yRW" eventType="editingDidBegin" id="hMg-01-Zlu"/>
+                                    <action selector="updateView:" destination="0lD-sl-yRW" eventType="editingDidEnd" id="e02-iB-CAj"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Post Spacing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qA1-Lp-rM6">
-                                <rect key="frame" x="66" y="20" width="101" height="21"/>
+                                <rect key="frame" x="9" y="20" width="101" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Spindle Thickness" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ttO-Wx-lFV">
-                                <rect key="frame" x="170" y="20" width="139" height="21"/>
+                                <rect key="frame" x="113" y="20" width="139" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Max Space" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNS-MD-Ifk">
-                                <rect key="frame" x="323" y="20" width="85" height="21"/>
+                                <rect key="frame" x="266" y="20" width="85" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Spaces" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJw-lh-a3E">
-                                <rect key="frame" x="450" y="20" width="57" height="21"/>
+                                <rect key="frame" x="393" y="20" width="57" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Spindles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztW-e5-4v8">
-                                <rect key="frame" x="85" y="76" width="66" height="21"/>
+                                <rect key="frame" x="493" y="18" width="66" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="On center" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgv-ff-T50">
-                                <rect key="frame" x="201" y="76" width="76" height="21"/>
+                                <rect key="frame" x="19" y="76" width="76" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Between" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NbO-H2-xhg">
-                                <rect key="frame" x="332" y="76" width="67" height="21"/>
+                                <rect key="frame" x="150" y="76" width="67" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Angle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZF-4A-ucq">
-                                <rect key="frame" x="456" y="76" width="44" height="21"/>
+                                <rect key="frame" x="274" y="76" width="44" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rise" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v0o-Yc-XBd">
-                                <rect key="frame" x="100" y="134" width="33" height="21"/>
+                                <rect key="frame" x="387" y="76" width="33" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Run" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlQ-dl-o6h">
-                                <rect key="frame" x="224" y="134" width="30" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Run" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlQ-dl-o6h">
+                                <rect key="frame" x="511" y="76" width="30" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Eg-bg-W7Q">
-                                <rect key="frame" x="68" y="154" width="97" height="30"/>
+                                <rect key="frame" x="355" y="96" width="97" height="30"/>
                                 <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
                                 <connections>
-                                    <action selector="shiftWindow:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="vqz-RD-Y9p"/>
-                                    <action selector="updateView:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="v5r-OL-rNy"/>
+                                    <action selector="shiftWindow:" destination="0lD-sl-yRW" eventType="editingDidBegin" id="PvC-zc-QL1"/>
+                                    <action selector="updateView:" destination="0lD-sl-yRW" eventType="editingDidEnd" id="08B-Rc-G3d"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="83E-sM-awm">
-                                <rect key="frame" x="191" y="154" width="97" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="83E-sM-awm">
+                                <rect key="frame" x="478" y="96" width="97" height="30"/>
                                 <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
                                 <connections>
-                                    <action selector="shiftWindow:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="whG-c2-CHC"/>
-                                    <action selector="updateView:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="Q1d-ZI-3yO"/>
+                                    <action selector="shiftWindow:" destination="0lD-sl-yRW" eventType="editingDidBegin" id="dg7-Yg-Hug"/>
+                                    <action selector="updateView:" destination="0lD-sl-yRW" eventType="editingDidEnd" id="9py-Pb-Ck7"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="inches" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fB-o9-bsc">
-                                <rect key="frame" x="344" y="159" width="50" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="feet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzN-AF-UGd">
-                                <rect key="frame" x="459" y="159" width="30" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wH1-bU-v62">
-                                <rect key="frame" x="402" y="154" width="51" height="31"/>
-                            </switch>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SBG-2r-YUf" customClass="SpindleDiagram" customModule="Spindler" customModuleProvider="target">
+                                <rect key="frame" x="20" y="134" width="560" height="446"/>
+                                <color key="backgroundColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="y3q-7B-iGj" appends="YES" id="EpK-e2-E6z"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Gbc-nc-wgF" firstAttribute="top" secondItem="SBG-2r-YUf" secondAttribute="bottom" constant="20" id="526-qv-zf5"/>
+                            <constraint firstItem="SBG-2r-YUf" firstAttribute="centerX" secondItem="bv6-kO-KF5" secondAttribute="centerX" id="8Ke-cz-PXB"/>
+                            <constraint firstItem="83E-sM-awm" firstAttribute="top" secondItem="nlQ-dl-o6h" secondAttribute="bottom" constant="-1" id="Pgi-uB-Peg"/>
+                            <constraint firstItem="SBG-2r-YUf" firstAttribute="top" secondItem="83E-sM-awm" secondAttribute="bottom" constant="10" id="VgY-E9-V7n"/>
+                            <constraint firstItem="83E-sM-awm" firstAttribute="top" secondItem="D2M-XC-KeY" secondAttribute="bottom" constant="28" id="lw3-J2-RUj"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="angle" destination="oql-Tn-65m" id="Oiq-bq-0Ec"/>
                         <outlet property="between" destination="rTT-E1-Y0c" id="2gM-XV-bI8"/>
+                        <outlet property="horizPincher" destination="y3q-7B-iGj" id="O0G-Hb-FJd"/>
                         <outlet property="maxSpace" destination="yHr-HL-YV3" id="TSX-1Q-JGq"/>
                         <outlet property="onCenter" destination="RjL-4c-cfK" id="sFt-DQ-FRT"/>
+                        <outlet property="pictureView" destination="SBG-2r-YUf" id="rdR-Bv-RME"/>
                         <outlet property="postSpacing" destination="3Vr-oL-e6H" id="gdu-kt-VjD"/>
                         <outlet property="rise" destination="9Eg-bg-W7Q" id="uDJ-hX-xBV"/>
                         <outlet property="run" destination="83E-sM-awm" id="P0n-FR-fHe"/>
@@ -436,6 +423,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eb0-WJ-O7E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="y3q-7B-iGj">
+                    <connections>
+                        <action selector="horizontalPinch:" destination="0lD-sl-yRW" id="oZD-hb-D0S"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="66" y="945"/>
         </scene>

@@ -22,7 +22,7 @@ class MathEngine {
     var maxSpace = 4.0
     var numSpaces: (Int)
     var numSpindles: (Int)
-    var units = "inches"
+    var units = false
     
     init(){
         numSpaces = Int(round((postSpacing) / (spindleWidth + maxSpace) + 1))
@@ -65,6 +65,8 @@ class MathEngine {
         numSpindles = numSpaces - 1
         between = (postSpacing - (Double(numSpindles) * spindleWidth)) / Double(numSpaces)
         onCenter = spindleWidth + between
+        rise = postSpacing * sin(angle)
+        run = postSpacing * cos(angle)
     }
     
     func spindleWidthChange(newValue: Double) {
@@ -146,6 +148,9 @@ class MathEngine {
     
     func runChange(newValue: Double) {
         run = newValue
+        if(run > postSpacing){
+            postSpacing = run
+        }
         angle = acos(run/postSpacing) * 180 /  M_PI
         rise = sqrt(postSpacing * postSpacing - run*run)
         numSpaces = Int(round((run) / (spindleWidth + maxSpace) + 1))
