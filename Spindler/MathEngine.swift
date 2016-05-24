@@ -109,7 +109,6 @@ class MathEngine {
         if(between > maxSpace){
             maxSpace = between
         }
-        
     }
     
     func numSpindlesChange(newValue: Double) {

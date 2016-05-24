@@ -25,12 +25,12 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     
     @IBOutlet var pictureView: SpindleDiagram!
     
-    @IBOutlet var horizPincher: UIPinchGestureRecognizer!
+    @IBOutlet var swipeGesture: UIPanGestureRecognizer!
     
     var tapLabel: UILabel!
     var labelColor: UIColor!
     
-    let pinchRec = UIPinchGestureRecognizer()
+    let swipeRec = UIPanGestureRecognizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,12 +46,12 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         rise.tag = 9
         run.tag = 10
         updateValues()
-        pinchRec.addTarget(self, action: #selector(LanscapeView.horizontalPinch))
-        pictureView.addGestureRecognizer(pinchRec)
+        swipeRec.addTarget(self, action: #selector(LanscapeView.swiper))
+        pictureView.addGestureRecognizer(swipeRec)
         pictureView.userInteractionEnabled = true
         pictureView.multipleTouchEnabled = true
         pictureView.rise = engine.rise
-        for i in -1...9 {
+        for i in 0...9 {
             if let taggedLabel = self.view.viewWithTag(i) as? UILabel {
                 NSLog(String(taggedLabel.text))
                 taggedLabel.userInteractionEnabled = true
@@ -83,8 +83,7 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
 
     
     // Receive action
-    func labelAction(gr:UITapGestureRecognizer)
-    {
+    func labelAction(gr:UITapGestureRecognizer) {
         let searchlbl:UILabel = (gr.view as! UILabel) // Type cast it with the class for which you have added gesture
         print(searchlbl.text)
         
@@ -100,19 +99,19 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         }
     }
     
-     @IBAction func updateView(sender: AnyObject) {
-//        NSLog(String(sender.tag, sender.text))
-        let update = sender.tag
-        let inputCheck = validateInput(sender.text!, fieldTag: update)
-        if(inputCheck.0) {
-            let newNumber = inputCheck.1
-            engine.updateOperation(update, newValue: newNumber)
-            updateValues()
-        } else {
-            let badField = sender as! UILabel
-            badField.text = "Invalid"
-        }
-    }
+//     @IBAction func updateView(sender: AnyObject) {
+////        NSLog(String(sender.tag, sender.text))
+//        let update = sender.tag
+//        let inputCheck = validateInput(sender.text!, fieldTag: update)
+//        if(inputCheck.0) {
+//            let newNumber = inputCheck.1
+//            engine.updateOperation(update, newValue: newNumber)
+//            updateValues()
+//        } else {
+//            let badField = sender as! UILabel
+//            badField.text = "Invalid"
+//        }
+//    }
     
     func asFraction(number: Double) -> String {
         let fraction = number - Double(Int(number))
@@ -130,71 +129,83 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         }
     }
     
-    func validateInput(input: String, fieldTag: Int) -> (Bool, Double) {
-        let value = asDecimal(input)
-        if( value >= 0 ) {
-            return (true, value)
-        } else {
-            return (false, value)
-        }
-    }
+//    func validateInput(input: String, fieldTag: Int) -> (Bool, Double) {
+//        let value = asDecimal(input)
+//        if( value >= 0 ) {
+//            return (true, value)
+//        } else {
+//            return (false, value)
+//        }
+//    }
     
-    func asDecimal(number: String) -> Double {
-        let trimmedNumber = number.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-        let numArray = Array(trimmedNumber.characters)
-        var root: Double = 0.0
-        var numerator: Double = 0.0
-        var denominator: Double = 0.0
-        
-        var spaceLocation: Int = -1
-        var fracLocation: Int = -1
-        var decimalLocation: Int = -1
-        
-        //validate characters
-        for i in 0..<numArray.count {
-            if( numArray[i] == "."){
-                if( decimalLocation != -1 ) {return -1}
-                decimalLocation = i
-            } else if( numArray[i] == " " ) {
-                if( spaceLocation != -1 ) {return -1}
-                spaceLocation = i
-            } else if( numArray[i] == "/" ) {
-                if( fracLocation != -1 ) {return -1}
-                fracLocation = i
-            } else if( numArray[i] < "0" || numArray[i] > "9") {
-                return -1
-            }
-        }
-        //real number, return it
-        if( spaceLocation == -1 && fracLocation == -1 ) {
-            return Double(trimmedNumber)!
-        }
-        //is it a fraction
-        if( spaceLocation != -1) {
-            root = Double(trimmedNumber.characters.split{$0 == " "}.map(String.init)[0])!
-            let substring = trimmedNumber.characters.split{$0 == " "}.map(String.init)[1]
-            numerator = Double(substring.characters.split{$0 == "/"}.map(String.init)[0])!
-            denominator = Double(substring.characters.split{$0 == "/"}.map(String.init)[1])!
-        }
-        return root + numerator/denominator
-    }
+//    func asDecimal(number: String) -> Double {
+//        let trimmedNumber = number.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+//        let numArray = Array(trimmedNumber.characters)
+//        var root: Double = 0.0
+//        var numerator: Double = 0.0
+//        var denominator: Double = 0.0
+//        
+//        var spaceLocation: Int = -1
+//        var fracLocation: Int = -1
+//        var decimalLocation: Int = -1
+//        
+//        //validate characters
+//        for i in 0..<numArray.count {
+//            if( numArray[i] == "."){
+//                if( decimalLocation != -1 ) {return -1}
+//                decimalLocation = i
+//            } else if( numArray[i] == " " ) {
+//                if( spaceLocation != -1 ) {return -1}
+//                spaceLocation = i
+//            } else if( numArray[i] == "/" ) {
+//                if( fracLocation != -1 ) {return -1}
+//                fracLocation = i
+//            } else if( numArray[i] < "0" || numArray[i] > "9") {
+//                return -1
+//            }
+//        }
+//        //real number, return it
+//        if( spaceLocation == -1 && fracLocation == -1 ) {
+//            return Double(trimmedNumber)!
+//        }
+//        //is it a fraction
+//        if( spaceLocation != -1) {
+//            root = Double(trimmedNumber.characters.split{$0 == " "}.map(String.init)[0])!
+//            let substring = trimmedNumber.characters.split{$0 == " "}.map(String.init)[1]
+//            numerator = Double(substring.characters.split{$0 == "/"}.map(String.init)[0])!
+//            denominator = Double(substring.characters.split{$0 == "/"}.map(String.init)[1])!
+//        }
+//        return root + numerator/denominator
+//    }
     
-    @IBAction func horizontalPinch(sender: UIPinchGestureRecognizer) {
+    var startLocation: CGPoint!
+    @IBAction func swiper(sender: UIPanGestureRecognizer) {
         var changeValue:Double  = 0
         if tapLabel != nil {
             changeValue = engine.getValue(tapLabel.tag)
         } else {
-            tapLabel = angle
-            changeValue = engine.getValue(angle.tag)
+            return
         }
-        var newValue = Double(sender.scale) > 1 ? Double(sender.scale) * 2 + Double(changeValue) : Double(changeValue) - Double(sender.scale)
-        newValue = newValue <= 0 ? 0 : newValue
-        engine.updateOperation(tapLabel.tag, newValue: newValue)
-//        NSLog("new value = %d", Int(engine.getValue(tapLabel.tag)))
-        updateValues()
-        pictureView.rise = engine.rise
-        pictureView.spindles = engine.numSpindles
-        sender.scale = 1
+        if (sender.state == UIGestureRecognizerState.Began) {
+            startLocation = sender.locationInView(self.view)
+        } else if (sender.state == UIGestureRecognizerState.Changed) {
+            let stopLocation: CGPoint = sender.locationInView(self.view);
+            let dx: CGFloat = stopLocation.x - startLocation.x;
+            let dy: CGFloat = stopLocation.y - startLocation.y;
+            var distance: CGFloat = sqrt(dx*dx + dy*dy);
+            if dy > 0 || dx < 0 {
+                distance = -distance
+            }
+            NSLog("Distance: %f", distance);
+            var newValue = Double(distance) > 0 ? Double(distance) * 0.1 + Double(changeValue) : Double(changeValue) + Double(distance) * 0.1
+            newValue = newValue <= 0 ? 0 : newValue
+            engine.updateOperation(tapLabel.tag, newValue: newValue)
+            //        NSLog("new value = %d", Int(engine.getValue(tapLabel.tag)))
+            updateValues()
+            pictureView.rise = engine.rise
+            pictureView.spindles = engine.numSpindles
+            startLocation = stopLocation
+        }
     }
 }
 
