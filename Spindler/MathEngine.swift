@@ -139,11 +139,13 @@ class MathEngine {
     func riseChange(newValue: Double) {
         rise = newValue
         angle = asin(rise/postSpacing) * 180 /  M_PI
-        run = sqrt(postSpacing*postSpacing - rise*rise)
-        numSpaces = Int(round((run) / (spindleWidth + maxSpace) + 1))
-        numSpindles = numSpaces - 1
-        between = (run - (Double(numSpindles) * spindleWidth)) / Double(numSpaces)
-        onCenter = spindleWidth + between
+        if(angle < 90 && angle > 0) {
+            run = sqrt(postSpacing*postSpacing - rise*rise)
+            numSpaces = Int(round((run) / (spindleWidth + maxSpace) + 1))
+            numSpindles = numSpaces - 1
+            between = (run - (Double(numSpindles) * spindleWidth)) / Double(numSpaces)
+            onCenter = spindleWidth + between
+        }
     }
     
     func runChange(newValue: Double) {

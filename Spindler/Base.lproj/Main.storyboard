@@ -3,210 +3,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Spindler" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="1" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4xZ-Gj-2iF">
-                                <rect key="frame" x="167" y="20" width="97" height="30"/>
-                                <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
-                                <connections>
-                                    <action selector="shiftWindow:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="tUc-qF-egd"/>
-                                    <action selector="updateView:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="bRH-zc-T3n"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UOA-JF-REK">
-                                <rect key="frame" x="167" y="58" width="97" height="30"/>
-                                <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
-                                <connections>
-                                    <action selector="shiftWindow:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="mlG-WY-MNZ"/>
-                                    <action selector="updateView:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="QQG-c9-fT9"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uIh-HD-7sn">
-                                <rect key="frame" x="167" y="96" width="97" height="30"/>
-                                <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
-                                <connections>
-                                    <action selector="shiftWindow:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="adE-j3-q48"/>
-                                    <action selector="updateView:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="ILg-bi-nt5"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="93N-Fe-Nkz">
-                                <rect key="frame" x="167" y="134" width="97" height="30"/>
-                                <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
-                                <connections>
-                                    <action selector="shiftWindow:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="ZiP-I7-QQa"/>
-                                    <action selector="updateView:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="Ei2-h1-iTH"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YMx-3q-CVi">
-                                <rect key="frame" x="167" y="172" width="97" height="30"/>
-                                <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
-                                <connections>
-                                    <action selector="shiftWindow:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="okt-Bx-Nn3"/>
-                                    <action selector="updateView:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="aBx-JH-7nR"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gh2-1s-XPs">
-                                <rect key="frame" x="167" y="210" width="97" height="30"/>
-                                <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
-                                <connections>
-                                    <action selector="shiftWindow:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="eHi-tC-SgV"/>
-                                    <action selector="updateView:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="pwm-e6-gYS"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TC6-97-mR0">
-                                <rect key="frame" x="167" y="248" width="97" height="30"/>
-                                <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
-                                <connections>
-                                    <action selector="shiftWindow:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="dFi-zY-ZMD"/>
-                                    <action selector="updateView:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="c2p-oh-kbc"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vvd-Y3-T9K">
-                                <rect key="frame" x="167" y="286" width="97" height="30"/>
-                                <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
-                                <connections>
-                                    <action selector="shiftWindow:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="cxn-Hd-dyd"/>
-                                    <action selector="updateView:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="lXk-fq-pq1"/>
-                                </connections>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Post Spacing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ok-D2-8ee">
-                                <rect key="frame" x="58" y="24" width="101" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Spindle Thickness" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XRg-C3-eRb">
-                                <rect key="frame" x="20" y="62" width="139" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Max Space" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZl-Fu-WIZ">
-                                <rect key="frame" x="74" y="100" width="85" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Spaces" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X8h-Au-CZx">
-                                <rect key="frame" x="102" y="138" width="57" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Spindles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eoW-kd-6YN">
-                                <rect key="frame" x="93" y="176" width="66" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="On center" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAy-Ug-ix5">
-                                <rect key="frame" x="83" y="214" width="76" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Between" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKB-So-Q9Q">
-                                <rect key="frame" x="92" y="252" width="67" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Angle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q1d-eZ-bLr">
-                                <rect key="frame" x="115" y="290" width="44" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rise" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iWU-91-0e4">
-                                <rect key="frame" x="126" y="328" width="33" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Run" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e67-35-h6d">
-                                <rect key="frame" x="129" y="366" width="30" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eH2-3N-Hqh">
-                                <rect key="frame" x="167" y="324" width="97" height="30"/>
-                                <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
-                                <connections>
-                                    <action selector="shiftWindow:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="fEX-96-dI6"/>
-                                    <action selector="updateView:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="NKC-AE-SLB"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E94-AI-Mug">
-                                <rect key="frame" x="167" y="362" width="97" height="30"/>
-                                <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
-                                <connections>
-                                    <action selector="shiftWindow:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="6aF-pH-UVo"/>
-                                    <action selector="updateView:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="b8w-oO-WIZ"/>
-                                </connections>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="angle" destination="vvd-Y3-T9K" id="Xnp-S6-UsB"/>
-                        <outlet property="between" destination="TC6-97-mR0" id="OH3-WJ-RVs"/>
-                        <outlet property="maxSpace" destination="uIh-HD-7sn" id="b8R-Ue-jEI"/>
-                        <outlet property="onCenter" destination="gh2-1s-XPs" id="apm-Sc-b0n"/>
-                        <outlet property="postSpacing" destination="4xZ-Gj-2iF" id="7d2-2d-gr7"/>
-                        <outlet property="rise" destination="eH2-3N-Hqh" id="GOY-LN-IEH"/>
-                        <outlet property="run" destination="E94-AI-Mug" id="xIK-h1-Gim"/>
-                        <outlet property="spaces" destination="93N-Fe-Nkz" id="9A7-4l-5Dp"/>
-                        <outlet property="spindleWidth" destination="UOA-JF-REK" id="oz9-9J-Xyt"/>
-                        <outlet property="spindles" destination="YMx-3q-CVi" id="FGG-A0-A1E"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="66" y="268"/>
-        </scene>
         <!--Lanscape View-->
         <scene sceneID="TkM-cU-ZjH">
             <objects>
@@ -219,179 +18,72 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="1" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Vr-oL-e6H">
-                                <rect key="frame" x="11" y="38" width="97" height="30"/>
-                                <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
-                                <connections>
-                                    <action selector="shiftWindow:" destination="0lD-sl-yRW" eventType="editingDidBegin" id="Ncp-1u-Ylq"/>
-                                    <action selector="updateView:" destination="0lD-sl-yRW" eventType="editingDidEnd" id="WY9-FN-ATn"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DXK-Xc-A3S">
-                                <rect key="frame" x="134" y="38" width="97" height="30"/>
-                                <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
-                                <connections>
-                                    <action selector="shiftWindow:" destination="0lD-sl-yRW" eventType="editingDidBegin" id="BvE-EB-QJ7"/>
-                                    <action selector="updateView:" destination="0lD-sl-yRW" eventType="editingDidEnd" id="b6a-5e-bS7"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yHr-HL-YV3">
-                                <rect key="frame" x="260" y="38" width="97" height="30"/>
-                                <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
-                                <connections>
-                                    <action selector="shiftWindow:" destination="0lD-sl-yRW" eventType="editingDidBegin" id="EbQ-LL-Mys"/>
-                                    <action selector="updateView:" destination="0lD-sl-yRW" eventType="editingDidEnd" id="1ej-qe-18F"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I4M-pO-r0v">
-                                <rect key="frame" x="373" y="38" width="97" height="30"/>
-                                <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
-                                <connections>
-                                    <action selector="shiftWindow:" destination="0lD-sl-yRW" eventType="editingDidBegin" id="trC-ZK-QM9"/>
-                                    <action selector="updateView:" destination="0lD-sl-yRW" eventType="editingDidEnd" id="hle-M2-Hjz"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D2M-XC-KeY">
-                                <rect key="frame" x="478" y="38" width="97" height="30"/>
-                                <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
-                                <connections>
-                                    <action selector="shiftWindow:" destination="0lD-sl-yRW" eventType="editingDidBegin" id="j75-1d-7dE"/>
-                                    <action selector="updateView:" destination="0lD-sl-yRW" eventType="editingDidEnd" id="n63-g0-qup"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RjL-4c-cfK">
-                                <rect key="frame" x="9" y="96" width="97" height="30"/>
-                                <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
-                                <connections>
-                                    <action selector="shiftWindow:" destination="0lD-sl-yRW" eventType="editingDidBegin" id="tk6-UT-sAX"/>
-                                    <action selector="updateView:" destination="0lD-sl-yRW" eventType="editingDidEnd" id="IsG-pf-HPx"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rTT-E1-Y0c">
-                                <rect key="frame" x="135" y="96" width="97" height="30"/>
-                                <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
-                                <connections>
-                                    <action selector="shiftWindow:" destination="0lD-sl-yRW" eventType="editingDidBegin" id="qCK-Zi-QIm"/>
-                                    <action selector="updateView:" destination="0lD-sl-yRW" eventType="editingDidEnd" id="3Fx-x3-m0z"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oql-Tn-65m">
-                                <rect key="frame" x="248" y="96" width="97" height="30"/>
-                                <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
-                                <connections>
-                                    <action selector="shiftWindow:" destination="0lD-sl-yRW" eventType="editingDidBegin" id="hMg-01-Zlu"/>
-                                    <action selector="updateView:" destination="0lD-sl-yRW" eventType="editingDidEnd" id="e02-iB-CAj"/>
-                                </connections>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Post Spacing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qA1-Lp-rM6">
-                                <rect key="frame" x="9" y="20" width="101" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Spindle Thickness" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ttO-Wx-lFV">
-                                <rect key="frame" x="113" y="20" width="139" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Max Space" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNS-MD-Ifk">
-                                <rect key="frame" x="266" y="20" width="85" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Spaces" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJw-lh-a3E">
-                                <rect key="frame" x="393" y="20" width="57" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Spindles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztW-e5-4v8">
-                                <rect key="frame" x="493" y="18" width="66" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="On center" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgv-ff-T50">
-                                <rect key="frame" x="19" y="76" width="76" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Between" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NbO-H2-xhg">
-                                <rect key="frame" x="150" y="76" width="67" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Angle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZF-4A-ucq">
-                                <rect key="frame" x="274" y="76" width="44" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rise" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v0o-Yc-XBd">
-                                <rect key="frame" x="387" y="76" width="33" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Run" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlQ-dl-o6h">
-                                <rect key="frame" x="511" y="76" width="30" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Eg-bg-W7Q">
-                                <rect key="frame" x="355" y="96" width="97" height="30"/>
-                                <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
-                                <connections>
-                                    <action selector="shiftWindow:" destination="0lD-sl-yRW" eventType="editingDidBegin" id="PvC-zc-QL1"/>
-                                    <action selector="updateView:" destination="0lD-sl-yRW" eventType="editingDidEnd" id="08B-Rc-G3d"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="83E-sM-awm">
-                                <rect key="frame" x="478" y="96" width="97" height="30"/>
-                                <accessibility key="accessibilityConfiguration" label="Post Spacing"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
-                                <connections>
-                                    <action selector="shiftWindow:" destination="0lD-sl-yRW" eventType="editingDidBegin" id="dg7-Yg-Hug"/>
-                                    <action selector="updateView:" destination="0lD-sl-yRW" eventType="editingDidEnd" id="9py-Pb-Ck7"/>
-                                </connections>
-                            </textField>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SBG-2r-YUf" customClass="SpindleDiagram" customModule="Spindler" customModuleProvider="target">
-                                <rect key="frame" x="20" y="134" width="560" height="446"/>
-                                <color key="backgroundColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SBG-2r-YUf" customClass="SpindleDiagram" customModule="Spindler" customModuleProvider="target">
+                                <rect key="frame" x="20" y="28" width="560" height="552"/>
+                                <subviews>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Post Spacing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qA1-Lp-rM6">
+                                        <rect key="frame" x="8" y="8" width="186" height="21"/>
+                                        <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Spindle Thickness" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ttO-Wx-lFV">
+                                        <rect key="frame" x="8" y="29" width="229" height="21"/>
+                                        <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Max Space" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNS-MD-Ifk">
+                                        <rect key="frame" x="8" y="51" width="156" height="21"/>
+                                        <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Spaces" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJw-lh-a3E">
+                                        <rect key="frame" x="8" y="71" width="131" height="21"/>
+                                        <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Spindles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztW-e5-4v8">
+                                        <rect key="frame" x="8" y="91" width="167" height="21"/>
+                                        <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="On center" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgv-ff-T50">
+                                        <rect key="frame" x="8" y="109" width="156" height="21"/>
+                                        <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Between" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NbO-H2-xhg">
+                                        <rect key="frame" x="8" y="127" width="167" height="21"/>
+                                        <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Angle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZF-4A-ucq">
+                                        <rect key="frame" x="8" y="144" width="204" height="21"/>
+                                        <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rise" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v0o-Yc-XBd">
+                                        <rect key="frame" x="8" y="163" width="161" height="21"/>
+                                        <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Run" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlQ-dl-o6h">
+                                        <rect key="frame" x="8" y="178" width="131" height="21"/>
+                                        <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.21382618063619604" green="0.34718837765296828" blue="0.93071007853403143" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.36138314928963899" green="0.65888362391533173" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="y3q-7B-iGj" appends="YES" id="EpK-e2-E6z"/>
@@ -401,25 +93,24 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Gbc-nc-wgF" firstAttribute="top" secondItem="SBG-2r-YUf" secondAttribute="bottom" constant="20" id="526-qv-zf5"/>
-                            <constraint firstItem="SBG-2r-YUf" firstAttribute="centerX" secondItem="bv6-kO-KF5" secondAttribute="centerX" id="8Ke-cz-PXB"/>
-                            <constraint firstItem="83E-sM-awm" firstAttribute="top" secondItem="nlQ-dl-o6h" secondAttribute="bottom" constant="-1" id="Pgi-uB-Peg"/>
-                            <constraint firstItem="SBG-2r-YUf" firstAttribute="top" secondItem="83E-sM-awm" secondAttribute="bottom" constant="10" id="VgY-E9-V7n"/>
-                            <constraint firstItem="83E-sM-awm" firstAttribute="top" secondItem="D2M-XC-KeY" secondAttribute="bottom" constant="28" id="lw3-J2-RUj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="SBG-2r-YUf" secondAttribute="trailing" id="Chd-2s-OL5"/>
+                            <constraint firstItem="SBG-2r-YUf" firstAttribute="top" secondItem="qcx-G9-CDE" secondAttribute="bottom" constant="8" id="DRz-tV-Wlg"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="SBG-2r-YUf" secondAttribute="leading" id="cFK-Gq-mdO"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="angle" destination="oql-Tn-65m" id="Oiq-bq-0Ec"/>
-                        <outlet property="between" destination="rTT-E1-Y0c" id="2gM-XV-bI8"/>
+                        <outlet property="angle" destination="aZF-4A-ucq" id="a7C-ka-7cD"/>
+                        <outlet property="between" destination="NbO-H2-xhg" id="IH5-mp-MEA"/>
                         <outlet property="horizPincher" destination="y3q-7B-iGj" id="O0G-Hb-FJd"/>
-                        <outlet property="maxSpace" destination="yHr-HL-YV3" id="TSX-1Q-JGq"/>
-                        <outlet property="onCenter" destination="RjL-4c-cfK" id="sFt-DQ-FRT"/>
+                        <outlet property="maxSpace" destination="aNS-MD-Ifk" id="zYU-cJ-I5e"/>
+                        <outlet property="onCenter" destination="pgv-ff-T50" id="j8K-9F-Y7m"/>
                         <outlet property="pictureView" destination="SBG-2r-YUf" id="rdR-Bv-RME"/>
-                        <outlet property="postSpacing" destination="3Vr-oL-e6H" id="gdu-kt-VjD"/>
-                        <outlet property="rise" destination="9Eg-bg-W7Q" id="uDJ-hX-xBV"/>
-                        <outlet property="run" destination="83E-sM-awm" id="P0n-FR-fHe"/>
-                        <outlet property="spaces" destination="I4M-pO-r0v" id="Pvc-hB-f9I"/>
-                        <outlet property="spindleWidth" destination="DXK-Xc-A3S" id="Bvf-DA-o3U"/>
-                        <outlet property="spindles" destination="D2M-XC-KeY" id="beo-kd-Nsg"/>
+                        <outlet property="postSpacing" destination="qA1-Lp-rM6" id="mwp-Is-3PX"/>
+                        <outlet property="rise" destination="v0o-Yc-XBd" id="L2f-Ye-QGF"/>
+                        <outlet property="run" destination="nlQ-dl-o6h" id="qgn-eP-MQp"/>
+                        <outlet property="spaces" destination="LJw-lh-a3E" id="Hpl-BF-R5h"/>
+                        <outlet property="spindleWidth" destination="ttO-Wx-lFV" id="ryq-1j-pCj"/>
+                        <outlet property="spindles" destination="ztW-e5-4v8" id="t3I-OY-WHR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eb0-WJ-O7E" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -429,7 +120,7 @@
                     </connections>
                 </pinchGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="66" y="945"/>
+            <point key="canvasLocation" x="245" y="352"/>
         </scene>
     </scenes>
 </document>
