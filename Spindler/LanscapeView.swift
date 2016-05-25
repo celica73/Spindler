@@ -50,16 +50,17 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         pictureView.addGestureRecognizer(swipeRec)
         pictureView.userInteractionEnabled = true
         pictureView.multipleTouchEnabled = true
-        pictureView.rise = engine.rise
-        for i in 0...9 {
+        for i in 0...10 {
             if let taggedLabel = self.view.viewWithTag(i) as? UILabel {
-                NSLog(String(taggedLabel.text))
+//                NSLog(String(taggedLabel.text))
                 taggedLabel.userInteractionEnabled = true
                 let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LanscapeView.labelAction))
                 taggedLabel.addGestureRecognizer(tap)
                 tap.delegate = self // Remember to extend your class with UIGestureRecognizerDelegate
             }
         }
+        pictureView.rise = engine.rise
+        pictureView.spindles = engine.numSpindles
     }
     
     override func didReceiveMemoryWarning() {
@@ -78,6 +79,11 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         angle.text = NSString(format: "Angle: %.0f deg.",engine.angle) as String
         rise.text = "Rise: " + asFraction(engine.rise) + "\""
         run.text = "Run: " + asFraction(engine.run) + "\""
+        if engine.maxSpace < engine.between {
+            maxSpace.textColor = .redColor()
+        } else {
+            maxSpace.textColor = .whiteColor()
+        }
     }
     
 
@@ -85,7 +91,7 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     // Receive action
     func labelAction(gr:UITapGestureRecognizer) {
         let searchlbl:UILabel = (gr.view as! UILabel) // Type cast it with the class for which you have added gesture
-        print(searchlbl.text)
+//        print(searchlbl.text)
         
         if tapLabel != nil && tapLabel == searchlbl {
             tapLabel.textColor = .whiteColor()
@@ -98,20 +104,6 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
             tapLabel.textColor = .orangeColor()
         }
     }
-    
-//     @IBAction func updateView(sender: AnyObject) {
-////        NSLog(String(sender.tag, sender.text))
-//        let update = sender.tag
-//        let inputCheck = validateInput(sender.text!, fieldTag: update)
-//        if(inputCheck.0) {
-//            let newNumber = inputCheck.1
-//            engine.updateOperation(update, newValue: newNumber)
-//            updateValues()
-//        } else {
-//            let badField = sender as! UILabel
-//            badField.text = "Invalid"
-//        }
-//    }
     
     func asFraction(number: Double) -> String {
         let fraction = number - Double(Int(number))
@@ -129,58 +121,10 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         }
     }
     
-//    func validateInput(input: String, fieldTag: Int) -> (Bool, Double) {
-//        let value = asDecimal(input)
-//        if( value >= 0 ) {
-//            return (true, value)
-//        } else {
-//            return (false, value)
-//        }
-//    }
-    
-//    func asDecimal(number: String) -> Double {
-//        let trimmedNumber = number.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-//        let numArray = Array(trimmedNumber.characters)
-//        var root: Double = 0.0
-//        var numerator: Double = 0.0
-//        var denominator: Double = 0.0
-//        
-//        var spaceLocation: Int = -1
-//        var fracLocation: Int = -1
-//        var decimalLocation: Int = -1
-//        
-//        //validate characters
-//        for i in 0..<numArray.count {
-//            if( numArray[i] == "."){
-//                if( decimalLocation != -1 ) {return -1}
-//                decimalLocation = i
-//            } else if( numArray[i] == " " ) {
-//                if( spaceLocation != -1 ) {return -1}
-//                spaceLocation = i
-//            } else if( numArray[i] == "/" ) {
-//                if( fracLocation != -1 ) {return -1}
-//                fracLocation = i
-//            } else if( numArray[i] < "0" || numArray[i] > "9") {
-//                return -1
-//            }
-//        }
-//        //real number, return it
-//        if( spaceLocation == -1 && fracLocation == -1 ) {
-//            return Double(trimmedNumber)!
-//        }
-//        //is it a fraction
-//        if( spaceLocation != -1) {
-//            root = Double(trimmedNumber.characters.split{$0 == " "}.map(String.init)[0])!
-//            let substring = trimmedNumber.characters.split{$0 == " "}.map(String.init)[1]
-//            numerator = Double(substring.characters.split{$0 == "/"}.map(String.init)[0])!
-//            denominator = Double(substring.characters.split{$0 == "/"}.map(String.init)[1])!
-//        }
-//        return root + numerator/denominator
-//    }
-    
     var startLocation: CGPoint!
     @IBAction func swiper(sender: UIPanGestureRecognizer) {
-        var changeValue:Double  = 0
+        var changeValue:Double
+        var velocity:CGPoint
         if tapLabel != nil {
             changeValue = engine.getValue(tapLabel.tag)
         } else {
@@ -189,15 +133,20 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         if (sender.state == UIGestureRecognizerState.Began) {
             startLocation = sender.locationInView(self.view)
         } else if (sender.state == UIGestureRecognizerState.Changed) {
-            let stopLocation: CGPoint = sender.locationInView(self.view);
-            let dx: CGFloat = stopLocation.x - startLocation.x;
-            let dy: CGFloat = stopLocation.y - startLocation.y;
-            var distance: CGFloat = sqrt(dx*dx + dy*dy);
-            if dy > 0 || dx < 0 {
+            let stopLocation: CGPoint = sender.locationInView(self.view)
+            velocity = sender.velocityInView(self.view)
+            let dx: CGFloat = stopLocation.x - startLocation.x
+            let dy: CGFloat = stopLocation.y - startLocation.y
+            let direction = dx*dx > dy*dy ? dx : dy
+            var distance: CGFloat = sqrt(dx*dx + dy*dy)
+            if (direction == dx && dx < 0) || (direction == dy && dy > 0) {
                 distance = -distance
             }
-            NSLog("Distance: %f", distance);
-            var newValue = Double(distance) > 0 ? Double(distance) * 0.1 + Double(changeValue) : Double(changeValue) + Double(distance) * 0.1
+            let magnitude = sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y))
+            let slideMult = magnitude / 10
+//            NSLog("Slide multitude: %f", slideMult)
+            let factor = slideMult > 4 ? 0.2 : 0.03
+            var newValue = Double(distance) > 0 ? Double(distance) * 0.1 + Double(changeValue) : Double(changeValue) + Double(distance) * factor
             newValue = newValue <= 0 ? 0 : newValue
             engine.updateOperation(tapLabel.tag, newValue: newValue)
             //        NSLog("new value = %d", Int(engine.getValue(tapLabel.tag)))
@@ -208,9 +157,3 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         }
     }
 }
-
-//code for figuring out scaling from x and y
-//CGPoint firstPoint = [recognizer locationOfTouch:0 inView:recognizer.view];
-//CGPoint secondPoint = [recognizer locationOfTouch:1 inView:recognizer.view];
-//
-//CGFloat angle = atan2(secondPoint.y - firstPoint.y, secondPoint.x - firstPoint.x);

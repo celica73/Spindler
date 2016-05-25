@@ -81,8 +81,8 @@ class MathEngine {
         numSpindles = numSpaces - 1
         between = (postSpacing - (Double(numSpindles) * spindleWidth)) / Double(numSpaces)
         onCenter = spindleWidth + between
-        rise = postSpacing * sin(angle)
-        run = postSpacing * cos(angle)
+        rise = postSpacing * abs(sin(angle))
+        run = postSpacing * abs(cos(angle))
     }
     
     func spindleWidthChange(newValue: Double) {
@@ -106,9 +106,6 @@ class MathEngine {
         numSpindles = numSpaces - 1
         between = (postSpacing - (Double(numSpindles) * spindleWidth)) / Double(numSpaces)
         onCenter = spindleWidth + between
-        if(between > maxSpace){
-            maxSpace = between
-        }
     }
     
     func numSpindlesChange(newValue: Double) {
@@ -116,9 +113,6 @@ class MathEngine {
         numSpaces = numSpindles + 1
         between = (postSpacing - (Double(numSpindles) * spindleWidth)) / Double(numSpaces)
         onCenter = spindleWidth + between
-        if(between > maxSpace){
-            maxSpace = between
-        }
     }
     
     func onCenterChange(newValue: Double) {
@@ -136,9 +130,6 @@ class MathEngine {
         onCenter = between + spindleWidth
         numSpaces = Int((postSpacing + spindleWidth)/(between + spindleWidth))
         numSpindles = numSpaces + 1
-        if(between > maxSpace){
-            maxSpace = between
-        }
     }
     
     func angleChange(newValue: Double) {
@@ -153,8 +144,8 @@ class MathEngine {
     
     func riseChange(newValue: Double) {
         rise = newValue
-        let newAngle = asin(rise/postSpacing) * 180 /  M_PI
-        angle =  newAngle > 0 ? (newAngle > 75 ? 75: newAngle): 0
+        let newAngle = abs(asin(rise/postSpacing)) * 180 /  M_PI
+        angle = newAngle > 0 ? (newAngle > 75 ? 75: newAngle): 0
         if(angle < 90 && angle > 0) {
             run = sqrt(postSpacing*postSpacing - rise*rise)
             numSpaces = Int(round((run) / (spindleWidth + maxSpace) + 1))
@@ -169,7 +160,7 @@ class MathEngine {
         if(run > postSpacing){
             postSpacing = run
         }
-        let newAngle = acos(run/postSpacing) * 180 /  M_PI
+        let newAngle = abs(acos(run/postSpacing)) * 180 /  M_PI
         angle =  newAngle > 0 ? (newAngle > 75 ? 75: newAngle): 0
         rise = sqrt(postSpacing * postSpacing - run*run)
         numSpaces = Int(round((run) / (spindleWidth + maxSpace) + 1))

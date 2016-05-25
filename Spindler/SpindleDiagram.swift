@@ -11,7 +11,7 @@ import UIKit
 var maxRise: Double = 400
 let π:Double = M_PI
 
-var space: Double = 3.5
+
 
 @IBDesignable class SpindleDiagram: UIView {
 
@@ -32,6 +32,13 @@ var space: Double = 3.5
             }
         }
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setNeedsDisplay()
+    }
+    
+    
     override func drawRect(rect: CGRect) {
         let level = UIBezierPath()
         
@@ -78,7 +85,7 @@ var space: Double = 3.5
                 picket.moveToPoint(CGPoint(x: xOrigin + space, y: yOrigin - ySpace))
                 picket.addLineToPoint(CGPoint(x: xOrigin + space, y: yOrigin - ySpace - 80))
                 picket.closePath()
-                picket.lineWidth = 8
+                picket.lineWidth = 7
                 UIColor.brownColor().set()
                 picket.stroke()
                 //If you want to fill it as well
