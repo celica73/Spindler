@@ -11,26 +11,15 @@ import Foundation
 
 
 class MathEngine {
-    
-    var postSpacing = 100.0
-    var spindleWidth = 1.5
-    var onCenter: (Double)
-    var between: (Double)
-    var angle = 0.0
-    var rise = 0.0
-    var run = 0.0
-    var maxSpace = 4.0
-    var numSpaces: (Int)
-    var numSpindles: (Int)
-    var units = false
+    var newProject: Project
     
     init(){
-        numSpaces = Int(round((postSpacing) / (spindleWidth + maxSpace) + 1))
-        numSpindles = numSpaces - 1
-        between = (postSpacing - (Double(numSpindles) * spindleWidth)) / Double(numSpaces)
-        onCenter = spindleWidth + between
-        rise = postSpacing * sin(angle)
-        run = postSpacing * cos(angle)
+        self.newProject = Project()
+        updateOperation(1, newValue: newProject.postSpacing)
+    }
+    
+    func getProject() -> Project {
+        return self.newProject
     }
     
     func updateOperation(sender: Int, newValue: Double) {
@@ -61,112 +50,112 @@ class MathEngine {
     
     func getValue(sender: Int)-> Double {
         switch sender {
-        case 1: return postSpacing
-        case 2: return spindleWidth
-        case 3: return maxSpace
-        case 4: return Double(numSpaces)
-        case 5: return Double(numSpindles)
-        case 6: return onCenter
-        case 7: return between
-        case 8: return angle
-        case 9: return rise
-        case 10: return run
-        default: return postSpacing
+        case 1: return newProject.postSpacing
+        case 2: return newProject.spindleWidth
+        case 3: return newProject.maxSpace
+        case 4: return Double(newProject.numSpaces)
+        case 5: return Double(newProject.numSpindles)
+        case 6: return newProject.onCenter
+        case 7: return newProject.between
+        case 8: return newProject.angle
+        case 9: return newProject.rise
+        case 10: return newProject.run
+        default: return newProject.postSpacing
         }
     }
     
     func postChange(newValue: Double) {
-        postSpacing = newValue
-        numSpaces = Int(round((postSpacing) / (spindleWidth + maxSpace) + 1))
-        numSpindles = numSpaces - 1
-        between = (postSpacing - (Double(numSpindles) * spindleWidth)) / Double(numSpaces)
-        onCenter = spindleWidth + between
-        rise = postSpacing * abs(sin(angle))
-        run = postSpacing * abs(cos(angle))
+        newProject.postSpacing = newValue
+        newProject.numSpaces = Int(round((newProject.postSpacing) / (newProject.spindleWidth + newProject.maxSpace) + 1))
+        newProject.numSpindles = newProject.numSpaces - 1
+        newProject.between = (newProject.postSpacing - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+        newProject.onCenter = newProject.spindleWidth + newProject.between
+        newProject.rise = newProject.postSpacing * abs(sin(newProject.angle))
+        newProject.run = newProject.postSpacing * abs(cos(newProject.angle))
     }
     
     func spindleWidthChange(newValue: Double) {
-        spindleWidth = newValue
-        numSpaces = Int((postSpacing) / (spindleWidth + maxSpace) + 1)
-        numSpindles = numSpaces - 1
-        between = (postSpacing - (Double(numSpindles) * spindleWidth)) / Double(numSpaces)
-        onCenter = spindleWidth + between
+        newProject.spindleWidth = newValue
+        newProject.numSpaces = Int((newProject.postSpacing) / (newProject.spindleWidth + newProject.maxSpace) + 1)
+        newProject.numSpindles = newProject.numSpaces - 1
+        newProject.between = (newProject.postSpacing - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+        newProject.onCenter = newProject.spindleWidth + newProject.between
     }
     
     func maxSpaceChange(newValue: Double) {
-        maxSpace = newValue
-        numSpaces = Int((postSpacing) / (spindleWidth + maxSpace) + 1)
-        numSpindles = numSpaces - 1
-        between = (postSpacing - (Double(numSpindles) * spindleWidth)) / Double(numSpaces)
-        onCenter = spindleWidth + between
+        newProject.maxSpace = newValue
+        newProject.numSpaces = Int((newProject.postSpacing) / (newProject.spindleWidth + newProject.maxSpace) + 1)
+        newProject.numSpindles = newProject.numSpaces - 1
+        newProject.between = (newProject.postSpacing - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+        newProject.onCenter = newProject.spindleWidth + newProject.between
     }
     
     func numSpacesChange(newValue: Double) {
-        numSpaces = Int(newValue)
-        numSpindles = numSpaces - 1
-        between = (postSpacing - (Double(numSpindles) * spindleWidth)) / Double(numSpaces)
-        onCenter = spindleWidth + between
+        newProject.numSpaces = Int(newValue)
+        newProject.numSpindles = newProject.numSpaces - 1
+        newProject.between = (newProject.postSpacing - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+        newProject.onCenter = newProject.spindleWidth + newProject.between
     }
     
     func numSpindlesChange(newValue: Double) {
-        numSpindles = Int(newValue)
-        numSpaces = numSpindles + 1
-        between = (postSpacing - (Double(numSpindles) * spindleWidth)) / Double(numSpaces)
-        onCenter = spindleWidth + between
+        newProject.numSpindles = Int(newValue)
+        newProject.numSpaces = newProject.numSpindles + 1
+        newProject.between = (newProject.postSpacing - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+        newProject.onCenter = newProject.spindleWidth + newProject.between
     }
     
     func onCenterChange(newValue: Double) {
-        onCenter = newValue
-        between = onCenter - spindleWidth
-        numSpaces = Int((postSpacing + spindleWidth)/(between + spindleWidth))
-        numSpindles = numSpaces + 1
-        if(between > maxSpace){
-            maxSpace = between
+        newProject.onCenter = newValue
+        newProject.between = newProject.onCenter - newProject.spindleWidth
+        newProject.numSpaces = Int((newProject.postSpacing + newProject.spindleWidth)/(newProject.between + newProject.spindleWidth))
+        newProject.numSpindles = newProject.numSpaces + 1
+        if(newProject.between > newProject.maxSpace){
+            newProject.maxSpace = newProject.between
         }
     }
     
     func betweenChange(newValue: Double) {
-        between = newValue
-        onCenter = between + spindleWidth
-        numSpaces = Int((postSpacing + spindleWidth)/(between + spindleWidth))
-        numSpindles = numSpaces + 1
+        newProject.between = newValue
+        newProject.onCenter = newProject.between + newProject.spindleWidth
+        newProject.numSpaces = Int((newProject.postSpacing + newProject.spindleWidth)/(newProject.between + newProject.spindleWidth))
+        newProject.numSpindles = newProject.numSpaces + 1
     }
     
     func angleChange(newValue: Double) {
-        angle =  newValue > 0 ? (newValue > 75 ? 75: newValue): 0
-        rise = postSpacing * abs(sin(angle * M_PI / 180))
-        run = postSpacing * abs(cos(angle * M_PI / 180))
-        numSpaces = Int(round((run) / (spindleWidth + maxSpace) + 1))
-        numSpindles = numSpaces - 1
-        between = (run - (Double(numSpindles) * spindleWidth)) / Double(numSpaces)
-        onCenter = spindleWidth + between
+        newProject.angle =  newValue > 0 ? (newValue > 75 ? 75: newValue): 0
+        newProject.rise = newProject.postSpacing * abs(sin(newProject.angle * M_PI / 180))
+        newProject.run = newProject.postSpacing * abs(cos(newProject.angle * M_PI / 180))
+        newProject.numSpaces = Int(round((newProject.run) / (newProject.spindleWidth + newProject.maxSpace) + 1))
+        newProject.numSpindles = newProject.numSpaces - 1
+        newProject.between = (newProject.run - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+        newProject.onCenter = newProject.spindleWidth + newProject.between
     }
     
     func riseChange(newValue: Double) {
-        rise = newValue
-        let newAngle = abs(asin(rise/postSpacing)) * 180 /  M_PI
-        angle = newAngle > 0 ? (newAngle > 75 ? 75: newAngle): 0
-        if(angle < 90 && angle > 0) {
-            run = sqrt(postSpacing*postSpacing - rise*rise)
-            numSpaces = Int(round((run) / (spindleWidth + maxSpace) + 1))
-            numSpindles = numSpaces - 1
-            between = (run - (Double(numSpindles) * spindleWidth)) / Double(numSpaces)
-            onCenter = spindleWidth + between
+        newProject.rise = newValue
+        let newAngle = abs(asin(newProject.rise/newProject.postSpacing)) * 180 /  M_PI
+        newProject.angle = newAngle > 0 ? (newAngle > 75 ? 75: newAngle): 0
+        if(newProject.angle < 90 && newProject.angle > 0) {
+            newProject.run = sqrt(newProject.postSpacing*newProject.postSpacing - newProject.rise*newProject.rise)
+            newProject.numSpaces = Int(round((newProject.run) / (newProject.spindleWidth + newProject.maxSpace) + 1))
+            newProject.numSpindles = newProject.numSpaces - 1
+            newProject.between = (newProject.run - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+            newProject.onCenter = newProject.spindleWidth + newProject.between
         }
     }
     
     func runChange(newValue: Double) {
-        run = newValue
-        if(run > postSpacing){
-            postSpacing = run
+        newProject.run = newValue
+        if(newProject.run > newProject.postSpacing){
+            newProject.postSpacing = newProject.run
         }
-        let newAngle = abs(acos(run/postSpacing)) * 180 /  M_PI
-        angle =  newAngle > 0 ? (newAngle > 75 ? 75: newAngle): 0
-        rise = sqrt(postSpacing * postSpacing - run*run)
-        numSpaces = Int(round((run) / (spindleWidth + maxSpace) + 1))
-        numSpindles = numSpaces - 1
-        between = (run - (Double(numSpindles) * spindleWidth)) / Double(numSpaces)
-        onCenter = spindleWidth + between
+        let newAngle = abs(acos(newProject.run/newProject.postSpacing)) * 180 /  M_PI
+        newProject.angle =  newAngle > 0 ? (newAngle > 75 ? 75: newAngle): 0
+        newProject.rise = sqrt(newProject.postSpacing * newProject.postSpacing - newProject.run*newProject.run)
+        newProject.numSpaces = Int(round((newProject.run) / (newProject.spindleWidth + newProject.maxSpace) + 1))
+        newProject.numSpindles = newProject.numSpaces - 1
+        newProject.between = (newProject.run - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+        newProject.onCenter = newProject.spindleWidth + newProject.between
     }
 }
 

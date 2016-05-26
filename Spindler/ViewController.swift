@@ -48,16 +48,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func updateValues() {
-        postSpacing.text = asFraction(engine.postSpacing)
-        spindleWidth.text = asFraction(engine.spindleWidth)
-        maxSpace.text = asFraction(engine.maxSpace)
-        spaces.text = String(engine.numSpaces)
-        spindles.text = String(engine.numSpindles)
-        onCenter.text = asFraction(engine.onCenter)
-        between.text = asFraction(engine.between)
-        angle.text = NSString(format: "%.0f",engine.angle) as String
-        rise.text = asFraction(engine.rise)
-        run.text = asFraction(engine.run)
+        postSpacing.text = asFraction(engine.getProject().postSpacing)
+        spindleWidth.text = asFraction(engine.getProject().spindleWidth)
+        maxSpace.text = asFraction(engine.getProject().maxSpace)
+        spaces.text = String(engine.getProject().numSpaces)
+        spindles.text = String(engine.getProject().numSpindles)
+        onCenter.text = asFraction(engine.getProject().onCenter)
+        between.text = asFraction(engine.getProject().between)
+        angle.text = NSString(format: "%.0f",engine.getProject().angle) as String
+        rise.text = asFraction(engine.getProject().rise)
+        run.text = asFraction(engine.getProject().run)
     }
     
     @IBAction func shiftWindow(sender: UITextField) {

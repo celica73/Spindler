@@ -59,8 +59,8 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
                 tap.delegate = self // Remember to extend your class with UIGestureRecognizerDelegate
             }
         }
-        pictureView.rise = engine.rise
-        pictureView.spindles = engine.numSpindles
+        pictureView.rise = engine.getProject().rise
+        pictureView.spindles = engine.getProject().numSpindles
     }
     
     override func didReceiveMemoryWarning() {
@@ -69,17 +69,17 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     }
     
     func updateValues() {
-        postSpacing.text = "PostSpacing: " + asFraction(engine.postSpacing) + "\""
-        spindleWidth.text = "Spindle Width: " + asFraction(engine.spindleWidth) + "\""
-        maxSpace.text = "Max Space: " + asFraction(engine.maxSpace) + "\""
-        spaces.text = "Spaces: " + String(engine.numSpaces)
-        spindles.text = "Spindles: " + String(engine.numSpindles)
-        onCenter.text = "On center: " + asFraction(engine.onCenter) + "\""
-        between.text = "Between: " + asFraction(engine.between) + "\""
-        angle.text = NSString(format: "Angle: %.0f deg.",engine.angle) as String
-        rise.text = "Rise: " + asFraction(engine.rise) + "\""
-        run.text = "Run: " + asFraction(engine.run) + "\""
-        if engine.maxSpace < engine.between {
+        postSpacing.text = "PostSpacing: " + asFraction(engine.getProject().postSpacing) + "\""
+        spindleWidth.text = "Spindle Width: " + asFraction(engine.getProject().spindleWidth) + "\""
+        maxSpace.text = "Max Space: " + asFraction(engine.getProject().maxSpace) + "\""
+        spaces.text = "Spaces: " + String(engine.getProject().numSpaces)
+        spindles.text = "Spindles: " + String(engine.getProject().numSpindles)
+        onCenter.text = "On center: " + asFraction(engine.getProject().onCenter) + "\""
+        between.text = "Between: " + asFraction(engine.getProject().between) + "\""
+        angle.text = NSString(format: "Angle: %.0f deg.",engine.getProject().angle) as String
+        rise.text = "Rise: " + asFraction(engine.getProject().rise) + "\""
+        run.text = "Run: " + asFraction(engine.getProject().run) + "\""
+        if engine.getProject().maxSpace < engine.getProject().between {
             maxSpace.textColor = .redColor()
         } else {
             maxSpace.textColor = .whiteColor()
@@ -149,10 +149,10 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
             var newValue = Double(distance) > 0 ? Double(distance) * 0.1 + Double(changeValue) : Double(changeValue) + Double(distance) * factor
             newValue = newValue <= 0 ? 0 : newValue
             engine.updateOperation(tapLabel.tag, newValue: newValue)
-            //        NSLog("new value = %d", Int(engine.getValue(tapLabel.tag)))
+            //        NSLog("new value = %d", Int(engine.getProject().getValue(tapLabel.tag)))
             updateValues()
-            pictureView.rise = engine.rise
-            pictureView.spindles = engine.numSpindles
+            pictureView.rise = engine.getProject().rise
+            pictureView.spindles = engine.getProject().numSpindles
             startLocation = stopLocation
         }
     }
