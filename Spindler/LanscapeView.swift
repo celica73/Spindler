@@ -10,7 +10,7 @@ import UIKit
 
 class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
     
-    var engine = MathEngine()
+    var engine = MathEngine.sharedInstance
     
     @IBOutlet var postSpacing: UILabel!
     @IBOutlet var spindleWidth: UILabel!
@@ -35,6 +35,12 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        swipeRec.addTarget(self, action: #selector(LanscapeView.swiper))
+        pictureView.addGestureRecognizer(swipeRec)
+        pictureView.userInteractionEnabled = true
+        pictureView.multipleTouchEnabled = true
+        pictureView.rise = CGFloat(engine.getProject().rise)
+        pictureView.spindles = engine.getProject().numSpindles
         postSpacing.tag = 1
         spindleWidth.tag = 2
         maxSpace.tag = 3
@@ -45,22 +51,15 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         angle.tag = 8
         rise.tag = 9
         run.tag = 10
-        updateValues()
-        swipeRec.addTarget(self, action: #selector(LanscapeView.swiper))
-        pictureView.addGestureRecognizer(swipeRec)
-        pictureView.userInteractionEnabled = true
-        pictureView.multipleTouchEnabled = true
         for i in 0...10 {
             if let taggedLabel = self.view.viewWithTag(i) as? UILabel {
-//                NSLog(String(taggedLabel.text))
                 taggedLabel.userInteractionEnabled = true
                 let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LanscapeView.labelAction))
                 taggedLabel.addGestureRecognizer(tap)
                 tap.delegate = self // Remember to extend your class with UIGestureRecognizerDelegate
             }
         }
-        pictureView.rise = engine.getProject().rise
-        pictureView.spindles = engine.getProject().numSpindles
+        updateValues()
     }
     
     override func didReceiveMemoryWarning() {
@@ -69,7 +68,8 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     }
     
     func updateValues() {
-        postSpacing.text = "PostSpacing: " + asFraction(engine.getProject().postSpacing) + "\""
+        updateLabel(postSpacing, center: pictureView.postSpaceLabel, text: (asFraction(engine.getProject().postSpacing) + "\""))
+//        postSpacing.text = "PostSpacing: " + asFraction(engine.getProject().postSpacing) + "\""
         spindleWidth.text = "Spindle Width: " + asFraction(engine.getProject().spindleWidth) + "\""
         maxSpace.text = "Max Space: " + asFraction(engine.getProject().maxSpace) + "\""
         spaces.text = "Spaces: " + String(engine.getProject().numSpaces)
@@ -86,12 +86,19 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         }
     }
     
-
+    func updateLabel(label: UILabel, center: CGPoint, text: String) {
+        NSLog(String(pictureView.postSpaceLabel.x) + ", " + String(pictureView.postSpaceLabel.y))
+        label.frame = CGRectMake(center.x, center.y, 100, 20)
+        label.transform = CGAffineTransformMakeTranslation(center.x, center.y)
+        label.center = center
+        label.textAlignment = NSTextAlignment.Center
+        label.text = text
+        self.view.addSubview(label)
+     }
     
     // Receive action
     func labelAction(gr:UITapGestureRecognizer) {
         let searchlbl:UILabel = (gr.view as! UILabel) // Type cast it with the class for which you have added gesture
-//        print(searchlbl.text)
         
         if tapLabel != nil && tapLabel == searchlbl {
             tapLabel.textColor = .whiteColor()
@@ -122,13 +129,18 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     }
     
     var startLocation: CGPoint!
+    
     @IBAction func swiper(sender: UIPanGestureRecognizer) {
         var changeValue:Double
         var velocity:CGPoint
+        var moveFactor: Double = 1
         if tapLabel != nil {
             changeValue = engine.getValue(tapLabel.tag)
         } else {
             return
+        }
+        if tapLabel.tag == 4 || tapLabel.tag == 5 {
+            moveFactor = 5
         }
         if (sender.state == UIGestureRecognizerState.Began) {
             startLocation = sender.locationInView(self.view)
@@ -144,14 +156,12 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
             }
             let magnitude = sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y))
             let slideMult = magnitude / 10
-//            NSLog("Slide multitude: %f", slideMult)
-            let factor = slideMult > 4 ? 0.2 : 0.03
-            var newValue = Double(distance) > 0 ? Double(distance) * 0.1 + Double(changeValue) : Double(changeValue) + Double(distance) * factor
+            let factor = (slideMult > 4 ? 0.2 : 0.01) * moveFactor
+            var newValue = Double(changeValue) + Double(distance) * factor
             newValue = newValue <= 0 ? 0 : newValue
             engine.updateOperation(tapLabel.tag, newValue: newValue)
-            //        NSLog("new value = %d", Int(engine.getProject().getValue(tapLabel.tag)))
             updateValues()
-            pictureView.rise = engine.getProject().rise
+            pictureView.rise = CGFloat(engine.getProject().rise)
             pictureView.spindles = engine.getProject().numSpindles
             startLocation = stopLocation
         }

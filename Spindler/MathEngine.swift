@@ -9,8 +9,12 @@
 import Foundation
 
 
+private let sharedEngine = MathEngine()
 
 class MathEngine {
+    class var sharedInstance: MathEngine {
+        return sharedEngine
+    }
     var newProject: Project
     
     init(){
@@ -78,36 +82,46 @@ class MathEngine {
         newProject.spindleWidth = newValue
         newProject.numSpaces = Int((newProject.postSpacing) / (newProject.spindleWidth + newProject.maxSpace) + 1)
         newProject.numSpindles = newProject.numSpaces - 1
-        newProject.between = (newProject.postSpacing - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+        if newProject.numSpaces > 0 {
+            newProject.between = (newProject.postSpacing - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+        }
         newProject.onCenter = newProject.spindleWidth + newProject.between
     }
     
     func maxSpaceChange(newValue: Double) {
         newProject.maxSpace = newValue
-        newProject.numSpaces = Int((newProject.postSpacing) / (newProject.spindleWidth + newProject.maxSpace) + 1)
+        if (newProject.spindleWidth + newProject.maxSpace) > 0 {
+            newProject.numSpaces = Int((newProject.postSpacing) / (newProject.spindleWidth + newProject.maxSpace) + 1)
+        }
         newProject.numSpindles = newProject.numSpaces - 1
         newProject.between = (newProject.postSpacing - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
         newProject.onCenter = newProject.spindleWidth + newProject.between
     }
     
     func numSpacesChange(newValue: Double) {
-        newProject.numSpaces = Int(newValue)
+        newProject.numSpaces = Int(newValue) >= 1 ? Int(newValue) : 1
         newProject.numSpindles = newProject.numSpaces - 1
-        newProject.between = (newProject.postSpacing - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+        if newProject.numSpaces > 0 {
+            newProject.between = (newProject.postSpacing - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+        }
         newProject.onCenter = newProject.spindleWidth + newProject.between
     }
     
     func numSpindlesChange(newValue: Double) {
-        newProject.numSpindles = Int(newValue)
+        newProject.numSpindles = Int(newValue) >= 0 ? Int(newValue) : 0
         newProject.numSpaces = newProject.numSpindles + 1
-        newProject.between = (newProject.postSpacing - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+        if newProject.numSpaces > 0 {
+            newProject.between = (newProject.postSpacing - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+        }
         newProject.onCenter = newProject.spindleWidth + newProject.between
     }
     
     func onCenterChange(newValue: Double) {
         newProject.onCenter = newValue
         newProject.between = newProject.onCenter - newProject.spindleWidth
-        newProject.numSpaces = Int((newProject.postSpacing + newProject.spindleWidth)/(newProject.between + newProject.spindleWidth))
+        if (newProject.between + newProject.spindleWidth) > 0 {
+            newProject.numSpaces = Int((newProject.postSpacing + newProject.spindleWidth)/(newProject.between + newProject.spindleWidth))
+        }
         newProject.numSpindles = newProject.numSpaces + 1
         if(newProject.between > newProject.maxSpace){
             newProject.maxSpace = newProject.between
@@ -117,7 +131,9 @@ class MathEngine {
     func betweenChange(newValue: Double) {
         newProject.between = newValue
         newProject.onCenter = newProject.between + newProject.spindleWidth
-        newProject.numSpaces = Int((newProject.postSpacing + newProject.spindleWidth)/(newProject.between + newProject.spindleWidth))
+        if (newProject.between + newProject.spindleWidth) > 0 {
+            newProject.numSpaces = Int((newProject.postSpacing + newProject.spindleWidth)/(newProject.between + newProject.spindleWidth))
+        }
         newProject.numSpindles = newProject.numSpaces + 1
     }
     
@@ -125,9 +141,13 @@ class MathEngine {
         newProject.angle =  newValue > 0 ? (newValue > 75 ? 75: newValue): 0
         newProject.rise = newProject.postSpacing * abs(sin(newProject.angle * M_PI / 180))
         newProject.run = newProject.postSpacing * abs(cos(newProject.angle * M_PI / 180))
-        newProject.numSpaces = Int(round((newProject.run) / (newProject.spindleWidth + newProject.maxSpace) + 1))
+        if (newProject.spindleWidth + newProject.maxSpace) > 0 {
+            newProject.numSpaces = Int(round((newProject.run) / (newProject.spindleWidth + newProject.maxSpace) + 1))
+        }
         newProject.numSpindles = newProject.numSpaces - 1
-        newProject.between = (newProject.run - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+        if newProject.numSpaces > 0 {
+            newProject.between = (newProject.run - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+        }
         newProject.onCenter = newProject.spindleWidth + newProject.between
     }
     
@@ -137,9 +157,13 @@ class MathEngine {
         newProject.angle = newAngle > 0 ? (newAngle > 75 ? 75: newAngle): 0
         if(newProject.angle < 90 && newProject.angle > 0) {
             newProject.run = sqrt(newProject.postSpacing*newProject.postSpacing - newProject.rise*newProject.rise)
-            newProject.numSpaces = Int(round((newProject.run) / (newProject.spindleWidth + newProject.maxSpace) + 1))
+            if (newProject.spindleWidth + newProject.maxSpace) > 0 {
+                newProject.numSpaces = Int(round((newProject.run) / (newProject.spindleWidth + newProject.maxSpace) + 1))
+            }
             newProject.numSpindles = newProject.numSpaces - 1
-            newProject.between = (newProject.run - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+            if newProject.numSpaces > 0 {
+                newProject.between = (newProject.run - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+            }
             newProject.onCenter = newProject.spindleWidth + newProject.between
         }
     }
@@ -152,9 +176,13 @@ class MathEngine {
         let newAngle = abs(acos(newProject.run/newProject.postSpacing)) * 180 /  M_PI
         newProject.angle =  newAngle > 0 ? (newAngle > 75 ? 75: newAngle): 0
         newProject.rise = sqrt(newProject.postSpacing * newProject.postSpacing - newProject.run*newProject.run)
-        newProject.numSpaces = Int(round((newProject.run) / (newProject.spindleWidth + newProject.maxSpace) + 1))
+        if (newProject.spindleWidth + newProject.maxSpace) > 0 {
+            newProject.numSpaces = Int(round((newProject.run) / (newProject.spindleWidth + newProject.maxSpace) + 1))
+        }
         newProject.numSpindles = newProject.numSpaces - 1
-        newProject.between = (newProject.run - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+        if newProject.numSpaces > 0 {
+            newProject.between = (newProject.run - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+        }
         newProject.onCenter = newProject.spindleWidth + newProject.between
     }
 }
