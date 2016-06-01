@@ -68,8 +68,7 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     }
     
     func updateValues() {
-        updateLabel(postSpacing, center: pictureView.postSpaceLabel, text: (asFraction(engine.getProject().postSpacing) + "\""))
-//        postSpacing.text = "PostSpacing: " + asFraction(engine.getProject().postSpacing) + "\""
+        postSpacing.text = "PostSpacing: " + asFraction(engine.getProject().postSpacing) + "\""
         spindleWidth.text = "Spindle Width: " + asFraction(engine.getProject().spindleWidth) + "\""
         maxSpace.text = "Max Space: " + asFraction(engine.getProject().maxSpace) + "\""
         spaces.text = "Spaces: " + String(engine.getProject().numSpaces)
@@ -85,16 +84,6 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
             maxSpace.textColor = .whiteColor()
         }
     }
-    
-    func updateLabel(label: UILabel, center: CGPoint, text: String) {
-        NSLog(String(pictureView.postSpaceLabel.x) + ", " + String(pictureView.postSpaceLabel.y))
-        label.frame = CGRectMake(center.x, center.y, 100, 20)
-        label.transform = CGAffineTransformMakeTranslation(center.x, center.y)
-        label.center = center
-        label.textAlignment = NSTextAlignment.Center
-        label.text = text
-        self.view.addSubview(label)
-     }
     
     // Receive action
     func labelAction(gr:UITapGestureRecognizer) {
