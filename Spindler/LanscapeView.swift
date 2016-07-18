@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
+class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewDataSource,UIPickerViewDelegate {
     
     var engine = MathEngine.sharedInstance
     
@@ -23,7 +23,14 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     @IBOutlet var rise: UILabel!
     @IBOutlet var run: UILabel!
     
+    @IBOutlet var feetPicker: UIPickerView!
+    
+    var feetData: [String] = []
+    var inchData: [String] = []
+    var fractionData: [String] = ["0","1/16","1/8","3/16","1/4","5/16","3/8","7/16","1/2","9/16","5/8","11/16","3/4","13/16","7/8","15/16"]
+    var pickerData = [[String]]()
     @IBOutlet var pictureView: SpindleDiagram!
+    @IBOutlet var pickerView: NumberSelector!
     
     @IBOutlet var swipeGesture: UIPanGestureRecognizer!
     
@@ -31,10 +38,24 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     var labelColor: UIColor!
     
     let swipeRec = UIPanGestureRecognizer()
+    let blueText = UIColor( red: 212/255, green: 207/255, blue: 255/255, alpha: 1.0 )
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        for i in 0...50 {
+            feetData.append(String(i))
+        }
+        for i in 0...50 {
+            inchData.append(String(i))
+        }
+        pickerData.append(feetData)
+        pickerData.append(inchData)
+        pickerData.append(fractionData)
+        pickerView.hidden = true
+        feetPicker.dataSource = self
+        feetPicker.delegate = self
+        
         swipeRec.addTarget(self, action: #selector(LanscapeView.swiper))
         pictureView.addGestureRecognizer(swipeRec)
         pictureView.userInteractionEnabled = true
@@ -68,20 +89,20 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
     }
     
     func updateValues() {
-        postSpacing.text = "PostSpacing: " + asFraction(engine.getProject().postSpacing) + "\""
-        spindleWidth.text = "Spindle Width: " + asFraction(engine.getProject().spindleWidth) + "\""
-        maxSpace.text = "Max Space: " + asFraction(engine.getProject().maxSpace) + "\""
-        spaces.text = "Spaces: " + String(engine.getProject().numSpaces)
-        spindles.text = "Spindles: " + String(engine.getProject().numSpindles)
-        onCenter.text = "On center: " + asFraction(engine.getProject().onCenter) + "\""
-        between.text = "Between: " + asFraction(engine.getProject().between) + "\""
-        angle.text = NSString(format: "Angle: %.0f deg.",engine.getProject().angle) as String
-        rise.text = "Rise: " + asFraction(engine.getProject().rise) + "\""
-        run.text = "Run: " + asFraction(engine.getProject().run) + "\""
+        postSpacing.text = "0\' " + asFraction(engine.getProject().postSpacing) + "\" 0"
+        spindleWidth.text = asFraction(engine.getProject().spindleWidth) + "\""
+        maxSpace.text = asFraction(engine.getProject().maxSpace) + "\""
+        spaces.text = String(engine.getProject().numSpaces)
+        spindles.text = String(engine.getProject().numSpindles)
+        onCenter.text = asFraction(engine.getProject().onCenter) + "\""
+        between.text = asFraction(engine.getProject().between) + "\""
+        angle.text = NSString(format: "%.0f deg.",engine.getProject().angle) as String
+        rise.text = asFraction(engine.getProject().rise) + "\""
+        run.text = asFraction(engine.getProject().run) + "\""
         if engine.getProject().maxSpace < engine.getProject().between {
             maxSpace.textColor = .redColor()
         } else {
-            maxSpace.textColor = .whiteColor()
+            maxSpace.textColor = blueText
         }
     }
     
@@ -90,15 +111,39 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
         let searchlbl:UILabel = (gr.view as! UILabel) // Type cast it with the class for which you have added gesture
         
         if tapLabel != nil && tapLabel == searchlbl {
-            tapLabel.textColor = .whiteColor()
+            tapLabel.textColor = blueText
             tapLabel = nil
+            pickerView.hidden = true
         } else {
             if tapLabel != nil {
-                tapLabel.textColor = .whiteColor()
+                tapLabel.textColor = blueText
+                pickerView.hidden = true
             }
             tapLabel = searchlbl
+            let labelFrame: CGRect = tapLabel.frame
+            pickerView.center = CGPointMake(CGRectGetMaxX(labelFrame) + 90,CGRectGetMidY(labelFrame) + 8)
             tapLabel.textColor = .orangeColor()
+            setPickerValues()
+            pickerView.hidden = false
         }
+    }
+    
+    func setPickerValues() {
+        let currentArray = tapLabel.text!.characters.split{$0 == " "}.map(String.init)
+        let feet = currentArray[0].characters.split{$0 == "\'"}.map(String.init)[0]
+        let inches = currentArray[1].characters.split{$0 == "\""}.map(String.init)[0]
+        let fraction = currentArray[2]
+        
+        if let feetIndex = pickerData[0].indexOf(feet) {
+            feetPicker.selectRow(0, inComponent: feetIndex, animated: false)
+        }
+        if let inchIndex = pickerData[1].indexOf(inches) {
+            feetPicker.selectRow(1, inComponent: inchIndex, animated: false)
+        }
+        if let fractionIndex = pickerData[2].indexOf(fraction) {
+            feetPicker.selectRow(2, inComponent: fractionIndex, animated: false)
+        }
+        
     }
     
     func asFraction(number: Double) -> String {
@@ -154,5 +199,33 @@ class LanscapeView: UIViewController, UITextFieldDelegate, UIGestureRecognizerDe
             pictureView.spindles = engine.getProject().numSpindles
             startLocation = stopLocation
         }
+    }
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return pickerData.count
+    }
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData[component].count
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if component == 0 {
+            return pickerData[component][row] + "\'"
+        } else if component == 1 {
+            return pickerData[component][row] + "\""
+        } else {
+            return pickerData[component][row]
+        }
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        updateLabel()
+    }
+    
+    func updateLabel(){
+        let feet = pickerData[0][feetPicker.selectedRowInComponent(0)]
+        let inches = pickerData[1][feetPicker.selectedRowInComponent(1)]
+        let fraction = pickerData[2][feetPicker.selectedRowInComponent(2)]
+        tapLabel.text = feet + "\' " + inches + "\" " + fraction
+
     }
 }
