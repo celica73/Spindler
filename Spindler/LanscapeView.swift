@@ -61,7 +61,7 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
         pictureView.userInteractionEnabled = true
         pictureView.multipleTouchEnabled = true
         pictureView.rise = CGFloat(engine.getProject().rise)
-        pictureView.spindles = engine.getProject().numSpindles
+//        pictureView.spindles = engine.getProject().numSpindles
         postSpacing.tag = 1
         spindleWidth.tag = 2
         maxSpace.tag = 3
@@ -196,7 +196,7 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
             engine.updateOperation(tapLabel.tag, newValue: newValue)
             updateValues()
             pictureView.rise = CGFloat(engine.getProject().rise)
-            pictureView.spindles = engine.getProject().numSpindles
+//            pictureView.spindles = engine.getProject().numSpindles
             startLocation = stopLocation
         }
     }

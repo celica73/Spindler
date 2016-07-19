@@ -14,7 +14,7 @@ class Project: NSObject, NSCoding {
     var spindleWidth = 1.5
     var onCenter = 3.31
     var between = 3.81
-    var angle = 0.0
+    var angle = 30.0
     var rise = 0.0
     var run = 100.0
     var maxSpace = 4.0
