@@ -12,7 +12,6 @@
 		D24186481CF068D800674227 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24186471CF068D800674227 /* ViewController.swift */; };
 		D241864B1CF068D800674227 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D24186491CF068D800674227 /* Main.storyboard */; };
 		D241864E1CF068D900674227 /* Spindler.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D241864C1CF068D900674227 /* Spindler.xcdatamodeld */; };
-		D24186501CF068D900674227 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D241864F1CF068D900674227 /* Assets.xcassets */; };
 		D24186531CF068D900674227 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D24186511CF068D900674227 /* LaunchScreen.storyboard */; };
 		D241865E1CF068D900674227 /* SpindlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D241865D1CF068D900674227 /* SpindlerTests.swift */; };
 		D24186691CF068D900674227 /* SpindlerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24186681CF068D900674227 /* SpindlerUITests.swift */; };
@@ -20,6 +19,7 @@
 		D244F6711CF717E300BFC06A /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = D244F6701CF717E300BFC06A /* Project.swift */; };
 		D285AC6C1CF116DE0033190A /* LanscapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D285AC6B1CF116DE0033190A /* LanscapeView.swift */; };
 		D28BDA5E1D0CCD7500DD8B02 /* NumberSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28BDA5D1D0CCD7500DD8B02 /* NumberSelector.swift */; };
+		D2A85ED01D413BE400DD9482 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2A85ECF1D413BE400DD9482 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +46,6 @@
 		D24186471CF068D800674227 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D241864A1CF068D800674227 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D241864D1CF068D900674227 /* Spindler.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Spindler.xcdatamodel; sourceTree = "<group>"; };
-		D241864F1CF068D900674227 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D24186521CF068D900674227 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D24186541CF068D900674227 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D24186591CF068D900674227 /* SpindlerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpindlerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,6 +58,7 @@
 		D244F6701CF717E300BFC06A /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		D285AC6B1CF116DE0033190A /* LanscapeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanscapeView.swift; sourceTree = "<group>"; };
 		D28BDA5D1D0CCD7500DD8B02 /* NumberSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberSelector.swift; sourceTree = "<group>"; };
+		D2A85ECF1D413BE400DD9482 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,10 +114,10 @@
 				D285AC6B1CF116DE0033190A /* LanscapeView.swift */,
 				D244F6701CF717E300BFC06A /* Project.swift */,
 				D24186491CF068D800674227 /* Main.storyboard */,
+				D2A85ECF1D413BE400DD9482 /* Assets.xcassets */,
 				D236AE561CF3736B008E6B81 /* SpindleDiagram.swift */,
 				D28BDA5D1D0CCD7500DD8B02 /* NumberSelector.swift */,
 				D24186761CF06A0A00674227 /* MathEngine.swift */,
-				D241864F1CF068D900674227 /* Assets.xcassets */,
 				D24186511CF068D900674227 /* LaunchScreen.storyboard */,
 				D24186541CF068D900674227 /* Info.plist */,
 				D241864C1CF068D900674227 /* Spindler.xcdatamodeld */,
@@ -254,7 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D24186531CF068D900674227 /* LaunchScreen.storyboard in Resources */,
-				D24186501CF068D900674227 /* Assets.xcassets in Resources */,
+				D2A85ED01D413BE400DD9482 /* Assets.xcassets in Resources */,
 				D241864B1CF068D800674227 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
