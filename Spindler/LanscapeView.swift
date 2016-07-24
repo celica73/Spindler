@@ -24,6 +24,12 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
     @IBOutlet var run: UILabel!
     
     @IBOutlet var feetPicker: UIPickerView!
+    @IBOutlet var stepAdjust: UIStepper!
+    @IBOutlet var unitsSelector: UISwitch!
+    @IBOutlet var slopeSelector: UISwitch!
+    
+    var metric = false
+    var slope = false
     
     var feetData: [String] = []
     var inchData: [String] = []
@@ -56,11 +62,14 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
         feetPicker.dataSource = self
         feetPicker.delegate = self
         
-        swipeRec.addTarget(self, action: #selector(LanscapeView.swiper))
-        pictureView.addGestureRecognizer(swipeRec)
-        pictureView.userInteractionEnabled = true
-        pictureView.multipleTouchEnabled = true
-        pictureView.rise = CGFloat(engine.getProject().rise)
+        stepAdjust.hidden = true
+        stepAdjust.layer.cornerRadius = 5;
+        
+//        swipeRec.addTarget(self, action: #selector(LanscapeView.swiper))
+//        pictureView.addGestureRecognizer(swipeRec)
+//        pictureView.userInteractionEnabled = true
+//        pictureView.multipleTouchEnabled = true
+        pictureView.rise = CGFloat(engine.getProject().rise.getRealMeasure())
 //        pictureView.spindles = engine.getProject().numSpindles
         postSpacing.tag = 1
         spindleWidth.tag = 2
@@ -80,6 +89,9 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
                 tap.delegate = self // Remember to extend your class with UIGestureRecognizerDelegate
             }
         }
+        rise.hidden = !slope
+        run.hidden = !slope
+        angle.hidden = !slope
         updateValues()
     }
     
@@ -89,117 +101,116 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
     }
     
     func updateValues() {
-        postSpacing.text = "0\' " + asFraction(engine.getProject().postSpacing) + "\" 0"
-        spindleWidth.text = asFraction(engine.getProject().spindleWidth) + "\""
-        maxSpace.text = asFraction(engine.getProject().maxSpace) + "\""
+        postSpacing.text = engine.getProject().postSpacing.asString(metric)
+        spindleWidth.text = engine.getProject().spindleWidth.asString(metric)
+        maxSpace.text = engine.getProject().maxSpace.asString(metric)
         spaces.text = String(engine.getProject().numSpaces)
         spindles.text = String(engine.getProject().numSpindles)
-        onCenter.text = asFraction(engine.getProject().onCenter) + "\""
-        between.text = asFraction(engine.getProject().between) + "\""
-        angle.text = NSString(format: "%.0f deg.",engine.getProject().angle) as String
-        rise.text = asFraction(engine.getProject().rise) + "\""
-        run.text = asFraction(engine.getProject().run) + "\""
-        if engine.getProject().maxSpace < engine.getProject().between {
+        onCenter.text = engine.getProject().onCenter.asString(metric)
+        between.text = engine.getProject().between.asString(metric)
+        angle.text = String(format: "%.0f deg.",engine.getProject().angle)
+        rise.text = engine.getProject().rise.asString(metric)
+        run.text = engine.getProject().run.asString(metric)
+        if engine.getProject().maxSpace.getRealMeasure() < engine.getProject().between.getRealMeasure() {
             maxSpace.textColor = .redColor()
         } else {
             maxSpace.textColor = blueText
         }
+        updateDiagram()
     }
     
     // Receive action
     func labelAction(gr:UITapGestureRecognizer) {
-        let searchlbl:UILabel = (gr.view as! UILabel) // Type cast it with the class for which you have added gesture
+        let searchlbl = (gr.view as! UILabel) // Type cast it with the class for which you have added gesture
         
         if tapLabel != nil && tapLabel == searchlbl {
             tapLabel.textColor = blueText
             tapLabel = nil
             pickerView.hidden = true
+            stepAdjust.hidden = true
         } else {
             if tapLabel != nil {
                 tapLabel.textColor = blueText
                 pickerView.hidden = true
+                stepAdjust.hidden = true
             }
             tapLabel = searchlbl
             let labelFrame: CGRect = tapLabel.frame
-            pickerView.center = CGPointMake(CGRectGetMaxX(labelFrame) + 90,CGRectGetMidY(labelFrame) + 8)
-            tapLabel.textColor = .orangeColor()
-            setPickerValues()
-            pickerView.hidden = false
+            if tapLabel.tag != 4 && tapLabel.tag != 5 && tapLabel.tag != 8 {
+                pickerView.center = CGPointMake(CGRectGetMidX(labelFrame),CGRectGetMaxY(labelFrame) + 60)
+                tapLabel.textColor = .orangeColor()
+                setPickerValues()
+                pickerView.hidden = false
+            } else {
+                tapLabel.textColor = .orangeColor()
+                stepAdjust.center = CGPointMake(CGRectGetMaxX(labelFrame) + 10,CGRectGetMidY(labelFrame))
+                stepAdjust.hidden = false
+                stepAdjust.value = engine.getValue(tapLabel.tag)
+            }
         }
+    }
+    
+    @IBAction func setStepper(sender: UIStepper) {
+        engine.updateOperation(tapLabel.tag, newValue: stepAdjust.value)
+        tapLabel.text = String(stepAdjust.value)
+        updateDiagram()
+        updateValues()
     }
     
     func setPickerValues() {
-        let currentArray = tapLabel.text!.characters.split{$0 == " "}.map(String.init)
-        let feet = currentArray[0].characters.split{$0 == "\'"}.map(String.init)[0]
-        let inches = currentArray[1].characters.split{$0 == "\""}.map(String.init)[0]
-        let fraction = currentArray[2]
+        let selection = engine.getProject().getValue(tapLabel.tag)
         
-        if let feetIndex = pickerData[0].indexOf(feet) {
-            feetPicker.selectRow(0, inComponent: feetIndex, animated: false)
+        if let feetIndex = pickerData[0].indexOf(String(selection.getFeet())) {
+            feetPicker.selectRow(feetIndex, inComponent: 0, animated: false)
         }
-        if let inchIndex = pickerData[1].indexOf(inches) {
-            feetPicker.selectRow(1, inComponent: inchIndex, animated: false)
+        if let inchIndex = pickerData[1].indexOf(String(selection.getInches())) {
+            feetPicker.selectRow(inchIndex, inComponent: 1, animated: false)
         }
-        if let fractionIndex = pickerData[2].indexOf(fraction) {
-            feetPicker.selectRow(2, inComponent: fractionIndex, animated: false)
+        if let fractionIndex = pickerData[2].indexOf(selection.getFraction()) {
+            feetPicker.selectRow(fractionIndex, inComponent: 2, animated: false)
         }
         
     }
     
-    func asFraction(number: Double) -> String {
-        let fraction = number - Double(Int(number))
-        var denominator = 32
-        var numerator = Int(fraction * Double(denominator))
-        
-        while(numerator != 0 && numerator % 2 == 0) {
-            numerator /= 2
-            denominator /= 2
-        }
-        if(numerator == 0) {
-            return String(Int(number))
-        } else {
-            return NSString(format: "%d %d/%d", Int(number), numerator, denominator) as String
-        }
-    }
+//    var startLocation: CGPoint!
+//    
+//    @IBAction func swiper(sender: UIPanGestureRecognizer) {
+//        var changeValue:Double
+//        var velocity:CGPoint
+//        var moveFactor: Double = 1
+//        if tapLabel != nil {
+//            changeValue = engine.getValue(tapLabel.tag)
+//        } else {
+//            return
+//        }
+//        if tapLabel.tag == 4 || tapLabel.tag == 5 {
+//            moveFactor = 5
+//        }
+//        if (sender.state == UIGestureRecognizerState.Began) {
+//            startLocation = sender.locationInView(self.view)
+//        } else if (sender.state == UIGestureRecognizerState.Changed) {
+//            let stopLocation: CGPoint = sender.locationInView(self.view)
+//            velocity = sender.velocityInView(self.view)
+//            let dx: CGFloat = stopLocation.x - startLocation.x
+//            let dy: CGFloat = stopLocation.y - startLocation.y
+//            let direction = dx*dx > dy*dy ? dx : dy
+//            var distance: CGFloat = sqrt(dx*dx + dy*dy)
+//            if (direction == dx && dx < 0) || (direction == dy && dy > 0) {
+//                distance = -distance
+//            }
+//            let magnitude = sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y))
+//            let slideMult = magnitude / 10
+//            let factor = (slideMult > 4 ? 0.2 : 0.01) * moveFactor
+//            var newValue = Double(changeValue) + Double(distance) * factor
+//            newValue = newValue <= 0 ? 0 : newValue
+//            engine.updateOperation(tapLabel.tag, newValue: newValue)
+//            updateValues()
+//            pictureView.rise = CGFloat(engine.getProject().rise.getRealMeasure())
+////            pictureView.spindles = engine.getProject().numSpindles
+//            startLocation = stopLocation
+//        }
+//    }
     
-    var startLocation: CGPoint!
-    
-    @IBAction func swiper(sender: UIPanGestureRecognizer) {
-        var changeValue:Double
-        var velocity:CGPoint
-        var moveFactor: Double = 1
-        if tapLabel != nil {
-            changeValue = engine.getValue(tapLabel.tag)
-        } else {
-            return
-        }
-        if tapLabel.tag == 4 || tapLabel.tag == 5 {
-            moveFactor = 5
-        }
-        if (sender.state == UIGestureRecognizerState.Began) {
-            startLocation = sender.locationInView(self.view)
-        } else if (sender.state == UIGestureRecognizerState.Changed) {
-            let stopLocation: CGPoint = sender.locationInView(self.view)
-            velocity = sender.velocityInView(self.view)
-            let dx: CGFloat = stopLocation.x - startLocation.x
-            let dy: CGFloat = stopLocation.y - startLocation.y
-            let direction = dx*dx > dy*dy ? dx : dy
-            var distance: CGFloat = sqrt(dx*dx + dy*dy)
-            if (direction == dx && dx < 0) || (direction == dy && dy > 0) {
-                distance = -distance
-            }
-            let magnitude = sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y))
-            let slideMult = magnitude / 10
-            let factor = (slideMult > 4 ? 0.2 : 0.01) * moveFactor
-            var newValue = Double(changeValue) + Double(distance) * factor
-            newValue = newValue <= 0 ? 0 : newValue
-            engine.updateOperation(tapLabel.tag, newValue: newValue)
-            updateValues()
-            pictureView.rise = CGFloat(engine.getProject().rise)
-//            pictureView.spindles = engine.getProject().numSpindles
-            startLocation = stopLocation
-        }
-    }
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return pickerData.count
     }
@@ -217,15 +228,53 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
         }
     }
     
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+        if let titleLabel = view as? UILabel {
+            titleLabel.text = "Your Text"
+            return titleLabel
+        }else{
+            let titleLabel = UILabel()
+            titleLabel.font = UIFont.systemFontOfSize(14)//Font you want here
+            titleLabel.textAlignment = NSTextAlignment.Center
+            titleLabel.text = pickerData[component][row]
+            return titleLabel
+        }
+    }
+    
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         updateLabel()
     }
     
+    @IBAction func slopeChanger(sender: UISwitch) {
+        slope = !slope
+        if !slope {
+            engine.getProject().rise.update(0)
+            engine.updateOperation(rise.tag, newValue: engine.getProject().rise)
+            pictureView.rise = 0
+        }
+        rise.hidden = !slope
+        angle.hidden = !slope
+        run.hidden = !slope
+        updateValues()
+    }
+    
+    @IBAction func unitsChange(sender: UISwitch) {
+        metric = !metric
+        updateValues()
+    }
     func updateLabel(){
         let feet = pickerData[0][feetPicker.selectedRowInComponent(0)]
         let inches = pickerData[1][feetPicker.selectedRowInComponent(1)]
         let fraction = pickerData[2][feetPicker.selectedRowInComponent(2)]
-        tapLabel.text = feet + "\' " + inches + "\" " + fraction
-
+        let newMeasurement = Measurement(feet: Int(feet)!, inches: Int(inches)!, fraction: fraction)
+        engine.getProject().getValue(tapLabel.tag).update(newMeasurement)
+        tapLabel.text = engine.getProject().getValue(tapLabel.tag).asString(metric)
+        engine.updateOperation(tapLabel.tag, newValue: newMeasurement)
+        updateValues()
+    }
+    
+    func updateDiagram() {
+        pictureView.rise = CGFloat(engine.getProject().rise.getRealMeasure())
+        pictureView.spindles = engine.getProject().numSpindles
     }
 }

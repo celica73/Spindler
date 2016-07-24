@@ -10,20 +10,20 @@ import Foundation
 
 class Project: NSObject, NSCoding {
     
-    var postSpacing = 100.0
-    var spindleWidth = 1.5
-    var onCenter = 3.31
-    var between = 3.81
-    var angle = 30.0
-    var rise = 0.0
-    var run = 100.0
-    var maxSpace = 4.0
+    var postSpacing = Measurement(feet: 0, inches: 100, fraction: "0")
+    var spindleWidth = Measurement(feet: 0, inches: 1, fraction: "1/2")
+    var onCenter = Measurement(feet: 0, inches: 3, fraction: "5/16")
+    var between = Measurement(feet: 0, inches: 3, fraction: "13/16")
+    var angle = 0.0
+    var rise = Measurement()
+    var run = Measurement(feet: 0, inches: 0, fraction: "0")
+    var maxSpace = Measurement(feet: 0, inches: 4, fraction: "0")
     var numSpaces = 19
     var numSpindles = 18
     
     override init() {}
     
-    init(postSpacing: Double, spindleWidth: Double, onCenter: Double, between: Double, angle: Double, rise: Double, run: Double, maxSpace: Double, numSpaces: Int, numSpindles: Int) {
+    init(postSpacing: Measurement, spindleWidth: Measurement, onCenter: Measurement, between: Measurement, angle: Double, rise: Measurement, run: Measurement, maxSpace: Measurement, numSpaces: Int, numSpindles: Int) {
             self.postSpacing = postSpacing
             self.spindleWidth = spindleWidth
             self.onCenter = onCenter
@@ -36,15 +36,28 @@ class Project: NSObject, NSCoding {
             self.numSpindles = numSpindles
     }
     
+    func getValue(sender: Int)->Measurement {
+        switch sender {
+        case 1: return postSpacing
+        case 2: return spindleWidth
+        case 3: return maxSpace
+        case 6: return onCenter
+        case 7: return between
+        case 9: return rise
+        case 10: return run
+        default: return postSpacing
+        }
+    }
+    
     required convenience init?(coder decoder: NSCoder) {
-        let postSpacing = decoder.decodeObjectForKey("postSpacing") as? Double
-        let spindleWidth = decoder.decodeObjectForKey("spindleWidth") as? Double
-        let onCenter = decoder.decodeObjectForKey("onCenter") as? Double
-        let between = decoder.decodeObjectForKey("between") as? Double
+        let postSpacing = decoder.decodeObjectForKey("postSpacing") as? Measurement
+        let spindleWidth = decoder.decodeObjectForKey("spindleWidth") as? Measurement
+        let onCenter = decoder.decodeObjectForKey("onCenter") as? Measurement
+        let between = decoder.decodeObjectForKey("between") as? Measurement
         let angle = decoder.decodeObjectForKey("angle") as? Double
-        let rise = decoder.decodeObjectForKey("rise") as? Double
-        let run = decoder.decodeObjectForKey("run") as? Double
-        let maxSpace = decoder.decodeObjectForKey("maxSpace") as? Double
+        let rise = decoder.decodeObjectForKey("rise") as? Measurement
+        let run = decoder.decodeObjectForKey("run") as? Measurement
+        let maxSpace = decoder.decodeObjectForKey("maxSpace") as? Measurement
         let numSpaces = decoder.decodeObjectForKey("numSpaces") as? Int
         let numSpindles = decoder.decodeObjectForKey("numSpindles") as? Int
         
@@ -63,15 +76,15 @@ class Project: NSObject, NSCoding {
     }
     
     func encodeWithCoder(coder: NSCoder) {
-        coder.encodeDouble(self.postSpacing, forKey: "postSpacing")
-        coder.encodeDouble(self.spindleWidth, forKey: "spindleWidth")
-        coder.encodeDouble(self.onCenter, forKey: "onCenter")
-        coder.encodeDouble(self.between, forKey: "between")
-        coder.encodeDouble(self.angle, forKey: "angle")
-        coder.encodeDouble(self.rise, forKey: "rise")
-        coder.encodeDouble(self.run, forKey: "run")
-        coder.encodeDouble(self.maxSpace, forKey: "maxSpace")
-        coder.encodeInt(Int32(self.numSpaces), forKey: "numSpaces")
-        coder.encodeInt(Int32(self.numSpindles), forKey: "numSpindles")
+//        coder.encodeDouble(self.postSpacing, forKey: "postSpacing")
+//        coder.encodeDouble(self.spindleWidth, forKey: "spindleWidth")
+//        coder.encodeDouble(self.onCenter, forKey: "onCenter")
+//        coder.encodeDouble(self.between, forKey: "between")
+//        coder.encodeDouble(self.angle, forKey: "angle")
+//        coder.encodeDouble(self.rise, forKey: "rise")
+//        coder.encodeDouble(self.run, forKey: "run")
+//        coder.encodeDouble(self.maxSpace, forKey: "maxSpace")
+//        coder.encodeInt(Int32(self.numSpaces), forKey: "numSpaces")
+//        coder.encodeInt(Int32(self.numSpindles), forKey: "numSpindles")
     }
 }

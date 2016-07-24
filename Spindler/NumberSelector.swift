@@ -20,21 +20,21 @@ class NumberSelector: UIView {
         let width = rect.width
         let height = rect.height
         let xOrigin: CGFloat = 20;
-        let yOrigin: CGFloat = height - 20
-        let yMax: CGFloat = 20
+        let yOrigin: CGFloat = height
+        let yMax: CGFloat = 0
         let xMax: CGFloat = width - 10
-        var arrowStart: CGPoint = CGPointMake(CGFloat(20),height / 2 + 10)
-        var arrowFinish: CGPoint = CGPointMake(CGFloat(20),height / 2 - 10)
-        var arrowPoint: CGPoint = CGPointMake(CGFloat(0),height / 2)
+        let arrowStart = CGPointMake(width/3 - 10, yMax + 20)
+        let arrowFinish = CGPointMake(width/3 + 10, yMax + 20)
+        let arrowPoint = CGPointMake(width/3,yMax)
         
-        var path = UIBezierPath()
-        path.moveToPoint(CGPoint(x: xOrigin, y: yOrigin))
+        let path = UIBezierPath()
+        path.moveToPoint(CGPoint(x: xOrigin, y: yMax + 20))
         path.addLineToPoint(arrowStart)
         path.addLineToPoint(arrowPoint)
         path.addLineToPoint(arrowFinish)
-        path.addLineToPoint(CGPoint(x: xOrigin, y: yMax))
-        path.addLineToPoint(CGPoint(x: xMax, y: yMax))
+        path.addLineToPoint(CGPoint(x: xMax, y: yMax + 20))
         path.addLineToPoint(CGPoint(x: xMax, y: yOrigin))
+        path.addLineToPoint(CGPoint(x: xOrigin, y: yOrigin))
         path.closePath()
         UIColor.grayColor().setStroke()
         UIColor.grayColor().setFill()

@@ -20,6 +20,7 @@
 		D285AC6C1CF116DE0033190A /* LanscapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D285AC6B1CF116DE0033190A /* LanscapeView.swift */; };
 		D28BDA5E1D0CCD7500DD8B02 /* NumberSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28BDA5D1D0CCD7500DD8B02 /* NumberSelector.swift */; };
 		D2A85ED01D413BE400DD9482 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2A85ECF1D413BE400DD9482 /* Assets.xcassets */; };
+		D2B7EF141D42578B00D12AA9 /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7EF131D42578B00D12AA9 /* Measurement.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		D285AC6B1CF116DE0033190A /* LanscapeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanscapeView.swift; sourceTree = "<group>"; };
 		D28BDA5D1D0CCD7500DD8B02 /* NumberSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberSelector.swift; sourceTree = "<group>"; };
 		D2A85ECF1D413BE400DD9482 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D2B7EF131D42578B00D12AA9 /* Measurement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Measurement.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				D24186471CF068D800674227 /* ViewController.swift */,
 				D285AC6B1CF116DE0033190A /* LanscapeView.swift */,
 				D244F6701CF717E300BFC06A /* Project.swift */,
+				D2B7EF131D42578B00D12AA9 /* Measurement.swift */,
 				D24186491CF068D800674227 /* Main.storyboard */,
 				D2A85ECF1D413BE400DD9482 /* Assets.xcassets */,
 				D236AE561CF3736B008E6B81 /* SpindleDiagram.swift */,
@@ -285,6 +288,7 @@
 				D236AE571CF3736B008E6B81 /* SpindleDiagram.swift in Sources */,
 				D24186461CF068D800674227 /* AppDelegate.swift in Sources */,
 				D241864E1CF068D900674227 /* Spindler.xcdatamodeld in Sources */,
+				D2B7EF141D42578B00D12AA9 /* Measurement.swift in Sources */,
 				D285AC6C1CF116DE0033190A /* LanscapeView.swift in Sources */,
 				D244F6711CF717E300BFC06A /* Project.swift in Sources */,
 				D24186771CF06A0A00674227 /* MathEngine.swift in Sources */,

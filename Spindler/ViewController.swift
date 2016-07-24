@@ -28,18 +28,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        registerForKeyboardNotifications()
-        postSpacing.tag = 0
-        spindleWidth.tag = 1
-        maxSpace.tag = 2
-        spaces.tag = 3
-        spindles.tag = 4
-        onCenter.tag = 5
-        between.tag = 6
-        angle.tag = 7
-        rise.tag = 8
-        run.tag = 9
-        updateValues()
+//        registerForKeyboardNotifications()
+//        postSpacing.tag = 0
+//        spindleWidth.tag = 1
+//        maxSpace.tag = 2
+//        spaces.tag = 3
+//        spindles.tag = 4
+//        onCenter.tag = 5
+//        between.tag = 6
+//        angle.tag = 7
+//        rise.tag = 8
+//        run.tag = 9
+//        updateValues()
     }
     
     override func didReceiveMemoryWarning() {
@@ -47,37 +47,37 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func updateValues() {
-        postSpacing.text = asFraction(engine.getProject().postSpacing)
-        spindleWidth.text = asFraction(engine.getProject().spindleWidth)
-        maxSpace.text = asFraction(engine.getProject().maxSpace)
-        spaces.text = String(engine.getProject().numSpaces)
-        spindles.text = String(engine.getProject().numSpindles)
-        onCenter.text = asFraction(engine.getProject().onCenter)
-        between.text = asFraction(engine.getProject().between)
-        angle.text = NSString(format: "%.0f",engine.getProject().angle) as String
-        rise.text = asFraction(engine.getProject().rise)
-        run.text = asFraction(engine.getProject().run)
-    }
+//    func updateValues() {
+//        postSpacing.text = asFraction(engine.getProject().postSpacing)
+//        spindleWidth.text = asFraction(engine.getProject().spindleWidth)
+//        maxSpace.text = asFraction(engine.getProject().maxSpace)
+//        spaces.text = String(engine.getProject().numSpaces)
+//        spindles.text = String(engine.getProject().numSpindles)
+//        onCenter.text = asFraction(engine.getProject().onCenter)
+//        between.text = asFraction(engine.getProject().between)
+//        angle.text = NSString(format: "%.0f",engine.getProject().angle) as String
+//        rise.text = asFraction(engine.getProject().rise)
+//        run.text = asFraction(engine.getProject().run)
+//    }
     
-    @IBAction func shiftWindow(sender: UITextField) {
-        bottomText = sender;
-    }
-    
-    @IBAction func updateView(sender: AnyObject) {
-        NSLog(String(sender.tag))
-        let update = sender.tag
-        let inputCheck = validateInput(sender.text!, fieldTag: update)
-        if(inputCheck.0) {
-            let newNumber = inputCheck.1
-            engine.updateOperation(update, newValue: newNumber)
-            updateValues()
-        } else {
-            let badField = sender as! UITextField
-            badField.text = "Invalid"
-        }
-    }
-    
+//    @IBAction func shiftWindow(sender: UITextField) {
+//        bottomText = sender;
+//    }
+//    
+//    @IBAction func updateView(sender: AnyObject) {
+//        NSLog(String(sender.tag))
+//        let update = sender.tag
+//        let inputCheck = validateInput(sender.text!, fieldTag: update)
+//        if(inputCheck.0) {
+//            let newNumber = inputCheck.1
+//            engine.updateOperation(update, newValue: newNumber)
+//            updateValues()
+//        } else {
+//            let badField = sender as! UITextField
+//            badField.text = "Invalid"
+//        }
+//    }
+
     func asFraction(number: Double) -> String {
         let fraction = number - Double(Int(number))
         var denominator = 32
@@ -149,37 +149,37 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return root + numerator/denominator
     }
     
-    func registerForKeyboardNotifications()
-    {
-        //Adding notifies on keyboard appearing
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
-    }
-    
-    
-    func deregisterFromKeyboardNotifications()
-    {
-        //Removing notifies on keyboard appearing
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
-    }
-
-    func keyboardWillShow(notification: NSNotification) {
-        if bottomText.tag == 7 || bottomText.tag == 8 || bottomText.tag == 9 {
-            if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-                self.view.window?.frame.origin.y = -0.5 * keyboardSize.height
-            }
-        } else {
-            self.view.window?.frame.origin.y = 0
-        }
-    }
-    
-    func keyboardWillHide(notification: NSNotification) {
-        if self.view.window?.frame.origin.y != 0 {
-            if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-                self.view.window?.frame.origin.y += keyboardSize.height
-            }
-        }
-    }
+//    func registerForKeyboardNotifications()
+//    {
+//        //Adding notifies on keyboard appearing
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+//    }
+//    
+//    
+//    func deregisterFromKeyboardNotifications()
+//    {
+//        //Removing notifies on keyboard appearing
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+//    }
+//
+//    func keyboardWillShow(notification: NSNotification) {
+//        if bottomText.tag == 7 || bottomText.tag == 8 || bottomText.tag == 9 {
+//            if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+//                self.view.window?.frame.origin.y = -0.5 * keyboardSize.height
+//            }
+//        } else {
+//            self.view.window?.frame.origin.y = 0
+//        }
+//    }
+//    
+//    func keyboardWillHide(notification: NSNotification) {
+//        if self.view.window?.frame.origin.y != 0 {
+//            if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+//                self.view.window?.frame.origin.y += keyboardSize.height
+//            }
+//        }
+//    }
 }
 

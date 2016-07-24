@@ -26,7 +26,7 @@ class MathEngine {
         return self.newProject
     }
     
-    func updateOperation(sender: Int, newValue: Double) {
+    func updateOperation(sender: Int, newValue: Measurement) {
         switch sender {
             case 1: postChange(newValue)
                 break
@@ -34,15 +34,9 @@ class MathEngine {
                 break
             case 3: maxSpaceChange(newValue)
                 break
-            case 4: numSpacesChange(newValue)
-                break
-            case 5: numSpindlesChange(newValue)
-                break
             case 6: onCenterChange(newValue)
                 break
             case 7: betweenChange(newValue)
-                break
-            case 8: angleChange(newValue)
                 break
             case 9: riseChange(newValue)
                 break
@@ -52,138 +46,151 @@ class MathEngine {
         }
     }
     
+    func updateOperation(sender: Int, newValue: Double) {
+        switch sender {
+        case 4: numSpacesChange(newValue)
+            break
+        case 5: numSpindlesChange(newValue)
+            break
+        case 8: angleChange(newValue)
+            break
+        default: break
+        }
+    }
+    
     func getValue(sender: Int)-> Double {
         switch sender {
-        case 1: return newProject.postSpacing
-        case 2: return newProject.spindleWidth
-        case 3: return newProject.maxSpace
+        case 1: return newProject.postSpacing.getRealMeasure()
+        case 2: return newProject.spindleWidth.getRealMeasure()
+        case 3: return newProject.maxSpace.getRealMeasure()
         case 4: return Double(newProject.numSpaces)
         case 5: return Double(newProject.numSpindles)
-        case 6: return newProject.onCenter
-        case 7: return newProject.between
+        case 6: return newProject.onCenter.getRealMeasure()
+        case 7: return newProject.between.getRealMeasure()
         case 8: return newProject.angle
-        case 9: return newProject.rise
-        case 10: return newProject.run
-        default: return newProject.postSpacing
+        case 9: return newProject.rise.getRealMeasure()
+        case 10: return newProject.run.getRealMeasure()
+        default: return newProject.postSpacing.getRealMeasure()
         }
     }
     
-    func postChange(newValue: Double) {
-        newProject.postSpacing = newValue
-        newProject.numSpaces = Int(round((newProject.postSpacing) / (newProject.spindleWidth + newProject.maxSpace) + 1))
+    func postChange(newValue: Measurement) {
+        newProject.postSpacing.update(newValue.getRealMeasure())
+        newProject.numSpaces = Int(round((newProject.postSpacing.getRealMeasure()) / (newProject.spindleWidth.getRealMeasure() + newProject.maxSpace.getRealMeasure()) + 1))
         newProject.numSpindles = newProject.numSpaces - 1
-        newProject.between = (newProject.postSpacing - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
-        newProject.onCenter = newProject.spindleWidth + newProject.between
-        newProject.rise = newProject.postSpacing * abs(sin(newProject.angle))
-        newProject.run = newProject.postSpacing * abs(cos(newProject.angle))
+        newProject.between.update((newProject.postSpacing.getRealMeasure() - (Double(newProject.numSpindles) * newProject.spindleWidth.getRealMeasure())) / Double(newProject.numSpaces))
+        newProject.onCenter.update(newProject.spindleWidth.getRealMeasure() + newProject.between.getRealMeasure())
+        newProject.rise.update(newProject.postSpacing.getRealMeasure() * abs(sin(newProject.angle)))
+        newProject.run.update(newProject.postSpacing.getRealMeasure() * abs(cos(newProject.angle)))
     }
     
-    func spindleWidthChange(newValue: Double) {
-        newProject.spindleWidth = newValue
-        newProject.numSpaces = Int((newProject.postSpacing) / (newProject.spindleWidth + newProject.maxSpace) + 1)
+    func spindleWidthChange(newValue: Measurement) {
+        newProject.spindleWidth.update(newValue)
+        newProject.numSpaces = Int((newProject.postSpacing.getRealMeasure()) / (newProject.spindleWidth.getRealMeasure() + newProject.maxSpace.getRealMeasure()) + 1)
         newProject.numSpindles = newProject.numSpaces - 1
         if newProject.numSpaces > 0 {
-            newProject.between = (newProject.postSpacing - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+            newProject.between.update((newProject.postSpacing.getRealMeasure() - (Double(newProject.numSpindles) * newProject.spindleWidth.getRealMeasure())) / Double(newProject.numSpaces))
         }
-        newProject.onCenter = newProject.spindleWidth + newProject.between
+        newProject.onCenter.update(newProject.spindleWidth.getRealMeasure() + newProject.between.getRealMeasure())
     }
     
-    func maxSpaceChange(newValue: Double) {
-        newProject.maxSpace = newValue
-        if (newProject.spindleWidth + newProject.maxSpace) > 0 {
-            newProject.numSpaces = Int((newProject.postSpacing) / (newProject.spindleWidth + newProject.maxSpace) + 1)
+    func maxSpaceChange(newValue: Measurement) {
+        newProject.maxSpace.update(newValue)
+        if (newProject.spindleWidth.getRealMeasure() + newProject.maxSpace.getRealMeasure()) > 0 {
+            newProject.numSpaces = Int((newProject.postSpacing.getRealMeasure()) / (newProject.spindleWidth.getRealMeasure() + newProject.maxSpace.getRealMeasure()) + 1)
         }
         newProject.numSpindles = newProject.numSpaces - 1
-        newProject.between = (newProject.postSpacing - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
-        newProject.onCenter = newProject.spindleWidth + newProject.between
+        newProject.between.update((newProject.postSpacing.getRealMeasure() - (Double(newProject.numSpindles) * newProject.spindleWidth.getRealMeasure())) / Double(newProject.numSpaces))
+        newProject.onCenter.update(newProject.spindleWidth.getRealMeasure() + newProject.between.getRealMeasure())
     }
     
     func numSpacesChange(newValue: Double) {
         newProject.numSpaces = Int(newValue) >= 1 ? Int(newValue) : 1
         newProject.numSpindles = newProject.numSpaces - 1
         if newProject.numSpaces > 0 {
-            newProject.between = (newProject.postSpacing - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+            newProject.between.update((newProject.postSpacing.getRealMeasure() - (Double(newProject.numSpindles) * newProject.spindleWidth.getRealMeasure())) / Double(newProject.numSpaces))
         }
-        newProject.onCenter = newProject.spindleWidth + newProject.between
+        newProject.onCenter.update(newProject.spindleWidth.getRealMeasure() + newProject.between.getRealMeasure())
     }
     
     func numSpindlesChange(newValue: Double) {
         newProject.numSpindles = Int(newValue) >= 0 ? Int(newValue) : 0
         newProject.numSpaces = newProject.numSpindles + 1
         if newProject.numSpaces > 0 {
-            newProject.between = (newProject.postSpacing - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+            newProject.between.update((newProject.postSpacing.getRealMeasure() - (Double(newProject.numSpindles) * newProject.spindleWidth.getRealMeasure())) / Double(newProject.numSpaces))
         }
-        newProject.onCenter = newProject.spindleWidth + newProject.between
+        newProject.onCenter.update(newProject.spindleWidth.getRealMeasure() + newProject.between.getRealMeasure())
     }
     
-    func onCenterChange(newValue: Double) {
-        newProject.onCenter = newValue
-        newProject.between = newProject.onCenter - newProject.spindleWidth
-        if (newProject.between + newProject.spindleWidth) > 0 {
-            newProject.numSpaces = Int((newProject.postSpacing + newProject.spindleWidth)/(newProject.between + newProject.spindleWidth))
+    func onCenterChange(newValue: Measurement) {
+        newProject.onCenter.update(newValue)
+        newProject.between.update(newProject.onCenter.getRealMeasure() - newProject.spindleWidth.getRealMeasure())
+        if (newProject.between.getRealMeasure() + newProject.spindleWidth.getRealMeasure()) > 0 {
+            newProject.numSpaces = Int((newProject.postSpacing.getRealMeasure() + newProject.spindleWidth.getRealMeasure())/(newProject.between.getRealMeasure() + newProject.spindleWidth.getRealMeasure()))
         }
         newProject.numSpindles = newProject.numSpaces + 1
-        if(newProject.between > newProject.maxSpace){
+        if(newProject.between.getRealMeasure() > newProject.maxSpace.getRealMeasure()){
             newProject.maxSpace = newProject.between
         }
     }
     
-    func betweenChange(newValue: Double) {
-        newProject.between = newValue
-        newProject.onCenter = newProject.between + newProject.spindleWidth
-        if (newProject.between + newProject.spindleWidth) > 0 {
-            newProject.numSpaces = Int((newProject.postSpacing + newProject.spindleWidth)/(newProject.between + newProject.spindleWidth))
+    func betweenChange(newValue: Measurement) {
+        newProject.between.update(newValue)
+        newProject.onCenter.update(newProject.between.getRealMeasure() + newProject.spindleWidth.getRealMeasure())
+        if (newProject.between.getRealMeasure() + newProject.spindleWidth.getRealMeasure()) > 0 {
+            newProject.numSpaces = Int((newProject.postSpacing.getRealMeasure()
+                + newProject.spindleWidth.getRealMeasure())/(newProject.between.getRealMeasure() + newProject.spindleWidth.getRealMeasure()))
         }
         newProject.numSpindles = newProject.numSpaces + 1
     }
     
     func angleChange(newValue: Double) {
         newProject.angle =  newValue > 0 ? (newValue > 75 ? 75: newValue): 0
-        newProject.rise = newProject.postSpacing * abs(sin(newProject.angle * M_PI / 180))
-        newProject.run = newProject.postSpacing * abs(cos(newProject.angle * M_PI / 180))
-        if (newProject.spindleWidth + newProject.maxSpace) > 0 {
-            newProject.numSpaces = Int(round((newProject.run) / (newProject.spindleWidth + newProject.maxSpace) + 1))
+        newProject.rise.update(newProject.postSpacing.getRealMeasure() * abs(sin(newProject.angle * M_PI / 180)))
+        newProject.run.update(newProject.postSpacing.getRealMeasure() * abs(cos(newProject.angle * M_PI / 180)))
+        if (newProject.spindleWidth.getRealMeasure() + newProject.maxSpace.getRealMeasure()) > 0 {
+            newProject.numSpaces = Int(round((newProject.run.getRealMeasure()) / (newProject.spindleWidth.getRealMeasure() + newProject.maxSpace.getRealMeasure()) + 1))
         }
         newProject.numSpindles = newProject.numSpaces - 1
         if newProject.numSpaces > 0 {
-            newProject.between = (newProject.run - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+            newProject.between.update((newProject.run.getRealMeasure() - (Double(newProject.numSpindles) * newProject.spindleWidth.getRealMeasure())) / Double(newProject.numSpaces))
         }
-        newProject.onCenter = newProject.spindleWidth + newProject.between
+        newProject.onCenter.update(newProject.spindleWidth.getRealMeasure() + newProject.between.getRealMeasure())
     }
     
-    func riseChange(newValue: Double) {
-        newProject.rise = newValue
-        let newAngle = abs(asin(newProject.rise/newProject.postSpacing)) * 180 /  M_PI
+    func riseChange(newValue: Measurement) {
+        newProject.rise.update(newValue)
+        let newAngle = abs(asin(newProject.rise.getRealMeasure()/newProject.postSpacing.getRealMeasure())) * 180 /  M_PI
         newProject.angle = newAngle > 0 ? (newAngle > 75 ? 75: newAngle): 0
         if(newProject.angle < 90 && newProject.angle > 0) {
-            newProject.run = sqrt(newProject.postSpacing*newProject.postSpacing - newProject.rise*newProject.rise)
-            if (newProject.spindleWidth + newProject.maxSpace) > 0 {
-                newProject.numSpaces = Int(round((newProject.run) / (newProject.spindleWidth + newProject.maxSpace) + 1))
+            newProject.run.update(sqrt(pow(newProject.postSpacing.getRealMeasure(),2) - pow(newProject.rise.getRealMeasure(), 2)))
+            if (newProject.spindleWidth.getRealMeasure() + newProject.maxSpace.getRealMeasure()) > 0 {
+                newProject.numSpaces = Int(round((newProject.run.getRealMeasure()) / (newProject.spindleWidth.getRealMeasure() + newProject.maxSpace.getRealMeasure()) + 1))
             }
             newProject.numSpindles = newProject.numSpaces - 1
             if newProject.numSpaces > 0 {
-                newProject.between = (newProject.run - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+                newProject.between.update((newProject.run.getRealMeasure() - (Double(newProject.numSpindles) * newProject.spindleWidth.getRealMeasure())) / Double(newProject.numSpaces))
             }
-            newProject.onCenter = newProject.spindleWidth + newProject.between
+            newProject.onCenter.update(newProject.spindleWidth.getRealMeasure() + newProject.between.getRealMeasure())
         }
     }
     
-    func runChange(newValue: Double) {
-        newProject.run = newValue
-        if(newProject.run > newProject.postSpacing){
-            newProject.postSpacing = newProject.run
+    func runChange(newValue: Measurement) {
+        newProject.run.update(newValue)
+        if(newProject.run.getRealMeasure() > newProject.postSpacing.getRealMeasure()){
+            newProject.postSpacing.update(newProject.run.getRealMeasure())
         }
-        let newAngle = abs(acos(newProject.run/newProject.postSpacing)) * 180 /  M_PI
+        let newAngle = abs(acos(newProject.run.getRealMeasure()/newProject.postSpacing.getRealMeasure())) * 180 /  M_PI
         newProject.angle =  newAngle > 0 ? (newAngle > 75 ? 75: newAngle): 0
-        newProject.rise = sqrt(newProject.postSpacing * newProject.postSpacing - newProject.run*newProject.run)
-        if (newProject.spindleWidth + newProject.maxSpace) > 0 {
-            newProject.numSpaces = Int(round((newProject.run) / (newProject.spindleWidth + newProject.maxSpace) + 1))
+        newProject.rise.update(sqrt(pow(newProject.postSpacing.getRealMeasure(), 2) - pow(newProject.run.getRealMeasure(), 2)))
+        if (newProject.spindleWidth.getRealMeasure() + newProject.maxSpace.getRealMeasure()) > 0 {
+            newProject.numSpaces = Int(round((newProject.run.getRealMeasure()) / (newProject.spindleWidth.getRealMeasure() + newProject.maxSpace.getRealMeasure()) + 1))
         }
         newProject.numSpindles = newProject.numSpaces - 1
         if newProject.numSpaces > 0 {
-            newProject.between = (newProject.run - (Double(newProject.numSpindles) * newProject.spindleWidth)) / Double(newProject.numSpaces)
+            newProject.between.update((newProject.run.getRealMeasure() - (Double(newProject.numSpindles) * newProject.spindleWidth.getRealMeasure())) / Double(newProject.numSpaces))
         }
-        newProject.onCenter = newProject.spindleWidth + newProject.between
+        newProject.onCenter.update(newProject.spindleWidth.getRealMeasure() + newProject.between.getRealMeasure())
     }
 }
 

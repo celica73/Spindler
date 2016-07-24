@@ -87,22 +87,24 @@ class SpindleDiagram: UIView {
         
         let numSpindles = (spindles < 5 ? spindles : 4)
         //place the spindles on the graph
-        for spindle in 1...numSpindles {
-            let space = (run / CGFloat(numSpindles + 1)) * CGFloat(spindle)
-            let ySpace = (yOrigin - newY) / CGFloat(numSpindles + 1) * CGFloat(spindle)
-            
-            let spindleTop: CGPoint = CGPoint(x: xOrigin + space, y: yOrigin - ySpace - picketHeight)
-            let picket = addLine(CGPoint(x: xOrigin + space, y: yOrigin - ySpace),
-                                 finish: spindleTop)
-            picket.lineWidth = picketWidth
-//            UIColor.brownColor().set()
-            picket.stroke()
-            if spindle == 1 {
-                spindle1Location = spindleTop
-            } else if spindle == 2 {
-                spindle2Location = spindleTop
-            } else if spindle == 3 {
-                spindle3Location = spindleTop
+        if spindles > 0 {
+            for spindle in 1...numSpindles {
+                let space = (run / CGFloat(numSpindles + 1)) * CGFloat(spindle)
+                let ySpace = (yOrigin - newY) / CGFloat(numSpindles + 1) * CGFloat(spindle)
+                
+                let spindleTop: CGPoint = CGPoint(x: xOrigin + space, y: yOrigin - ySpace - picketHeight)
+                let picket = addLine(CGPoint(x: xOrigin + space, y: yOrigin - ySpace),
+                                     finish: spindleTop)
+                picket.lineWidth = picketWidth
+                //            UIColor.brownColor().set()
+                picket.stroke()
+                if spindle == 1 {
+                    spindle1Location = spindleTop
+                } else if spindle == 2 {
+                    spindle2Location = spindleTop
+                } else if spindle == 3 {
+                    spindle3Location = spindleTop
+                }
             }
         }
         
@@ -114,10 +116,10 @@ class SpindleDiagram: UIView {
         let postHashHeight = yOrigin - picketHeight - 55
         let spindleSpaceHeight = yOrigin - picketHeight - 25
         
-        let lengthTick1 = addLine(CGPoint(x: xOrigin + 10, y: postSpaceHeight),
+        let lengthLine = addLine(CGPoint(x: xOrigin + 10, y: postSpaceHeight),
                                   finish: CGPoint(x: maxX/2 - 10, y: postSpaceHeight - ySpace))
         UIColor.whiteColor().set()
-        lengthTick1.stroke()
+        lengthLine.stroke()
         addArrow(CGPoint(x: xOrigin + 12, y: postSpaceHeight - 1), angle: angle)
 
         let lengthHash1 = addLine(CGPoint(x: xOrigin + 10, y: yOrigin - picketHeight - 2),
@@ -184,12 +186,13 @@ class SpindleDiagram: UIView {
                 let spindleTick2 = addLine(pointShift(spindle2Location, xshift: -picketWidth/2, yshift: picketHeight/2),
                                            finish: CGPoint(x: spindle2Location.x - 30, y: yOrigin - ySpace - picketHeight/2))
                 spindleTick2.stroke()
+                
                 ySpace = (((spindle2Location.x + 30) - (xOrigin)) / (maxX - xOrigin)) * (yOrigin - newY)
                 
-                let spindleTick1 = addLine(pointShift(spindle2Location, xshift: picketWidth/2, yshift: picketHeight/2 - tan(angle) * picketWidth/2),
-                                           finish: CGPoint(x: spindle2Location.x + 30, y: yOrigin - ySpace - picketHeight/2 - tan(angle) * picketWidth/2))
+                let spindleTick1 = addLine(pointShift(spindle2Location, xshift: picketWidth/2, yshift: picketHeight/2),
+                                           finish: CGPoint(x: spindle2Location.x + 30, y: yOrigin - ySpace - picketHeight/2))
                 spindleTick1.stroke()
-                addArrow(pointShift(spindle2Location, xshift: picketWidth/2 + 2, yshift: picketHeight/2 - tan(angle) * picketWidth/2), angle: angle)
+                addArrow(pointShift(spindle2Location, xshift: picketWidth/2 + 2, yshift: picketHeight/2), angle: angle)
                 addArrow(pointShift(spindle2Location, xshift: -picketWidth/2 - 2, yshift: picketHeight/2), angle: 180 - angle)
             }
         }
@@ -281,36 +284,63 @@ class SpindleDiagram: UIView {
         return CGPoint(x: newX, y: newY)
     }
     
+//    func addArrow(head: CGPoint, angle: CGFloat) -> UIBezierPath {
+//        let height: CGFloat = 8
+//        let width: CGFloat = 2
+//        let length: CGFloat = sqrt(height * height + width * width)
+//        let arrowAngle: CGFloat = atan(width / height) * 180 / π
+//        
+//        let pt2x: CGFloat = head.x + (cos((angle + arrowAngle) * π / 180) * length)
+//        var pt2y: CGFloat = head.y - (sin((angle + arrowAngle) * π / 180) * length)
+//        
+//        var pt3x: CGFloat = head.x + (cos((arrowAngle - angle) * π / 180) * length)
+//        var pt3y: CGFloat = head.y - (sin((arrowAngle - angle) * π / 180) * length)
+//        if angle == 0 || angle == 180 {
+//            pt3x = pt2x
+//            pt3y = head.y + (sin((angle + arrowAngle) * π / 180) * length)
+//        } else if angle >= 70 && angle <= 270 {
+//            pt2y = head.y + (sin((angle + arrowAngle) * π / 180) * length)
+//        }
+//        
+//        let arrowHead = UIBezierPath()
+//        arrowHead.moveToPoint(head)
+//        arrowHead.addLineToPoint(CGPoint(x: pt2x, y: pt2y))
+//        arrowHead.addLineToPoint(CGPoint(x: pt3x, y: pt3y))
+//        arrowHead.closePath()
+//        UIColor.whiteColor().set()
+//        arrowHead.stroke()
+//        arrowHead.fill()
+//        
+//        return arrowHead
+//    }
+    
     func addArrow(head: CGPoint, angle: CGFloat) -> UIBezierPath {
-        let height: CGFloat = 8
-        let width: CGFloat = 2
-        let length: CGFloat = sqrt(height * height + width * width)
-        let arrowAngle: CGFloat = atan(width / height) * 180 / π
+        let height: CGFloat = 4
+        let width: CGFloat = 4
+        let length: CGFloat = sqrt(pow(height, 2) + pow(width, 2))
+        let arrowAngle = CGFloat(45)
         
         let pt2x: CGFloat = head.x + (cos((angle + arrowAngle) * π / 180) * length)
         var pt2y: CGFloat = head.y - (sin((angle + arrowAngle) * π / 180) * length)
         
-        var pt3x: CGFloat = head.x + (cos((arrowAngle - angle) * π / 180) * length)
-        var pt3y: CGFloat = head.y - (sin((arrowAngle - angle) * π / 180) * length)
-        if angle == 0 || angle == 180 {
-            pt3x = pt2x
-            pt3y = head.y + (sin((angle + arrowAngle) * π / 180) * length)
-        } else if angle >= 70 && angle <= 270 {
-            pt2y = head.y + (sin((angle + arrowAngle) * π / 180) * length)
-        }
+        var pt3x: CGFloat = head.x - (cos((arrowAngle - angle) * π / 180) * length)
+        var pt3y: CGFloat = head.y + (sin((arrowAngle - angle) * π / 180) * length)
+//        if angle == 0 || angle == 180 {
+//            pt3x = pt2x
+//            pt3y = head.y + (sin((angle + arrowAngle) * π / 180) * length)
+//        } else if angle >= 70 && angle <= 270 {
+//            pt2y = head.y + (sin((angle + arrowAngle) * π / 180) * length)
+//        }
         
         let arrowHead = UIBezierPath()
-        arrowHead.moveToPoint(head)
-        arrowHead.addLineToPoint(CGPoint(x: pt2x, y: pt2y))
+        arrowHead.moveToPoint(CGPoint(x: pt2x, y: pt2y))
         arrowHead.addLineToPoint(CGPoint(x: pt3x, y: pt3y))
-        arrowHead.closePath()
         UIColor.whiteColor().set()
         arrowHead.stroke()
-        arrowHead.fill()
         
         return arrowHead
     }
-
+    
 }
 // rob mayoff's CGPath.foreach
 extension CGPath {
