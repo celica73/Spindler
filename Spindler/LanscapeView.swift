@@ -88,6 +88,8 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
                 let tap = UITapGestureRecognizer(target: self, action: #selector(LanscapeView.labelAction))
                 taggedLabel.addGestureRecognizer(tap)
                 tap.delegate = self // Remember to extend your class with UIGestureRecognizerDelegate
+                taggedLabel.layer.cornerRadius = 5.0
+                taggedLabel.layer.masksToBounds = true
             }
         }
         pictureView.userInteractionEnabled = true
@@ -110,16 +112,22 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
     }
     
     func updateValues() {
-        postSpacing.text = engine.getProject().postSpacing.asString(metric)
-        spindleWidth.text = engine.getProject().spindleWidth.asString(metric)
-        maxSpace.text = engine.getProject().maxSpace.asString(metric)
+        postSpacing.attributedText = engine.getProject().postSpacing.asString(metric)
+        spindleWidth.attributedText = engine.getProject().spindleWidth.asString(metric)
+        maxSpace.attributedText = engine.getProject().maxSpace.asString(metric)
         spaces.text = String(engine.getProject().numSpaces)
         spindles.text = String(engine.getProject().numSpindles)
-        onCenter.text = engine.getProject().onCenter.asString(metric)
-        between.text = engine.getProject().between.asString(metric)
-        angle.text = String(format: "%.0f deg.",engine.getProject().angle)
-        rise.text = engine.getProject().rise.asString(metric)
-        run.text = engine.getProject().run.asString(metric)
+        onCenter.attributedText = engine.getProject().onCenter.asString(metric)
+        between.attributedText = engine.getProject().between.asString(metric)
+        angle.text = String(format: "%.0f\u{00B0}",engine.getProject().angle)
+        rise.attributedText = engine.getProject().rise.asString(metric)
+        run.attributedText = engine.getProject().run.asString(metric)
+        rise.sizeToFit()
+        postSpacing.sizeToFit()
+        spindleWidth.sizeToFit()
+        between.sizeToFit()
+        angle.sizeToFit()
+        run.sizeToFit()
         if engine.getProject().maxSpace.getRealMeasure() < engine.getProject().between.getRealMeasure() {
             maxSpace.textColor = .redColor()
         } else {
@@ -131,14 +139,17 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
     
     func updatePositions() {
         let center = CGPointMake(view.frame.midX, view.frame.midY)
+        print(center)
         let viewCenter = CGPointMake(pictureView.frame.midX, pictureView.frame.midY)
-        let xOffset = viewCenter.x - center.x
+        print(viewCenter)
+        let xOffset = center.x - viewCenter.x
         let yOffset = center.y - viewCenter.y
-        rise.center = pictureView.pointShift(pictureView.riseLocation, xshift: xOffset, yshift: yOffset)
+        rise.center = pictureView.pointShift(pictureView.riseLocation, xshift: xOffset - rise.frame.width/2, yshift: yOffset)
         run.center = pictureView.pointShift(pictureView.runLocation, xshift: xOffset, yshift: yOffset)
         postSpacing.center = pictureView.pointShift(pictureView.slopeLocation, xshift: xOffset, yshift: yOffset)
         between.center = pictureView.pointShift(pictureView.spaceLocation, xshift: xOffset, yshift: yOffset)
         spindleWidth.center = pictureView.pointShift(pictureView.picketLocation, xshift: xOffset, yshift: yOffset)
+        angle.center = pictureView.pointShift(pictureView.angleLocation, xshift: xOffset, yshift: yOffset)
     }
     
     // Receive action
@@ -304,7 +315,7 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
         let fraction = pickerData[2][feetPicker.selectedRowInComponent(2)]
         let newMeasurement = Measurement(feet: Int(feet)!, inches: Int(inches)!, fraction: fraction)
         engine.getProject().getValue(tapLabel.tag).update(newMeasurement)
-        tapLabel.text = engine.getProject().getValue(tapLabel.tag).asString(metric)
+        tapLabel.attributedText = engine.getProject().getValue(tapLabel.tag).asString(metric)
         engine.updateOperation(tapLabel.tag, newValue: newMeasurement)
         updateValues()
     }

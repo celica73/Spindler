@@ -5,7 +5,7 @@
 //  Created by Scott Johnson on 7/22/16.
 //  Copyright © 2016 Scott Johnson. All rights reserved.
 //
-
+import UIKit
 import Foundation
 
 extension Double {
@@ -90,17 +90,30 @@ class Measurement {
         self.cm = getMetric()
     }
     
-    func asString(metric: Bool)->String{
+    func asString(metric: Bool)->NSMutableAttributedString{
+        let fracStr = NSMutableAttributedString(
+            string: fraction,
+            attributes: [NSFontAttributeName:UIFont.systemFontOfSize(14.0)])
+        var output: String = ""
+        
         if !metric {
             if feet != 0 {
-                return String(format: "%d' %d",feet, inches) + (fraction != "0" ? " " + fraction  : "") + "\""
+                output += String(format: "%d' %d",feet, inches) + (fraction != "0" ? "": "\"")
             } else if fraction != "0" {
-                return String(format: "%d ", inches) + fraction + "\""
+                output += String(format: "%d", inches) //+ fraction + "\""
             } else {
-                return String(format: "%d\"", inches)
+                return NSMutableAttributedString(string: String(format: "%d\"", inches))
             }
         } else {
-            return String(format: "%.1f cm", getMetric())
+            return NSMutableAttributedString(string: String(format: "%.1f cm", getMetric()))
         }
+        if fraction != "0" {
+            output += " "
+            let newOutput = NSMutableAttributedString(string: output)
+            newOutput.appendAttributedString(fracStr)
+            newOutput.appendAttributedString(NSAttributedString(string: "\""))
+            return newOutput
+        }
+        return NSMutableAttributedString(string: output)
     }
 }
