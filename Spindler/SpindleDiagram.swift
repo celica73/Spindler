@@ -9,12 +9,17 @@
 import UIKit
 
 let π = CGFloat(M_PI)
+var maxRise: CGFloat = 400
+var angle: CGFloat = 30
 
 @IBDesignable
 class SpindleDiagram: UIView {
-    let engine = MathEngine.sharedInstance
-    var maxRise: CGFloat = 400
-    var angle: CGFloat = 30
+    var slopeLocation = CGPointMake(0, 0)
+    var riseLocation = CGPointMake(0, 0)
+    var spaceLocation = CGPointMake(0, 0)
+    var picketLocation = CGPointMake(0, 0)
+    var angleLocation = CGPointMake(0, 0)
+    var runLocation = CGPointMake(0, 0)
     
     var rise: CGFloat = 30 {
         didSet {
@@ -34,6 +39,12 @@ class SpindleDiagram: UIView {
         }
     }
     
+    var slopeChange = false {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         setNeedsDisplay()
@@ -44,23 +55,25 @@ class SpindleDiagram: UIView {
         let yOrigin = rect.maxY - 30 //max Y is screen bottom
         let xOrigin:CGFloat = 10
         let maxX = rect.maxX - 30
-        rise = (rise > 0 ? 90 : 0)
+        rise = (slopeChange ? 90 : 0)
         let maxY: CGFloat = 10 //top of screen
         var newY = yOrigin - rise
         newY = newY > maxY ? newY: maxY
         maxRise = yOrigin - maxY
         let run = maxX - 10
         angle = atan(rise / run) * 180 / π
+        let picketHeight: CGFloat = 80
         
-        let slope = UIBezierPath()
-        slope.moveToPoint(CGPoint(x: xOrigin, y: yOrigin))
-        slope.addLineToPoint(CGPoint(x: maxX, y: newY))
+        slopeLocation = CGPoint(x: (maxX - xOrigin)/2 + 50, y: rect.maxY - picketHeight - 80)
+        runLocation = CGPoint(x: (maxX - xOrigin)/2 + 50, y: rect.maxY)
+        riseLocation = CGPoint(x: maxX, y: yOrigin - (rise/2))
+        
+        let slope = addLine(CGPoint(x: xOrigin, y: yOrigin), finish: CGPoint(x: maxX, y: newY))
         slope.lineWidth = 5
         UIColor.brownColor().set()
         slope.stroke()
         
         let leftPost = UIBezierPath()
-        let picketHeight: CGFloat = 80
         leftPost.moveToPoint(CGPoint(x: xOrigin, y: yOrigin))
         leftPost.addLineToPoint(CGPoint(x: xOrigin + 10, y: yOrigin))
         leftPost.addLineToPoint(CGPoint(x: xOrigin + 10, y: yOrigin - picketHeight))
@@ -82,10 +95,10 @@ class SpindleDiagram: UIView {
         
         var spindle1Location = CGPointMake(xOrigin, yOrigin)
         var spindle2Location = CGPointMake(xOrigin, yOrigin)
-        var spindle3Location = CGPointMake(xOrigin, yOrigin)
+//        var spindle3Location = CGPointMake(xOrigin, yOrigin)
         let picketWidth: CGFloat = 7
         
-        let numSpindles = (spindles < 5 ? spindles : 4)
+        let numSpindles = (spindles < 3 ? spindles : 2)
         //place the spindles on the graph
         if spindles > 0 {
             for spindle in 1...numSpindles {
@@ -102,37 +115,32 @@ class SpindleDiagram: UIView {
                     spindle1Location = spindleTop
                 } else if spindle == 2 {
                     spindle2Location = spindleTop
-                } else if spindle == 3 {
-                    spindle3Location = spindleTop
                 }
+//                else if spindle == 3 {
+//                    spindle3Location = spindleTop
+//                }
             }
         }
         
         /*******************************/
         /* post space ticks begin here */
         /*******************************/
-        var ySpace = (((maxX/2 - 10) - (xOrigin)) / (maxX - xOrigin)) * (yOrigin - newY)
+        var ySpace = (yOrigin - newY)
+        
         let postSpaceHeight = yOrigin - picketHeight - 45
         let postHashHeight = yOrigin - picketHeight - 55
-        let spindleSpaceHeight = yOrigin - picketHeight - 25
-        
+
         let lengthLine = addLine(CGPoint(x: xOrigin + 10, y: postSpaceHeight),
-                                  finish: CGPoint(x: maxX/2 - 10, y: postSpaceHeight - ySpace))
+                                  finish: CGPoint(x: run, y: postSpaceHeight - ySpace))
         UIColor.whiteColor().set()
         lengthLine.stroke()
-        addArrow(CGPoint(x: xOrigin + 12, y: postSpaceHeight - 1), angle: angle)
-
+        addArrow(CGPoint(x: xOrigin + 10, y: postSpaceHeight), angle: angle)
+        addArrow(CGPoint(x: run, y: postSpaceHeight - ySpace), angle: angle)
+        
         let lengthHash1 = addLine(CGPoint(x: xOrigin + 10, y: yOrigin - picketHeight - 2),
                                   finish: CGPoint(x: xOrigin + 10, y: postHashHeight))
         lengthHash1.stroke()
-        
-        ySpace = (((maxX/2 + 10) - (xOrigin)) / (maxX - xOrigin)) * (yOrigin - newY)
-        
-        let lengthTick2 = addLine(CGPoint(x: run, y: newY - picketHeight - 45),
-                                  finish: CGPoint(x: maxX/2 + 10, y: postSpaceHeight - ySpace))
-        lengthTick2.stroke()
-        addArrow(CGPoint(x: run - 2, y: newY - picketHeight - 44), angle: 180 - angle)
-        
+
         let lengthHash2 = addLine(CGPoint(x: run, y: newY - picketHeight - 2),
                                   finish: CGPoint(x: run, y: newY - picketHeight - 55))
         lengthHash2.stroke()
@@ -143,130 +151,98 @@ class SpindleDiagram: UIView {
             var midXOffset = (spindle2Location.x - spindle1Location.x)/2
             ySpace = (((spindle1Location.x + midXOffset - 10) - (xOrigin)) / (maxX - xOrigin)) * (yOrigin - newY)
             
-            let spaceTick1 = addLine(pointShift(spindle1Location, xshift: 3, yshift: -25),
-                                     finish: CGPoint(x: spindle1Location.x + midXOffset - 10, y: spindleSpaceHeight - ySpace))
-            spaceTick1.stroke()
-            addArrow(pointShift(spindle1Location, xshift: 5, yshift: -25), angle: angle)
+            let spaceLength = addLine(pointShift(spindle1Location, xshift: picketWidth/2, yshift: -25),
+                                     finish: pointShift(spindle2Location, xshift: -picketWidth/2, yshift: -25))
+            spaceLength.stroke()
+            addArrow(pointShift(spindle1Location, xshift: picketWidth/2, yshift: -25), angle: angle)
+            addArrow(pointShift(spindle2Location, xshift: -picketWidth/2, yshift: -25), angle: angle)
             
             let spaceHash1 = addLine(pointShift(spindle1Location, xshift: 3, yshift: -2),
                                      finish: pointShift(spindle1Location, xshift: 3, yshift: -35))
             spaceHash1.stroke()
             
-            ySpace = (((spindle1Location.x + midXOffset + 10) - (xOrigin)) / (maxX - xOrigin)) * (yOrigin - newY)
-            
-            let spaceTick2 = addLine(CGPoint(x: spindle2Location.x - midXOffset + 10, y: spindleSpaceHeight - ySpace),
-                                     finish: pointShift(spindle2Location, xshift: -3, yshift: -25))
-            spaceTick2.stroke()
-            addArrow(pointShift(spindle2Location, xshift: -5, yshift: -25), angle: 180 - angle)
-            
             let spaceHash2 = addLine(pointShift(spindle2Location, xshift: -3, yshift: -2),
                                      finish: pointShift(spindle2Location, xshift: -3, yshift: -35))
             spaceHash2.stroke()
+            spaceLocation = CGPoint(x: spindle1Location.x + midXOffset + 40 , y: yOrigin - picketHeight - 10)
             
-            if spindles > 2 {
-                midXOffset = spindle3Location.x
-                
-                ySpace = (((spindle3Location.x - 30) - (xOrigin)) / (maxX - xOrigin)) * (yOrigin - newY)
-                
-                let spindleTick2 = addLine(pointShift(spindle3Location, xshift: -picketWidth/2, yshift: picketHeight/2),
-                                           finish: CGPoint(x: spindle3Location.x - 30, y: yOrigin - ySpace - picketHeight/2))
-                spindleTick2.stroke()
-                ySpace = (((spindle3Location.x + 30) - (xOrigin)) / (maxX - xOrigin)) * (yOrigin - newY)
-                
-                let spindleTick1 = addLine(pointShift(spindle3Location, xshift: picketWidth/2, yshift: picketHeight/2 - tan(angle) * picketWidth/2),
-                                           finish: CGPoint(x: spindle3Location.x + 30, y: yOrigin - ySpace - picketHeight/2 - tan(angle) * picketWidth/2))
-                spindleTick1.stroke()
-                addArrow(pointShift(spindle3Location, xshift: picketWidth/2 + 2, yshift: picketHeight/2 - tan(angle) * picketWidth/2), angle: angle)
-                addArrow(pointShift(spindle3Location, xshift: -picketWidth/2 - 2, yshift: picketHeight/2), angle: 180 - angle)
-            } else if spindles == 2 {
+//            if spindles > 2 {
+//                midXOffset = spindle3Location.x
+//                
+//                ySpace = (((spindle3Location.x - 30 - picketWidth/2) - (xOrigin)) / (maxX - xOrigin)) * (yOrigin - newY)
+//                
+//                picketLocation = CGPoint(x: spindle3Location.x - 30 , y: yOrigin - ySpace - picketHeight/2)
+//                
+//                let spindleTick1 = addLine(pointShift(spindle3Location, xshift: -picketWidth/2, yshift: picketHeight/2), finish: CGPoint(x: spindle3Location.x - 30, y: yOrigin - ySpace - picketHeight/2))
+//                spindleTick1.stroke()
+//                
+//                ySpace = (((spindle3Location.x + 30 + picketWidth/2) - (xOrigin)) / (maxX - xOrigin)) * (yOrigin - newY)
+//                
+//                let spindleTick2 = addLine(pointShift(spindle3Location, xshift: picketWidth/2, yshift: picketHeight/2 - tan(angle * π / 180) * picketWidth/2 - 1), finish: CGPoint(x: spindle3Location.x + 30, y: yOrigin - ySpace - picketHeight/2 - 1))
+//                spindleTick2.stroke()
+//                
+//                addArrow(pointShift(spindle3Location, xshift: picketWidth/2, yshift: picketHeight/2 - tan(angle * π / 180) * picketWidth/2 - 1), angle: angle)
+//                addArrow(pointShift(spindle3Location, xshift: -picketWidth/2, yshift: picketHeight/2), angle: angle)
+//                
+//            } else
+            
+            if spindles >= 2 {
                 midXOffset = spindle2Location.x
                 
-                ySpace = (((spindle2Location.x - 30) - (xOrigin)) / (maxX - xOrigin)) * (yOrigin - newY)
+                ySpace = (((spindle2Location.x - 30 - picketWidth/2) - (xOrigin)) / (maxX - xOrigin)) * (yOrigin - newY)
                 
-                let spindleTick2 = addLine(pointShift(spindle2Location, xshift: -picketWidth/2, yshift: picketHeight/2),
-                                           finish: CGPoint(x: spindle2Location.x - 30, y: yOrigin - ySpace - picketHeight/2))
-                spindleTick2.stroke()
+                picketLocation = CGPoint(x: spindle2Location.x - 30 , y: yOrigin - ySpace - picketHeight/2)
                 
-                ySpace = (((spindle2Location.x + 30) - (xOrigin)) / (maxX - xOrigin)) * (yOrigin - newY)
-                
-                let spindleTick1 = addLine(pointShift(spindle2Location, xshift: picketWidth/2, yshift: picketHeight/2),
-                                           finish: CGPoint(x: spindle2Location.x + 30, y: yOrigin - ySpace - picketHeight/2))
+                let spindleTick1 = addLine(pointShift(spindle2Location, xshift: -picketWidth/2, yshift: picketHeight/2), finish: CGPoint(x: spindle2Location.x - 30, y: yOrigin - ySpace - picketHeight/2))
                 spindleTick1.stroke()
-                addArrow(pointShift(spindle2Location, xshift: picketWidth/2 + 2, yshift: picketHeight/2), angle: angle)
-                addArrow(pointShift(spindle2Location, xshift: -picketWidth/2 - 2, yshift: picketHeight/2), angle: 180 - angle)
+                
+                ySpace = (((spindle2Location.x + 30 + picketWidth/2) - (xOrigin)) / (maxX - xOrigin)) * (yOrigin - newY)
+                
+                let spindleTick2 = addLine(pointShift(spindle2Location, xshift: picketWidth/2, yshift: picketHeight/2 - tan(angle * π / 180) * picketWidth/2 - 1), finish: CGPoint(x: spindle2Location.x + 30, y: yOrigin - ySpace - picketHeight/2 - 1))
+                spindleTick2.stroke()
+                addArrow(pointShift(spindle2Location, xshift: picketWidth/2, yshift: picketHeight/2 - tan(angle * π / 180) * picketWidth/2 - 1), angle: angle)
+                addArrow(pointShift(spindle2Location, xshift: -picketWidth/2, yshift: picketHeight/2), angle: angle)
             }
         }
         /*******************************/
         /* run space ticks begin here */
         /*******************************/
-        if angle > 0 {
+        if slopeChange {
             
-            let runLine = UIBezierPath()
-            runLine.moveToPoint(CGPoint(x: xOrigin, y: yOrigin))
-            runLine.addLineToPoint(CGPoint(x: maxX + 20, y: yOrigin))
-            runLine.lineWidth = 1
-            
-            UIColor.whiteColor().set()
+            let runLine = addLine(CGPoint(x: xOrigin, y: yOrigin), finish: CGPoint(x: maxX + 20, y: yOrigin))
             runLine.stroke()
             
-            let riseTick = UIBezierPath()
-            riseTick.moveToPoint(CGPoint(x: maxX + 2, y: newY))
-            riseTick.addLineToPoint(CGPoint(x: maxX + 20, y: newY))
-            riseTick.lineWidth = 1
-            riseTick.stroke()
-            
-            let halfRise = (yOrigin - newY)/2
-            let riseMeasure1 = UIBezierPath()
-            riseMeasure1.moveToPoint(CGPoint(x: maxX + 10, y: newY))
-            riseMeasure1.addLineToPoint(CGPoint(x: maxX + 10, y: yOrigin - halfRise - 10))
-            riseMeasure1.lineWidth = 1
-            riseMeasure1.stroke()
-            addArrow(CGPoint(x: maxX + 10, y: newY + 2), angle: 90)
-            
-            let riseMeasure2 = UIBezierPath()
-            riseMeasure2.moveToPoint(CGPoint(x: maxX + 10, y: yOrigin))
-            riseMeasure2.addLineToPoint(CGPoint(x: maxX + 10, y: yOrigin - halfRise + 10))
-            riseMeasure2.lineWidth = 1
-            riseMeasure2.stroke()
-            addArrow(CGPoint(x: maxX + 10, y: yOrigin - 2), angle: 270)
-            
-            let runTick1 = addLine(CGPoint(x: xOrigin + 10, y: yOrigin + 15),
-                                   finish: CGPoint(x: maxX/2 - 10, y: yOrigin + 15))
+            let runMeasure = addLine(CGPoint(x: xOrigin + 10, y: yOrigin + 15), finish: CGPoint(x: run, y: yOrigin + 15))
             UIColor.whiteColor().set()
-            runTick1.stroke()
-            addArrow(CGPoint(x: xOrigin + 10 + 2, y: yOrigin + 15), angle: 0)
+            runMeasure.stroke()
+            addArrow(CGPoint(x: xOrigin + 10, y: yOrigin + 15), angle: 0)
+            addArrow(CGPoint(x: run, y: yOrigin + 15), angle: 0)
             
-            let runHash1 = addLine(CGPoint(x: xOrigin + 10, y: yOrigin + 2),
-                                   finish: CGPoint(x: xOrigin + 10, y: yOrigin + 25))
+            let runHash1 = addLine(CGPoint(x: xOrigin + 10, y: yOrigin + 2), finish: CGPoint(x: xOrigin + 10, y: yOrigin + 25))
             runHash1.stroke()
             
-            let runTick2 = addLine(CGPoint(x: run, y: yOrigin + 15),
-                                   finish: CGPoint(x: maxX/2 + 10, y: yOrigin + 15))
-            runTick2.stroke()
-            addArrow(CGPoint(x: run - 2, y: yOrigin + 15), angle: 180)
-            
-            let runHash2 = addLine(CGPoint(x: run, y: yOrigin + 25),
-                                   finish: CGPoint(x: run, y: newY + 10))
+            let runHash2 = addLine(CGPoint(x: run, y: yOrigin + 25), finish: CGPoint(x: run, y: newY + 10))
             runHash2.stroke()
+            
+            let riseMeasure = addLine(CGPoint(x: maxX + 10, y: newY), finish: CGPoint(x: maxX + 10, y: yOrigin))
+            riseMeasure.stroke()
+            addArrow(CGPoint(x: maxX + 10, y: newY), angle: 0)
+            addArrow(CGPoint(x: maxX + 10, y: yOrigin), angle: 0)
+            
+            let riseTick = addLine(CGPoint(x: maxX + 2, y: newY), finish: CGPoint(x: maxX + 20, y: newY))
+            riseTick.stroke()
             
             let angleMeasure1 = UIBezierPath(arcCenter: CGPoint(x: xOrigin, y: yOrigin),
                                              radius: maxX / 1.3,
-                                             startAngle: -angle / 180 * π * 0.4,
+                                             startAngle: -angle / 180 * π * 0.96,
                                              endAngle: 0,
                                              clockwise: true)
             angleMeasure1.lineWidth = 1
             angleMeasure1.stroke()
-            addArrow(CGPoint(x: xOrigin + maxX/1.3, y: yOrigin - 2), angle: 265)
+            addArrow(CGPoint(x: xOrigin + maxX/1.3, y: yOrigin), angle: 0)
             
-            let angleMeasure2 = UIBezierPath(arcCenter: CGPoint(x: xOrigin, y: yOrigin),
-                                            radius: maxX / 1.3,
-                                            startAngle: -angle / 180 * π * 0.85,
-                                            endAngle: -angle / 180 * π * 0.6,
-                                            clockwise: true)
-            angleMeasure2.lineWidth = 1
-            angleMeasure2.stroke()
             let arrowXOrigin: CGFloat = xOrigin + maxX/1.3
-            addArrow(CGPoint(x: cos(angle * π / 180) * arrowXOrigin, y: yOrigin + 8 - sin(angle * π / 180) * arrowXOrigin), angle: 70)
+            addArrow(CGPoint(x: cos(angle * π / 180) * arrowXOrigin + 1, y: yOrigin + 6 - sin(angle * π / 180) * arrowXOrigin), angle: 0)
         }
       }
     
@@ -318,23 +294,15 @@ class SpindleDiagram: UIView {
         let height: CGFloat = 4
         let width: CGFloat = 4
         let length: CGFloat = sqrt(pow(height, 2) + pow(width, 2))
-        let arrowAngle = CGFloat(45)
+        let arrowAngle = CGFloat(45 + angle)
         
-        let pt2x: CGFloat = head.x + (cos((angle + arrowAngle) * π / 180) * length)
-        var pt2y: CGFloat = head.y - (sin((angle + arrowAngle) * π / 180) * length)
+        let pt2x: CGFloat = head.x + (cos((arrowAngle) * π / 180) * length)
+        let pt2y: CGFloat = head.y - (sin((arrowAngle) * π / 180) * length)
         
-        var pt3x: CGFloat = head.x - (cos((arrowAngle - angle) * π / 180) * length)
-        var pt3y: CGFloat = head.y + (sin((arrowAngle - angle) * π / 180) * length)
-//        if angle == 0 || angle == 180 {
-//            pt3x = pt2x
-//            pt3y = head.y + (sin((angle + arrowAngle) * π / 180) * length)
-//        } else if angle >= 70 && angle <= 270 {
-//            pt2y = head.y + (sin((angle + arrowAngle) * π / 180) * length)
-//        }
+        let pt3x: CGFloat = head.x - (cos((arrowAngle) * π / 180) * length)
+        let pt3y: CGFloat = head.y + (sin((arrowAngle) * π / 180) * length)
         
-        let arrowHead = UIBezierPath()
-        arrowHead.moveToPoint(CGPoint(x: pt2x, y: pt2y))
-        arrowHead.addLineToPoint(CGPoint(x: pt3x, y: pt3y))
+        let arrowHead = addLine(CGPoint(x: pt2x, y: pt2y), finish: CGPoint(x: pt3x, y: pt3y))
         UIColor.whiteColor().set()
         arrowHead.stroke()
         

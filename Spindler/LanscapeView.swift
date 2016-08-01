@@ -59,6 +59,7 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
         pickerData.append(inchData)
         pickerData.append(fractionData)
         pickerView.hidden = true
+
         feetPicker.dataSource = self
         feetPicker.delegate = self
         
@@ -69,8 +70,8 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
 //        pictureView.addGestureRecognizer(swipeRec)
 //        pictureView.userInteractionEnabled = true
 //        pictureView.multipleTouchEnabled = true
+        
         pictureView.rise = CGFloat(engine.getProject().rise.getRealMeasure())
-//        pictureView.spindles = engine.getProject().numSpindles
         postSpacing.tag = 1
         spindleWidth.tag = 2
         maxSpace.tag = 3
@@ -84,14 +85,22 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
         for i in 0...10 {
             if let taggedLabel = self.view.viewWithTag(i) as? UILabel {
                 taggedLabel.userInteractionEnabled = true
-                let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LanscapeView.labelAction))
+                let tap = UITapGestureRecognizer(target: self, action: #selector(LanscapeView.labelAction))
                 taggedLabel.addGestureRecognizer(tap)
                 tap.delegate = self // Remember to extend your class with UIGestureRecognizerDelegate
             }
         }
+        pictureView.userInteractionEnabled = true
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(LanscapeView.labelFinish))
+        pictureView.addGestureRecognizer(tap2)
+        tap2.delegate = self
+        
         rise.hidden = !slope
         run.hidden = !slope
         angle.hidden = !slope
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         updateValues()
     }
     
@@ -117,6 +126,19 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
             maxSpace.textColor = blueText
         }
         updateDiagram()
+        updatePositions()
+    }
+    
+    func updatePositions() {
+        let center = CGPointMake(view.frame.midX, view.frame.midY)
+        let viewCenter = CGPointMake(pictureView.frame.midX, pictureView.frame.midY)
+        let xOffset = viewCenter.x - center.x
+        let yOffset = center.y - viewCenter.y
+        rise.center = pictureView.pointShift(pictureView.riseLocation, xshift: xOffset, yshift: yOffset)
+        run.center = pictureView.pointShift(pictureView.runLocation, xshift: xOffset, yshift: yOffset)
+        postSpacing.center = pictureView.pointShift(pictureView.slopeLocation, xshift: xOffset, yshift: yOffset)
+        between.center = pictureView.pointShift(pictureView.spaceLocation, xshift: xOffset, yshift: yOffset)
+        spindleWidth.center = pictureView.pointShift(pictureView.picketLocation, xshift: xOffset, yshift: yOffset)
     }
     
     // Receive action
@@ -150,27 +172,22 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
         }
     }
     
+    func labelFinish(gr:UITapGestureRecognizer) {
+        if tapLabel != nil {
+            tapLabel.textColor = blueText
+            tapLabel = nil
+            pickerView.hidden = true
+            stepAdjust.hidden = true
+        }
+    }
+    
     @IBAction func setStepper(sender: UIStepper) {
         engine.updateOperation(tapLabel.tag, newValue: stepAdjust.value)
         tapLabel.text = String(stepAdjust.value)
         updateDiagram()
         updateValues()
     }
-    
-    func setPickerValues() {
-        let selection = engine.getProject().getValue(tapLabel.tag)
-        
-        if let feetIndex = pickerData[0].indexOf(String(selection.getFeet())) {
-            feetPicker.selectRow(feetIndex, inComponent: 0, animated: false)
-        }
-        if let inchIndex = pickerData[1].indexOf(String(selection.getInches())) {
-            feetPicker.selectRow(inchIndex, inComponent: 1, animated: false)
-        }
-        if let fractionIndex = pickerData[2].indexOf(selection.getFraction()) {
-            feetPicker.selectRow(fractionIndex, inComponent: 2, animated: false)
-        }
-        
-    }
+
     
 //    var startLocation: CGPoint!
 //    
@@ -211,34 +228,52 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
 //        }
 //    }
     
+    func setPickerValues() {
+        let selection = engine.getProject().getValue(tapLabel.tag)
+        
+        if let feetIndex = pickerData[0].indexOf(String(selection.getFeet())) {
+            feetPicker.selectRow(feetIndex, inComponent: 0, animated: false)
+        }
+        if let inchIndex = pickerData[1].indexOf(String(selection.getInches())) {
+            feetPicker.selectRow(inchIndex, inComponent: 1, animated: false)
+        }
+        if let fractionIndex = pickerData[2].indexOf(selection.getFraction()) {
+            feetPicker.selectRow(fractionIndex, inComponent: 2, animated: false)
+        }
+        
+    }
+    
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return pickerData.count
     }
+    
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerData[component].count
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if component == 0 {
-            return pickerData[component][row] + "\'"
-        } else if component == 1 {
-            return pickerData[component][row] + "\""
-        } else {
-            return pickerData[component][row]
-        }
-    }
+//    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        if component == 0 {
+//            return pickerData[component][row] + "\'"
+//        } else if component == 1 {
+//            return pickerData[component][row] + "\""
+//        } else {
+//            return pickerData[component][row]
+//        }
+//    }
     
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
-        if let titleLabel = view as? UILabel {
-            titleLabel.text = "Your Text"
-            return titleLabel
-        }else{
-            let titleLabel = UILabel()
-            titleLabel.font = UIFont.systemFontOfSize(14)//Font you want here
-            titleLabel.textAlignment = NSTextAlignment.Center
-            titleLabel.text = pickerData[component][row]
-            return titleLabel
+        let titleLabel = UILabel()
+        titleLabel.font = UIFont.systemFontOfSize(14)//Font you want here
+        titleLabel.textAlignment = NSTextAlignment.Right
+        if component == 0 {
+            titleLabel.text = pickerData[component][row] + "\'"
+        } else if component == 1 {
+            titleLabel.text = pickerData[component][row] + "\""
+        } else if component == 2 {
+                titleLabel.text = pickerData[component][row] + "\""
+                titleLabel.font = UIFont.systemFontOfSize(10)
         }
+        return titleLabel
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -247,6 +282,7 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
     
     @IBAction func slopeChanger(sender: UISwitch) {
         slope = !slope
+        pictureView.slopeChange = slope
         if !slope {
             engine.getProject().rise.update(0)
             engine.updateOperation(rise.tag, newValue: engine.getProject().rise)
