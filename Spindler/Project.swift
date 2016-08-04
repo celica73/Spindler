@@ -10,14 +10,14 @@ import Foundation
 
 class Project: NSObject, NSCoding {
     
-    var postSpacing = Measurement(feet: 0, inches: 100, fraction: "0")
-    var spindleWidth = Measurement(feet: 0, inches: 1, fraction: "1/2")
+    var postSpacing = Measurement(cm: 456, mm: 3)
+    var spindleWidth = Measurement(cm: 4, mm: 0)
     var onCenter = Measurement(feet: 0, inches: 3, fraction: "5/16")
     var between = Measurement(feet: 0, inches: 3, fraction: "13/16")
     var angle = 0.0
     var rise = Measurement()
     var run = Measurement(feet: 0, inches: 0, fraction: "0")
-    var maxSpace = Measurement(feet: 0, inches: 4, fraction: "0")
+    var maxSpace = Measurement(cm: 10, mm: 0)
     var numSpaces = 19
     var numSpindles = 18
     

@@ -34,7 +34,8 @@ class Measurement {
         self.inches = inches
         self.fraction = fraction
         self.cm = 0
-        self.cm = getMetric()
+        self.cm = setMetric()
+        update(self)
     }
     
     init(cm: Int, mm: Int) {
@@ -42,7 +43,19 @@ class Measurement {
         self.feet = 0
         self.inches = 0
         self.fraction = "0"
-        update(self.cm / 2.54)
+        if self.cm != 0 {
+            update(self.cm, metricInput: true)
+        }
+    }
+    
+    func setMetric() -> Double {
+        let output = feet * 12 + inches
+        var decimal: Double = 0
+        if fraction.containsString("/"){
+            let frac = fraction.characters.split{$0 == "/"}.map(String.init)
+            decimal = Double(frac[0])!/Double(frac[1])!
+        }
+        return (Double(output) + decimal) * 2.54
     }
     
     func getFeet()->Int{
@@ -54,29 +67,32 @@ class Measurement {
     func getFraction()->String{
         return self.fraction
     }
-    func getRealMeasure()->Double{
-        let output = feet * 12 + inches
-        var decimal: Double = 0
-        if fraction.containsString("/"){
-            let frac = fraction.characters.split{$0 == "/"}.map(String.init)
-            decimal = Double(frac[0])!/Double(frac[1])!
-        }
-        return Double(output) + decimal
+    func getInchMeasure()->Double{
+        return self.cm / 2.54
     }
     
-    func getMetric()->Double{
-        return getRealMeasure() * 2.54
+    func getMetricMeasure()->Double{
+        return self.cm
     }
     
     func update(value: Measurement){
-        self.feet = value.feet
-        self.inches = value.inches
-        self.fraction = value.fraction
-        self.cm = getMetric()
+        if value.cm != self.cm {
+            self.cm = value.cm
+        }
+        update(self.cm, metricInput: true)
     }
     
-    func update(measure: Double){
-        var newValue = measure/12
+    func update(measure: Double, metricInput: Bool){
+        var english: Double
+   
+        if metricInput && measure != 0 {
+            self.cm = measure
+            english = measure / 2.54
+        } else {
+            english = measure
+            self.cm = measure * 2.54
+        }
+        var newValue = english/12
         self.feet = Int(newValue)
         newValue -= Double(self.feet)
         self.inches = Int(newValue * 12)
@@ -95,7 +111,8 @@ class Measurement {
         } else {
             self.fraction = "0"
         }
-        self.cm = getMetric()
+        print(String(format: "feet: %d, inches: %d, fraction %s, cm: %f", feet, inches, fraction, cm))
+
     }
     
     func asString(metric: Bool)->NSMutableAttributedString{
@@ -113,7 +130,7 @@ class Measurement {
                 return NSMutableAttributedString(string: String(format: " %d\" ", inches))
             }
         } else {
-            return NSMutableAttributedString(string: String(format: " %.1f cm ", getMetric()))
+            return NSMutableAttributedString(string: String(format: " %.1f cm ", getMetricMeasure()))
         }
         if fraction != "0" {
             output += " "

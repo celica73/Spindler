@@ -79,7 +79,7 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
         metricData.append(centimeters)
         metricData.append(millimeters)
         
-        pictureView.rise = CGFloat(engine.getProject().rise.getRealMeasure())
+        pictureView.rise = CGFloat(engine.getProject().rise.getMetricMeasure())
         postSpacing.tag = 1
         spindleWidth.tag = 2
         maxSpace.tag = 3
@@ -147,12 +147,12 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
         between.sizeToFit()
         angle.sizeToFit()
         run.sizeToFit()
-        if engine.getProject().maxSpace.getRealMeasure() < engine.getProject().between.getRealMeasure() {
+        if engine.getProject().maxSpace.getMetricMeasure() < engine.getProject().between.getMetricMeasure() {
             maxSpace.textColor = .redColor()
         } else {
             maxSpace.textColor = .blackColor()
         }
-        pictureView.rise = CGFloat(engine.getProject().rise.getRealMeasure())
+        pictureView.rise = CGFloat(engine.getProject().rise.getMetricMeasure())
         pictureView.spindles = engine.getProject().numSpindles
         updatePositions()
     }
@@ -290,7 +290,7 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
         pictureView.slopeChange = slope
 
         if !slope {
-            engine.getProject().rise.update(0)
+            engine.getProject().rise.update(0, metricInput: true)
             engine.updateOperation(rise.tag, newValue: engine.getProject().rise)
             pictureView.rise = 0
         }
