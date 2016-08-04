@@ -37,6 +37,14 @@ class Measurement {
         self.cm = getMetric()
     }
     
+    init(cm: Int, mm: Int) {
+        self.cm = Double(cm) + Double(mm)/10
+        self.feet = 0
+        self.inches = 0
+        self.fraction = "0"
+        update(self.cm / 2.54)
+    }
+    
     func getFeet()->Int{
         return self.feet
     }
@@ -53,13 +61,13 @@ class Measurement {
             let frac = fraction.characters.split{$0 == "/"}.map(String.init)
             decimal = Double(frac[0])!/Double(frac[1])!
         }
-//        print(output)
         return Double(output) + decimal
     }
     
     func getMetric()->Double{
         return getRealMeasure() * 2.54
     }
+    
     func update(value: Measurement){
         self.feet = value.feet
         self.inches = value.inches
@@ -98,20 +106,20 @@ class Measurement {
         
         if !metric {
             if feet != 0 {
-                output += String(format: "%d' %d",feet, inches) + (fraction != "0" ? "": "\"")
+                output += String(format: " %d' %d",feet, inches) + (fraction != "0" ? "": "\" ")
             } else if fraction != "0" {
-                output += String(format: "%d", inches) //+ fraction + "\""
+                output += String(format: " %d", inches) //+ fraction + "\""
             } else {
-                return NSMutableAttributedString(string: String(format: "%d\"", inches))
+                return NSMutableAttributedString(string: String(format: " %d\" ", inches))
             }
         } else {
-            return NSMutableAttributedString(string: String(format: "%.1f cm", getMetric()))
+            return NSMutableAttributedString(string: String(format: " %.1f cm ", getMetric()))
         }
         if fraction != "0" {
             output += " "
             let newOutput = NSMutableAttributedString(string: output)
             newOutput.appendAttributedString(fracStr)
-            newOutput.appendAttributedString(NSAttributedString(string: "\""))
+            newOutput.appendAttributedString(NSAttributedString(string: "\" "))
             return newOutput
         }
         return NSMutableAttributedString(string: output)

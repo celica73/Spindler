@@ -8,13 +8,7 @@
 
 import Foundation
 
-
-private let sharedEngine = MathEngine()
-
 class MathEngine {
-    class var sharedInstance: MathEngine {
-        return sharedEngine
-    }
     var newProject: Project
     
     init(){
