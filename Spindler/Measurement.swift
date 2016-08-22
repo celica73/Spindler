@@ -111,8 +111,6 @@ class Measurement {
         } else {
             self.fraction = "0"
         }
-        print(String(format: "feet: %d, inches: %d, fraction %s, cm: %f", feet, inches, fraction, cm))
-
     }
     
     func asString(metric: Bool)->NSMutableAttributedString{

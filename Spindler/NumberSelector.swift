@@ -23,16 +23,16 @@ class NumberSelector: UIView {
         let yOrigin: CGFloat = height
         let yMax: CGFloat = 0
         let xMax: CGFloat = width - 10
-        let arrowStart = CGPointMake(width/3 - 10, yMax + 20)
-        let arrowFinish = CGPointMake(width/3 + 10, yMax + 20)
-        let arrowPoint = CGPointMake(width/3,yMax)
+//        let arrowStart = CGPointMake(width/3 - 10, yMax + 20)
+//        let arrowFinish = CGPointMake(width/3 + 10, yMax + 20)
+//        let arrowPoint = CGPointMake(width/3,yMax)
         
         let path = UIBezierPath()
         path.moveToPoint(CGPoint(x: xOrigin, y: yMax + 30))
         path.addArcWithCenter(CGPoint(x: xOrigin + 10, y: yMax + 30), radius: 10.0, startAngle: π, endAngle: (3 * π / 2), clockwise: true)
-        path.addLineToPoint(arrowStart)
-        path.addLineToPoint(arrowPoint)
-        path.addLineToPoint(arrowFinish)
+//        path.addLineToPoint(arrowStart)
+//        path.addLineToPoint(arrowPoint)
+//        path.addLineToPoint(arrowFinish)
         path.addLineToPoint(CGPoint(x: xMax - 10, y: yMax + 20))
         path.addArcWithCenter(CGPoint(x: xMax - 10, y: yMax + 30), radius: 10.0, startAngle: (3 * π / 2), endAngle: 0, clockwise: true)
         path.addLineToPoint(CGPoint(x: xMax, y: yOrigin - 10))

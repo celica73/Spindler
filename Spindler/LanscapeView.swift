@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewDataSource,UIPickerViewDelegate {
+class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate {
     
     var engine = MathEngine()
     
@@ -22,62 +22,39 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
     @IBOutlet var angle: UILabel!
     @IBOutlet var rise: UILabel!
     @IBOutlet var run: UILabel!
-    
-    @IBOutlet var feetPicker: UIPickerView!
+
     @IBOutlet var unitsSelector: UISwitch!
     @IBOutlet var slopeSelector: UISwitch!
+    
+    @IBOutlet var info: UIButton!
+    var getInfo = false;
     
     var metric = false
     var slope = false
     var landscape = false
     var stepAdjust = UIStepper(frame:CGRectMake(110, 250, 0, 0))
     
-    
-    
-    var feetData: [String] = []
-    var inchData: [String] = []
-    var fractionData: [String] = ["0","1/16","1/8","3/16","1/4","5/16","3/8","7/16","1/2","9/16","5/8","11/16","3/4","13/16","7/8","15/16"]
-    var pickerData = [[String]]()
-    
-    var centimeters: [Int] = Array(0...2000)
-    var millimeters:[Int] = Array(0...9)
-    var metricData = [[Int]]()
-    
-    
     @IBOutlet var pictureView: SpindleDiagram!
-    @IBOutlet var pickerView: NumberSelector!
     
     var tapLabel: UILabel!
     var labelColor: UIColor!
+    
+    var btnDone = UIBarButtonItem()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        btnDone = UIBarButtonItem(title: "Done", style: .Done, target: self, action: #selector(LanscapeView.dismiss))
         stepAdjust.wraps = true
         stepAdjust.autorepeat = true
         stepAdjust.maximumValue = 100
-        stepAdjust.backgroundColor = UIColor.lightGrayColor()
+        stepAdjust.backgroundColor = .lightGrayColor()
         stepAdjust.addTarget(self, action: #selector(LanscapeView.setStepper), forControlEvents: .ValueChanged)
         self.view.addSubview(stepAdjust)
         stepAdjust.hidden = true
         stepAdjust.layer.cornerRadius = 5;
         
         // Do any additional setup after loading the view, typically from a nib.
-        for i in 0...50 {
-            feetData.append(String(i))
-        }
-        for i in 0...50 {
-            inchData.append(String(i))
-        }
-        pickerData.append(feetData)
-        pickerData.append(inchData)
-        pickerData.append(fractionData)
-        pickerView.hidden = true
-        
-        feetPicker.dataSource = self
-        feetPicker.delegate = self
-        
-        metricData.append(centimeters)
-        metricData.append(millimeters)
+
         
         pictureView.rise = CGFloat(engine.getProject().rise.getMetricMeasure())
         postSpacing.tag = 1
@@ -100,6 +77,7 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
                 taggedLabel.layer.masksToBounds = true
             }
         }
+
         pictureView.userInteractionEnabled = true
         let tap2 = UITapGestureRecognizer(target: self, action: #selector(LanscapeView.labelFinish))
         pictureView.addGestureRecognizer(tap2)
@@ -108,6 +86,7 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
         rise.hidden = !slope
         run.hidden = !slope
         angle.hidden = !slope
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -120,15 +99,54 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
     }
     
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+//        dismiss()
+        UIApplication.sharedApplication().sendAction(btnDone.action, to: btnDone.target, from: self, forEvent: nil)
         landscape = !landscape
         pictureView.landscapeView = landscape
+        info.hidden = landscape
         if tapLabel != nil {
             stepAdjust.center = CGPointMake(CGRectGetMaxX(tapLabel.frame) + stepAdjust.frame.width/2,CGRectGetMidY(tapLabel.frame))
         }
         let delay = 0.025
         NSTimer.scheduledTimerWithTimeInterval(delay, target: self, selector: #selector(updateValues), userInfo: nil, repeats: false)
-        
     }
+    
+    @IBAction func getInfo(sender: UIButton) {
+        getInfo = true
+        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("Popover View")
+        vc.modalPresentationStyle = UIModalPresentationStyle.Popover
+        let popover: UIPopoverPresentationController = vc.popoverPresentationController!
+        let viewForSource = sender as UIView
+        popover.sourceView = viewForSource
+        
+        // the position of the popover where it's showed
+        popover.sourceRect = viewForSource.bounds
+        popover.delegate = self
+        presentViewController(vc, animated: true, completion:nil)
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        //        return UIModalPresentationStyle.FullScreen
+        if getInfo {
+            return UIModalPresentationStyle.Popover
+        } else {
+            return UIModalPresentationStyle.None
+        }
+    }
+    
+    func presentationController(controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
+        let navigationController = UINavigationController(rootViewController: controller.presentedViewController)
+//        let btnDone = UIBarButtonItem(title: "Done", style: .Done, target: self, action: #selector(LanscapeView.dismiss))
+        navigationController.topViewController!.navigationItem.rightBarButtonItem = btnDone
+        return navigationController
+    }
+    
+    func dismiss() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        getInfo = false
+    }
+
     
     func updateValues() {
         postSpacing.attributedText = engine.getProject().postSpacing.asString(metric)
@@ -170,30 +188,41 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
         angle.center = pictureView.pointShift(pictureView.angleLocation, xshift: xOffset, yshift: yOffset)
     }
     
+    func measurementPopover(view: UIView){
+        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("Popover")
+        vc.modalPresentationStyle = UIModalPresentationStyle.Popover
+        let popover: UIPopoverPresentationController = vc.popoverPresentationController!
+        let viewForSource = view
+        popover.sourceView = viewForSource
+        
+        // the position of the popover where it's showed
+        popover.sourceRect = viewForSource.bounds
+        popover.delegate = self
+        presentViewController(vc, animated: true, completion:nil)
+    }
+    
     // Receive action
     func labelAction(gr:UITapGestureRecognizer) {
         let searchlbl = (gr.view as! UILabel) // Type cast it with the class for which you have added gesture
-        feetPicker.reloadAllComponents()
-//        pictureView.addSubview(feetPicker)
+//        feetPicker.reloadAllComponents()
+        
+        measurementPopover(gr.view!)
         
         if tapLabel != nil && tapLabel == searchlbl {
             tapLabel.textColor = .blackColor()
             tapLabel = nil
-            pickerView.hidden = true
             stepAdjust.hidden = true
         } else {
             if tapLabel != nil {
                 tapLabel.textColor = .blackColor()
-                pickerView.hidden = true
                 stepAdjust.hidden = true
             }
             tapLabel = searchlbl
             let labelFrame: CGRect = tapLabel.frame
             if tapLabel.tag != 4 && tapLabel.tag != 5 && tapLabel.tag != 8 {
-                pickerView.center = CGPointMake(self.view.frame.midX, self.view.frame.midY)
                 tapLabel.textColor = .orangeColor()
-                setPickerValues()
-                pickerView.hidden = false
+//                setPickerValues()
             } else {
                 tapLabel.textColor = .orangeColor()
                 stepAdjust.center = CGPointMake(CGRectGetMaxX(labelFrame) + stepAdjust.frame.width/2,CGRectGetMidY(labelFrame))
@@ -207,7 +236,6 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
         if tapLabel != nil {
             tapLabel.textColor = .blackColor()
             tapLabel = nil
-            pickerView.hidden = true
             stepAdjust.hidden = true
         }
     }
@@ -222,68 +250,7 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
         updateValues()
     }
 
-    func setPickerValues() {
-        let selection = engine.getProject().getValue(tapLabel.tag)
-        
-        if !metric {
-            if let feetIndex = pickerData[0].indexOf(String(selection.getFeet())) {
-                feetPicker.selectRow(feetIndex, inComponent: 0, animated: false)
-            }
-            if let inchIndex = pickerData[1].indexOf(String(selection.getInches())) {
-                feetPicker.selectRow(inchIndex, inComponent: 1, animated: false)
-            }
-            if let fractionIndex = pickerData[2].indexOf(selection.getFraction()) {
-                feetPicker.selectRow(fractionIndex, inComponent: 2, animated: false)
-            }
-        } else {
-            if let cmIndex = metricData[0].indexOf(Int(selection.cm)) {
-                feetPicker.selectRow(cmIndex, inComponent: 0, animated: false)
-            }
-            if let mmIndex = metricData[1].indexOf(Int((selection.cm * 10)) % 10) {
-                feetPicker.selectRow(mmIndex, inComponent: 1, animated: false)
-            }
-        }
-    }
-    
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        if !metric {
-            return pickerData.count
-        } else {
-            return metricData.count
-        }
-    }
-    
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if !metric {
-            return pickerData[component].count
-        } else {
-            return metricData[component].count
-        }
-    }
-    
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
-        let titleLabel = UILabel()
-        titleLabel.font = UIFont.systemFontOfSize(14)//Font you want here
-        titleLabel.textAlignment = NSTextAlignment.Right
-        if !metric {
-            if component == 0 {
-                titleLabel.text = pickerData[component][row] + "\'"
-            } else if component == 1 {
-                titleLabel.text = pickerData[component][row] + "\""
-            } else if component == 2 {
-                titleLabel.text = pickerData[component][row] + "\""
-                titleLabel.font = UIFont.systemFontOfSize(10)
-            }
-            return titleLabel
-        } else {
-            titleLabel.text = String(metricData[component][row])
-            return titleLabel
-        }
-    }
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        updateLabel()
-    }
+
     
     @IBAction func slopeChanger(sender: UISwitch) {
         slope = !slope
@@ -303,24 +270,6 @@ class LanscapeView: UIViewController, UIGestureRecognizerDelegate, UIPickerViewD
     
     @IBAction func unitsChange(sender: UISwitch) {
         metric = !metric
-        updateValues()
-    }
-    
-    func updateLabel(){
-        var newMeasurement: Measurement
-        if !metric {
-            let feet = pickerData[0][feetPicker.selectedRowInComponent(0)]
-            let inches = pickerData[1][feetPicker.selectedRowInComponent(1)]
-            let fraction = pickerData[2][feetPicker.selectedRowInComponent(2)]
-            newMeasurement = Measurement(feet: Int(feet)!, inches: Int(inches)!, fraction: fraction)
-        } else {
-            let cm = metricData[0][feetPicker.selectedRowInComponent(0)]
-            let mm = metricData[1][feetPicker.selectedRowInComponent(1)]
-            newMeasurement = Measurement(cm: cm, mm: mm)
-        }
-        engine.getProject().getValue(tapLabel.tag).update(newMeasurement)
-        tapLabel.attributedText = engine.getProject().getValue(tapLabel.tag).asString(metric)
-        engine.updateOperation(tapLabel.tag, newValue: newMeasurement)
         updateValues()
     }
 }

@@ -14,7 +14,6 @@ class MathEngine {
     
     init(){
         self.newProject = Project()
-        //self.true = false
         updateOperation(1, newValue: newProject.postSpacing)
     }
     

@@ -9,7 +9,7 @@
         <!--Lanscape View-->
         <scene sceneID="TkM-cU-ZjH">
             <objects>
-                <viewController id="0lD-sl-yRW" customClass="LanscapeView" customModule="Spindler" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Landscape View" id="0lD-sl-yRW" customClass="LanscapeView" customModule="Spindler" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qcx-G9-CDE"/>
                         <viewControllerLayoutGuide type="bottom" id="Gbc-nc-wgF"/>
@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="blueprint-paper" translatesAutoresizingMaskIntoConstraints="NO" id="riu-mX-6Na">
-                                <rect key="frame" x="0.0" y="0.0" width="695" height="726"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blueprint-paper" translatesAutoresizingMaskIntoConstraints="NO" id="riu-mX-6Na">
+                                <rect key="frame" x="-4" y="0.0" width="383" height="667"/>
                             </imageView>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SBG-2r-YUf" customClass="SpindleDiagram" customModule="Spindler" customModuleProvider="target">
                                 <rect key="frame" x="12" y="20" width="351" height="639"/>
@@ -60,18 +60,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fre-u2-DdD" userLabel="LengthPicker" customClass="NumberSelector" customModule="Spindler" customModuleProvider="target">
-                                        <rect key="frame" x="100" y="257" width="150" height="126"/>
-                                        <subviews>
-                                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N2c-D2-oje" userLabel="Feet">
-                                                <rect key="frame" x="23" y="8" width="114" height="132"/>
-                                                <connections>
-                                                    <outlet property="dataSource" destination="0lD-sl-yRW" id="ejA-FN-P8B"/>
-                                                </connections>
-                                            </pickerView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
                                 </subviews>
                                 <gestureRecognizers/>
                             </view>
@@ -147,11 +135,24 @@
                                     <action selector="slopeChanger:" destination="0lD-sl-yRW" eventType="valueChanged" id="vAg-gM-87g"/>
                                 </connections>
                             </switch>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZKd-Lt-3Nq">
+                                <rect key="frame" x="347" y="635" width="22" height="22"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="getInfo:" destination="0lD-sl-yRW" eventType="touchUpInside" id="KF4-rf-fpk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="aNS-MD-Ifk" firstAttribute="leading" secondItem="xcl-XQ-7YN" secondAttribute="trailing" constant="7" id="3vb-Jg-Jwd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="riu-mX-6Na" secondAttribute="trailing" constant="-20" id="5I0-UJ-3lE"/>
                             <constraint firstItem="LJw-lh-a3E" firstAttribute="leading" secondItem="XVp-SN-VDu" secondAttribute="trailing" constant="7" id="5XJ-X7-5IA"/>
+                            <constraint firstItem="ZKd-Lt-3Nq" firstAttribute="trailing" secondItem="bv6-kO-KF5" secondAttribute="trailingMargin" constant="10" id="6aB-ac-RN7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Dbh-c3-ST1" secondAttribute="trailing" constant="-4" id="6aE-Xb-qk3"/>
                             <constraint firstItem="d03-Ff-Mst" firstAttribute="top" secondItem="Dbh-c3-ST1" secondAttribute="bottom" constant="-2" id="7cB-1T-WWt"/>
                             <constraint firstAttribute="leadingMargin" secondItem="xcl-XQ-7YN" secondAttribute="leading" id="7qs-HF-Sgh"/>
@@ -168,16 +169,20 @@
                             <constraint firstItem="FWw-L2-7Np" firstAttribute="top" secondItem="XVp-SN-VDu" secondAttribute="bottom" constant="4" id="Tc7-ex-lgU"/>
                             <constraint firstItem="Gbc-nc-wgF" firstAttribute="top" secondItem="SBG-2r-YUf" secondAttribute="bottom" constant="8" symbolic="YES" id="UVK-mu-wbu"/>
                             <constraint firstItem="pgv-ff-T50" firstAttribute="leading" secondItem="FWw-L2-7Np" secondAttribute="trailing" constant="7" id="ZIu-2o-lFI"/>
+                            <constraint firstItem="riu-mX-6Na" firstAttribute="leading" secondItem="bv6-kO-KF5" secondAttribute="leadingMargin" constant="-20" id="cI9-Qj-qH9"/>
                             <constraint firstItem="xcl-XQ-7YN" firstAttribute="baseline" secondItem="aNS-MD-Ifk" secondAttribute="baseline" id="chf-kd-DMB"/>
                             <constraint firstItem="ztW-e5-4v8" firstAttribute="leading" secondItem="f2D-YV-fDe" secondAttribute="trailing" constant="7" id="gb2-Fv-HNd"/>
                             <constraint firstItem="Dbh-c3-ST1" firstAttribute="top" secondItem="qcx-G9-CDE" secondAttribute="bottom" constant="10" id="i73-uf-flW"/>
                             <constraint firstItem="xcl-XQ-7YN" firstAttribute="top" secondItem="qcx-G9-CDE" secondAttribute="bottom" constant="10" id="i9N-3L-udO"/>
                             <constraint firstItem="SBG-2r-YUf" firstAttribute="top" secondItem="qcx-G9-CDE" secondAttribute="bottom" id="kzQ-44-2Hb"/>
+                            <constraint firstItem="Gbc-nc-wgF" firstAttribute="top" secondItem="ZKd-Lt-3Nq" secondAttribute="bottom" constant="10" id="mgM-g2-oCn"/>
                             <constraint firstItem="f2D-YV-fDe" firstAttribute="top" secondItem="xcl-XQ-7YN" secondAttribute="bottom" constant="3" id="oYv-uG-Ifq"/>
                             <constraint firstItem="d03-Ff-Mst" firstAttribute="centerX" secondItem="Dbh-c3-ST1" secondAttribute="centerX" id="oqf-nb-h6z"/>
                             <constraint firstItem="f2D-YV-fDe" firstAttribute="baseline" secondItem="ztW-e5-4v8" secondAttribute="baseline" id="ruS-lB-tQ5"/>
                             <constraint firstItem="FWw-L2-7Np" firstAttribute="baseline" secondItem="pgv-ff-T50" secondAttribute="baseline" id="tn9-j4-YjN"/>
                             <constraint firstItem="Apt-hR-EZg" firstAttribute="centerX" secondItem="d03-Ff-Mst" secondAttribute="centerX" id="uk7-eY-1NV"/>
+                            <constraint firstItem="Gbc-nc-wgF" firstAttribute="top" secondItem="riu-mX-6Na" secondAttribute="bottom" id="zYb-6Y-ozs"/>
+                            <constraint firstItem="riu-mX-6Na" firstAttribute="top" secondItem="bv6-kO-KF5" secondAttribute="topMargin" id="zgC-Ts-gQf"/>
                         </constraints>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
@@ -185,7 +190,7 @@
                     <connections>
                         <outlet property="angle" destination="aZF-4A-ucq" id="a7C-ka-7cD"/>
                         <outlet property="between" destination="NbO-H2-xhg" id="IH5-mp-MEA"/>
-                        <outlet property="feetPicker" destination="N2c-D2-oje" id="tEQ-BM-PmR"/>
+                        <outlet property="info" destination="ZKd-Lt-3Nq" id="BlA-Nv-Ve6"/>
                         <outlet property="maxSpace" destination="aNS-MD-Ifk" id="zYU-cJ-I5e"/>
                         <outlet property="onCenter" destination="pgv-ff-T50" id="j8K-9F-Y7m"/>
                         <outlet property="pickerView" destination="fre-u2-DdD" id="YMh-wk-k8v"/>
@@ -202,7 +207,117 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eb0-WJ-O7E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="302.5" y="199.5"/>
+            <point key="canvasLocation" x="95.5" y="179.5"/>
+        </scene>
+        <!--Popover-->
+        <scene sceneID="25L-q5-7kc">
+            <objects>
+                <viewController storyboardIdentifier="Popover" title="Popover" id="rHN-f2-EDk" customClass="PickerPopover" customModule="Spindler" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="h6x-8z-Pon"/>
+                        <viewControllerLayoutGuide type="bottom" id="vZz-1k-2HL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XnB-Mi-AY2">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fre-u2-DdD" userLabel="LengthPicker" customClass="NumberSelector" customModule="Spindler" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="12" width="150" height="126"/>
+                                <subviews>
+                                    <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N2c-D2-oje" userLabel="Feet">
+                                        <rect key="frame" x="18" y="-3" width="114" height="132"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="rHN-f2-EDk" id="6ww-XN-Zai"/>
+                                        </connections>
+                                    </pickerView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="150" height="150"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="150" height="150"/>
+                    <connections>
+                        <outlet property="feetPicker" destination="N2c-D2-oje" id="RdZ-Aw-2ZY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PtZ-Px-lBw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="377" y="655"/>
+        </scene>
+        <!--Info Popover-->
+        <scene sceneID="bE8-sc-UZQ">
+            <objects>
+                <viewController storyboardIdentifier="Popover View" id="QEp-8Q-hGB" customClass="InfoPopover" customModule="Spindler" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="u5V-Vl-pPI"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ogq-rK-VA3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YMJ-8O-8lo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Spindler" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37X-pz-aGN">
+                                <rect key="frame" x="36" y="74" width="233" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="Gun-2F-oBP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="35"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="©VanRocker Software" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2dB-FZ-jJO">
+                                <rect key="frame" x="83" y="117" width="169" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Vua-KF-vCx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" text="Instructions: Tap the dimension of interest and adjust to a new value. " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hpG-Hx-DhS">
+                                <rect key="frame" x="36" y="146" width="270" height="52"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="qYX-Ds-kag"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="If you find any bugs or have any feature requests, don't hesitate to email." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5ct-aB-6w5">
+                                <rect key="frame" x="36" y="206" width="257" height="67"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlI-Oj-C6q">
+                                <rect key="frame" x="61" y="281" width="216" height="30"/>
+                                <state key="normal" title="vanrockersoftware@icloud.com"/>
+                                <connections>
+                                    <action selector="sendMail:" destination="QEp-8Q-hGB" eventType="touchUpInside" id="3qC-O4-o04"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="VFk-3u-thy">
+                                <rect key="frame" x="36" y="340" width="261" height="131"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Disclaimer: Every effort was made to ensure this calculator shows the right results, however, VanRocker Software assumes no liabaility for any improper dimensions, or loss of material that may result from cutting parts to the wrong length.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="email" destination="PlI-Oj-C6q" id="otc-45-gGV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v0Q-NX-VN3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="675.5" y="179.5"/>
         </scene>
     </scenes>
     <resources>

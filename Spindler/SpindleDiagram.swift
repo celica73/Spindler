@@ -69,7 +69,7 @@ class SpindleDiagram: UIView {
         maxRise = yOrigin - maxY
         let run = maxX - 10
         angle = atan(rise / run) * 180 / π
-        let picketHeight: CGFloat = 80
+        let picketHeight: CGFloat = rect.maxY * 0.25
         
         slopeLocation = CGPoint(x: (maxX - xOrigin)/2 + xOrigin, y: yOrigin - picketHeight - 55 - rise/2 - orientationFactor)
         runLocation = CGPoint(x: (maxX - xOrigin)/2 + xOrigin, y: rect.maxY - 15 - orientationFactor)
